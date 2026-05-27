@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de Mentoría · Oscar Morillo · Felipe Avinzano</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-ink:       #0D1B2A;
+    --warm-bone:      #F4F1EB;
+    --considered-blue:#2C5F8A;
+    --fog:            #8C87A0;
+    --copper:         #B87333;
+    --type-black:     #1A1A1A;
+    --ink-line:       rgba(13,27,42,0.11);
+    --bone-line:      rgba(244,241,235,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--warm-bone);
+    color: var(--type-black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── ISOTIPO SVG fiel al branding board ── */
+  .isotipo { width: 44px; height: 44px; flex-shrink: 0; }
+
+  /* ── COPPER STRIP ── */
+  .copper-strip {
+    background: var(--copper);
+    padding: 9px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .copper-strip span {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+  }
+  .validity-tag {
+    background: rgba(255,255,255,0.18);
+    padding: 2px 10px; border-radius: 2px;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--deep-ink);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 52px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Isotipo pattern sutil — fondo */
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 480px; height: 480px;
+    border: 1.5px solid rgba(244,241,235,0.05);
+    border-radius: 3px;
+    transform: rotate(8deg);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -10px;
+    width: 320px; height: 320px;
+    background: rgba(44,95,138,0.06);
+    border-radius: 3px;
+    transform: rotate(8deg);
+  }
+
+  .cover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; z-index: 2;
+  }
+  .logo-lockup { display: flex; align-items: center; gap: 13px; }
+  .logo-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300; font-size: 15px;
+    color: var(--warm-bone); letter-spacing: 0.05em;
+  }
+  .doc-id {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(244,241,235,0.35);
+  }
+
+  .cover-body {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    position: relative; z-index: 2;
+    padding: 72px 0 48px;
+  }
+  .cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 24px;
+  }
+  .cover-title {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: clamp(44px, 5.5vw, 68px);
+    line-height: 1.05;
+    color: var(--warm-bone);
+    max-width: 720px;
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: rgba(244,241,235,0.5);
+  }
+  .cover-hook {
+    font-size: 15px; font-weight: 300;
+    color: rgba(244,241,235,0.6);
+    max-width: 500px; line-height: 1.75;
+    border-left: 2px solid var(--copper);
+    padding-left: 20px;
+    margin-top: 8px;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 48px;
+    padding-top: 52px;
+    border-top: 1px solid var(--bone-line);
+    position: relative; z-index: 2;
+  }
+  .meta-label {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,241,235,0.28); margin-bottom: 5px;
+  }
+  .meta-value {
+    font-size: 13px; font-weight: 300;
+    color: rgba(244,241,235,0.72);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 880px; margin: 0 auto;
+    padding: 84px 72px;
+  }
+  .section-divider {
+    height: 1px; background: var(--ink-line);
+    max-width: 880px; margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 14px;
+  }
+  .section-h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400; font-size: 34px;
+    color: var(--deep-ink); line-height: 1.15;
+    margin-bottom: 36px; letter-spacing: -0.01em;
+  }
+  .section-h2 em {
+    font-style: italic; color: var(--considered-blue);
+  }
+  .body {
+    font-size: 15px; font-weight: 300;
+    color: #3d3d3d; line-height: 1.82;
+    margin-bottom: 22px; max-width: 680px;
+  }
+
+  /* ── MANIFIESTO BOX — voz del brief ── */
+  .manifiesto {
+    background: var(--deep-ink);
+    padding: 36px 44px; margin: 40px 0;
+    position: relative; overflow: hidden;
+    border-left: 3px solid var(--copper);
+  }
+  .manifiesto::after {
+    content: '';
+    position: absolute; right: -30px; top: -30px;
+    width: 160px; height: 160px;
+    border: 1px solid rgba(244,241,235,0.05);
+    border-radius: 2px; transform: rotate(15deg);
+  }
+  .manifiesto p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 19px;
+    color: rgba(244,241,235,0.82); line-height: 1.55;
+    position: relative; z-index: 1;
+    letter-spacing: -0.01em;
+  }
+  .manifiesto cite {
+    display: block; margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal; font-size: 11px;
+    font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  /* ── CREDENCIAL STRIP ── */
+  .credencial {
+    background: rgba(44,95,138,0.07);
+    border: 1px solid rgba(44,95,138,0.15);
+    padding: 28px 36px; margin: 40px 0;
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    gap: 0;
+  }
+  .credencial-bar {
+    background: var(--considered-blue);
+    border-radius: 2px;
+    margin-right: 28px;
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .credencial-content { grid-column: 2; padding-left: 24px; border-left: 1px solid rgba(44,95,138,0.2); }
+  .credencial-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--considered-blue); margin-bottom: 12px;
+  }
+  .credencial-items {
+    display: flex; flex-wrap: wrap; gap: 20px 40px;
+  }
+  .credencial-item {}
+  .credencial-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; font-weight: 400;
+    color: var(--deep-ink); line-height: 1;
+  }
+  .credencial-desc {
+    font-size: 12px; font-weight: 300;
+    color: var(--fog); margin-top: 2px;
+  }
+
+  /* ── MÓDULOS ── */
+  .modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px; margin: 44px 0;
+    background: var(--ink-line);
+    border: 1px solid var(--ink-line);
+  }
+  .module-card {
+    background: var(--warm-bone);
+    padding: 28px 24px;
+    min-height: 220px;
+    display: flex; flex-direction: column;
+    transition: background 0.18s;
+  }
+  .module-card:hover { background: #ece9e1; }
+  .module-num {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 12px;
+  }
+  .module-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px; font-weight: 400;
+    color: var(--deep-ink); margin-bottom: 10px;
+    line-height: 1.25; flex: 1;
+  }
+  .module-tools {
+    font-size: 10px; font-weight: 400;
+    color: var(--fog); letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    border-top: 1px solid var(--ink-line);
+    padding-top: 10px;
+  }
+  .module-desc {
+    font-size: 12px; font-weight: 300;
+    color: #5e5e5e; line-height: 1.65;
+  }
+
+  /* ── METODOLOGÍA ── */
+  .method-list { margin: 44px 0; }
+  .method-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--ink-line);
+    align-items: start; gap: 20px;
+  }
+  .method-item:last-child { border-bottom: none; }
+  .method-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px; font-weight: 400;
+    color: rgba(13,27,42,0.13); line-height: 1;
+  }
+  .method-title {
+    font-size: 14px; font-weight: 500;
+    color: var(--deep-ink); margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .method-desc {
+    font-size: 13px; font-weight: 300;
+    color: #5a5a5a; line-height: 1.68;
+  }
+
+  /* ── INVERSIÓN ── */
+  .inv-section {
+    background: var(--deep-ink);
+    padding: 84px 72px;
+  }
+  .inv-inner { max-width: 880px; margin: 0 auto; }
+  .inv-section .eyebrow { color: var(--copper); }
+  .inv-section .section-h2 { color: var(--warm-bone); }
+  .inv-section .section-h2 em { color: rgba(244,241,235,0.38); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2px; margin: 44px 0;
+    background: rgba(244,241,235,0.06);
+  }
+  .price-card {
+    padding: 36px 32px;
+    background: rgba(13,27,42,0.95);
+    border: 1px solid rgba(244,241,235,0.07);
+  }
+  .price-card.featured {
+    background: var(--considered-blue);
+    border-color: transparent;
+    position: relative;
+  }
+  .featured-badge {
+    position: absolute; top: 20px; right: 20px;
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,241,235,0.55);
+    border: 1px solid rgba(244,241,235,0.2);
+    padding: 3px 8px; border-radius: 2px;
+  }
+  .price-label {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 22px;
+  }
+  .price-card.featured .price-label { color: rgba(244,241,235,0.65); }
+  .price-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px; font-weight: 400;
+    color: var(--warm-bone); line-height: 1;
+    margin-bottom: 4px; letter-spacing: -0.02em;
+  }
+  .price-period {
+    font-size: 12px; font-weight: 300;
+    color: rgba(244,241,235,0.38);
+    letter-spacing: 0.04em; margin-bottom: 28px;
+  }
+  .price-savings {
+    display: inline-block;
+    background: var(--copper);
+    color: white; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .price-list { list-style: none; }
+  .price-list li {
+    font-size: 13px; font-weight: 300;
+    color: rgba(244,241,235,0.65);
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(244,241,235,0.07);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .price-list li:last-child { border-bottom: none; }
+  .price-list li::before {
+    content: '';
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--copper); flex-shrink: 0;
+  }
+  .price-card.featured .price-list li::before {
+    background: rgba(244,241,235,0.45);
+  }
+  .inv-note {
+    border-left: 2px solid var(--copper);
+    padding: 18px 24px; margin-top: 32px;
+  }
+  .inv-note p {
+    font-size: 13px; font-weight: 300;
+    color: rgba(244,241,235,0.5); line-height: 1.72;
+  }
+  .inv-note strong { color: rgba(244,241,235,0.78); font-weight: 400; }
+
+  /* ── PRÓXIMOS PASOS ── */
+  .steps-section { padding: 84px 72px; background: var(--warm-bone); }
+  .steps-inner { max-width: 880px; margin: 0 auto; }
+  .steps-row {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 2px; margin: 44px 0;
+    background: var(--ink-line);
+  }
+  .step-box {
+    background: var(--warm-bone);
+    padding: 32px 24px; text-align: center;
+  }
+  .step-n {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px; font-weight: 400;
+    color: var(--deep-ink); opacity: 0.10;
+    margin-bottom: 12px; line-height: 1;
+  }
+  .step-title {
+    font-size: 13px; font-weight: 500;
+    color: var(--deep-ink); letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: 12px; font-weight: 300;
+    color: #666; line-height: 1.65;
+  }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    background: var(--copper);
+    padding: 36px 44px;
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 32px;
+    margin-top: 8px;
+  }
+  .cta-copy {}
+  .cta-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-bottom: 6px;
+  }
+  .cta-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; font-weight: 400;
+    color: white; line-height: 1.2;
+  }
+  .cta-buttons { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.18s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--deep-ink); color: var(--warm-bone);
+    border: 1.5px solid var(--deep-ink);
+  }
+  .btn-primary:hover { background: #162336; }
+  .btn-ghost {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.5);
+  }
+  .btn-ghost:hover { border-color: white; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--deep-ink);
+    padding: 44px 72px;
+    display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left { display: flex; align-items: center; gap: 14px; }
+  .footer-brand {}
+  .footer-name {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 15px; color: var(--warm-bone);
+    letter-spacing: 0.04em;
+  }
+  .footer-role {
+    font-size: 11px; font-weight: 300;
+    color: rgba(244,241,235,0.38); letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+  .footer-right { text-align: right; }
+  .footer-right a {
+    display: block; font-size: 12px; font-weight: 300;
+    color: rgba(244,241,235,0.45); text-decoration: none;
+    letter-spacing: 0.04em; margin-bottom: 3px;
+    transition: color 0.18s;
+  }
+  .footer-right a:hover { color: var(--warm-bone); }
+  .footer-tagline {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(244,241,235,0.18); margin-top: 10px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .cover-eyebrow { animation: fadeUp 0.55s ease 0.15s both; }
+  .cover-title   { animation: fadeUp 0.55s ease 0.30s both; }
+  .cover-hook    { animation: fadeUp 0.55s ease 0.45s both; }
+  .cover-meta    { animation: fadeUp 0.55s ease 0.60s both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .copper-strip, .cover, .section, .inv-section,
+    .steps-section, .footer { padding-left: 28px; padding-right: 28px; }
+    .cover-meta { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .steps-row { grid-template-columns: 1fr; }
+    .cta-block { flex-direction: column; align-items: flex-start; }
+    .footer { flex-direction: column; gap: 28px; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+  .footer-social {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 6px; margin-bottom: 4px;
+    justify-content: flex-end;
+  }
+  .footer-social a {
+    color: rgba(244,241,235,0.38);
+    transition: color 0.18s;
+    display: flex; align-items: center;
+    margin-bottom: 0 !important;
+  }
+  .footer-social a:hover { color: rgba(244,241,235,0.85); }
+  .footer-social svg { display: block; }
+
+  
+
+          
+  
+  
+</style>
+</head>
+<body>
+
+<!-- COPPER STRIP -->
+<div class="copper-strip">
+  <span>Propuesta Confidencial · 01 de 02</span>
+  <span class="validity-tag">Válida hasta 30 Jun 2026</span>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-header">
+    <div class="logo-lockup">
+      <!-- Isotipo fiel: sq filled + sq outlined, delta 8°, overlap 25% -->
+      <svg class="isotipo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" stroke="none" transform="rotate(-4, 185, 200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4, 215, 200)"/></svg>
+      <span class="logo-name">felipe avinzano</span>
+    </div>
+    <span class="doc-id">Mentoría 1:1 · Mayo 2026</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">Programa Privado · Inteligencia Artificial Aplicada</div>
+    <h1 class="cover-title">Dominio de IA<br><em>para Ingeniería.</em></h1>
+    <p class="cover-hook">Preparado para Oscar Morillo, basado en nuestra conversación del 23 de mayo y en los seis puntos que identificaste como prioritarios para tu trabajo.</p>
+  </div>
+
+  <div class="cover-meta">
+    <div class="meta-item">
+      <div class="meta-label">Preparado para</div>
+      <div class="meta-value">Oscar Morillo</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Modalidad</div>
+      <div class="meta-value">1:1 · Live online</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Duración total</div>
+      <div class="meta-value">6 sesiones · 90 min c/u</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Válida hasta</div>
+      <div class="meta-value">30 Junio 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 · CONTEXTO -->
+<div class="section">
+  <div class="eyebrow">01 · Contexto</div>
+  <h2 class="section-h2">Lo que hablamos,<br><em>formalizado.</em></h2>
+
+  <p class="body">Esta propuesta no nace de un formulario genérico. Nace de lo que me dijiste el 23 de mayo: hay seis áreas donde la IA puede fortalecer directamente tu flujo de trabajo, y quieres dominarlas de forma práctica, no teórica.</p>
+
+  <div class="manifiesto">
+    <p>"La IA no se implementa. Se injerta sobre una operación existente. Si esa operación tiene claridad, la IA la amplifica. Si no la tiene, solo la hace más rápida, más opaca y más peligrosa."</p>
+    <cite>— Felipe Avinzano</cite>
+  </div>
+
+  <p class="body">Por eso cada sesión de este programa trabaja con tus archivos reales, tu software actual y tus procesos específicos. No hay ejercicios de laboratorio. Hay resultados que puedes usar desde el día uno.</p>
+
+  <!-- CREDENCIAL — por qué Felipe -->
+  <div class="credencial">
+    
+    <div class="credencial-content">
+      <div class="credencial-label">¿Por qué Felipe Avinzano?</div>
+      <div class="credencial-items">
+        <div class="credencial-item">
+          <div class="credencial-num">25+</div>
+          <div class="credencial-desc">años liderando organizaciones tecnológicas</div>
+        </div>
+        <div class="credencial-item">
+          <div class="credencial-num">10</div>
+          <div class="credencial-desc">años como CIO en empresas de escala</div>
+        </div>
+        <div class="credencial-item">
+          <div class="credencial-num">1,600+</div>
+          <div class="credencial-desc">GPTs desarrollados y desplegados</div>
+        </div>
+        <div class="credencial-item">
+          <div class="credencial-num">1,000+</div>
+          <div class="credencial-desc">profesionales formados en IA aplicada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  
+  </div>
+
+  </div>
+  </div>
+
+<!-- 02 · PROGRAMA -->
+<div class="section">
+  <div class="eyebrow">02 · Programa</div>
+  <h2 class="section-h2">Seis módulos.<br><em>Seis dominios.</em></h2>
+  <p class="body">Cada sesión de 90 minutos cubre un área específica. El orden se define contigo en la sesión de diagnóstico según tu necesidad más urgente.</p>
+
+  <div class="modules-grid">
+    <div class="module-card">
+      <div class="module-num">Módulo 01</div>
+      <div class="module-title">Elaboración de Imágenes con IA</div>
+      <div class="module-desc">Imágenes técnicas, renders conceptuales y visualizaciones para propuestas. Prompt engineering de precisión para resultados de calidad profesional.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Módulo 02</div>
+      <div class="module-title">Corrección de Hojas de Cálculo Estructurales</div>
+      <div class="module-desc">Auditoría, corrección y validación de resultados de software estructural. Detección de inconsistencias y verificación cruzada asistida por IA.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Módulo 03</div>
+      <div class="module-title">Dibujos 3D y Renderizado con IA</div>
+      <div class="module-desc">Modelos 3D desde texto o imagen de referencia. Renders para propuestas a clientes y documentación técnica visual.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Módulo 04</div>
+      <div class="module-title">Elaboración de Videos de Proceso</div>
+      <div class="module-desc">Videos explicativos de procesos de ingeniería, secuencias constructivas y animaciones de sistemas mecánicos para documentación o presentación.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Módulo 05</div>
+      <div class="module-title">Creación de Asistentes Virtuales</div>
+      <div class="module-desc">Diseño e implementación de asistentes personalizados para revisar documentos, responder consultas técnicas y generar reportes automatizados.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Módulo 06</div>
+      <div class="module-title">Mapa de Herramientas: Cuál IA Usar</div>
+      <div class="module-desc">Marco de decisión personalizado para tu flujo. Evaluación de herramientas según tu contexto real. Actualizable conforme el ecosistema evoluciona.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 · METODOLOGÍA -->
+<div class="section">
+  <div class="eyebrow">03 · Cómo trabajo</div>
+  <h2 class="section-h2">Mi proceso,<br><em>sin rodeos.</em></h2>
+
+  <div class="method-list">
+    <div class="method-item">
+      <div class="method-num">01</div>
+      <div>
+        <div class="method-title">Diagnóstico inicial — sin costo</div>
+        <div class="method-desc">45 minutos para mapear tu nivel real en cada área, identificar las herramientas que ya usas, y definir el orden de los módulos según tu prioridad más urgente. Sin esto no comenzamos — el programa tiene que estar calibrado a ti.</div>
+      </div>
+    </div>
+    <div class="method-item">
+      <div class="method-num">02</div>
+      <div>
+        <div class="method-title">Sesiones 1:1 con tus archivos reales</div>
+        <div class="method-desc">No trabajo con ejemplos genéricos. Cada sesión usa tus documentos, tu software y tus casos reales. Demostración en vivo → práctica guiada → resultado que puedes usar al cerrar la sesión.</div>
+      </div>
+    </div>
+    <div class="method-item">
+      <div class="method-num">03</div>
+      <div>
+        <div class="method-title">Materiales de referencia post-sesión</div>
+        <div class="method-desc">Resumen de herramientas, prompts de referencia probados y recursos específicos del tema tratado. Todo en un formato que puedas consultar cuando lo necesites, no solo durante la sesión.</div>
+      </div>
+    </div>
+    <div class="method-item">
+      <div class="method-num">04</div>
+      <div>
+        <div class="method-title">Canal directo entre sesiones</div>
+        <div class="method-desc">WhatsApp para dudas puntuales durante el programa. No es soporte 24/7 — es acompañamiento real para que lo que aprendiste aterrice en tu trabajo sin que te quedes bloqueado.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVERSIÓN -->
+<div class="inv-section">
+  <div class="inv-inner">
+    <div class="eyebrow">04 · Inversión</div>
+    <h2 class="section-h2">Lo que cuesta,<br><em>lo que incluye.</em></h2>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Sesión individual</div>
+        <div class="price-amount">$250</div>
+        <div class="price-period">USD · por sesión de 90 min</div>
+        <ul class="price-list">
+          <li>1 módulo a elección</li>
+          <li>Materiales de referencia</li>
+          <li>Grabación de la sesión</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">Recomendado</div>
+        <div class="price-label">Programa completo · 6 módulos</div>
+        <div class="price-amount">$1,200</div>
+        <div class="price-period">USD · programa completo</div>
+        <div class="price-savings">Ahorro de $300 vs. sesiones sueltas</div>
+        <ul class="price-list">
+          <li>6 sesiones de 90 minutos c/u</li>
+          <li>Diagnóstico inicial sin costo</li>
+          <li>Materiales de todos los módulos</li>
+          <li>Soporte WhatsApp durante el programa</li>
+          <li>Grabaciones de todas las sesiones</li>
+          <li>Orden de módulos según tus prioridades</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inv-note">
+      <p><strong>Nota:</strong> El programa completo permite un seguimiento real de tu progreso entre módulos. Si empezamos con sesiones individuales y luego decides el paquete, el valor pagado se descuenta del total.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRÓXIMOS PASOS -->
+<div class="steps-section">
+  <div class="steps-inner">
+    <div class="eyebrow">05 · Próximos pasos</div>
+    <h2 class="section-h2">Para comenzar,<br><em>tres movimientos.</em></h2>
+
+    <div class="steps-row">
+      <div class="step-box">
+        <div class="step-n">01</div>
+        <div class="step-title">Confirma tu interés</div>
+        <div class="step-desc">Responde al email o usa el botón abajo. Sin formularios, sin esperas.</div>
+      </div>
+      <div class="step-box">
+        <div class="step-n">02</div>
+        <div class="step-title">Diagnóstico de 45 min</div>
+        <div class="step-desc">Sin costo. Definimos juntos el orden de los módulos y la fecha de inicio.</div>
+      </div>
+      <div class="step-box">
+        <div class="step-n">03</div>
+        <div class="step-title">Primera sesión en 7 días</div>
+        <div class="step-desc">Arrancamos dentro de los 7 días siguientes al diagnóstico.</div>
+      </div>
+    </div>
+
+    <!-- CTA ACCIONABLE -->
+    <div class="cta-block">
+      <div class="cta-copy">
+        <div class="cta-label">¿Listo para comenzar?</div>
+        <div class="cta-text">Agenda el diagnóstico gratuito ahora.</div>
+      </div>
+      <div class="cta-buttons">
+        <a href="mailto:felipe@felipeavinzano.com?subject=Mentoría%201%3A1%20-%20Confirmo%20interés%20Oscar%20Morillo&body=Hola%20Felipe%2C%20quiero%20agendar%20el%20diagnóstico%20inicial." class="btn btn-primary">Escribir a Felipe</a>
+        <a href="https://felipeavinzano.com" class="btn btn-ghost">Ver perfil</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    <svg class="isotipo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" stroke="none" transform="rotate(-4, 185, 200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4, 215, 200)"/></svg>
+    <div class="footer-brand">
+      <div class="footer-name">felipe avinzano</div>
+      <div class="footer-role">Executive AI Consultant & Educator · Stuart, Florida</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:felipe@felipeavinzano.com">felipe@felipeavinzano.com</a>
+    <a href="https://felipeavinzano.com">felipeavinzano.com</a>
+    <a href="tel:+17728009691">+1 (772) 800-9691</a>
+    <div class="footer-social">
+      <a href="https://linkedin.com/in/felipe-avinzano" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="https://x.com/AvinzanoFelipe" target="_blank" aria-label="X / Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://www.instagram.com/felipeavinzano/" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+    </div>
+    <div class="footer-tagline">Strategy · Frameworks · Impact</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>felipe avinzano — consultoría de IA para empresas B2B</title>
+<meta name="description" content="Convierte experiencia acumulada en sistemas de IA accionables. Consultoría ejecutiva y formación en IA para directores y empresas B2B en LATAM, España y EE.UU.">
+<meta property="og:title" content="felipe avinzano — consultoría de IA para empresas B2B">
+<meta property="og:description" content="Convierte experiencia acumulada en sistemas de IA accionables.">
+<meta property="og:url" content="https://felipeavinzano.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["Person","ProfessionalService"],"name":"Felipe Avinzano","jobTitle":"Consultor Ejecutivo de Inteligencia Artificial","description":"Convierte experiencia acumulada en sistemas de IA accionables.","url":"https://felipeavinzano.com","knowsAbout":["Inteligencia Artificial","Automatización de procesos","Consultoría ejecutiva","Gestión de TI"],"areaServed":["LATAM","España","Estados Unidos"],"inLanguage":"es"}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep-ink:#0D1B2A;
+  --warm-bone:#F4F1EB;
+  --considered-blue:#2C5F8A;
+  --fog:#8C97A0;
+  --type-black:#1A1A1A;
+  --copper:#B87333;
+  --rule:rgba(244,241,235,0.12);
+  --rule-light:rgba(13,27,42,0.10);
+  --font-display:"DM Serif Display",Georgia,serif;
+  --font:"Inter",-apple-system,sans-serif;
+  --pad:clamp(24px,5vw,96px);
+  --section-y:clamp(96px,12vw,160px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--deep-ink);color:var(--warm-bone);font-family:var(--font);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ── REVEAL SYSTEM ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+.reveal-delay-5{transition-delay:0.5s}
+.reveal-line{opacity:0;transform:scaleX(0);transform-origin:left;transition:opacity 0.6s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal-line.visible{opacity:1;transform:scaleX(1)}
+
+/* ── LAYOUT ── */
+.container{width:100%;max-width:1440px;margin-inline:auto;padding-inline:var(--pad)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(13,27,42,0.92);backdrop-filter:blur(12px);border-color:var(--rule)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:22px}
+.nav-logo{display:flex;align-items:center;gap:12px;opacity:0;animation:fadeIn 0.6s 0.2s forwards}
+.nav-wordmark{font-size:15px;font-weight:300;letter-spacing:-0.02em}
+.nav-links{display:flex;align-items:center;gap:32px;opacity:0;animation:fadeIn 0.6s 0.4s forwards}
+.nav-links a{font-size:13px;font-weight:300;color:var(--fog);letter-spacing:-0.01em;transition:color 200ms}
+.nav-links a:hover{color:var(--warm-bone)}
+.nav-cta{padding:9px 20px;border:1px solid rgba(244,241,235,0.28);font-size:13px;color:var(--warm-bone)!important;transition:background 200ms,border-color 200ms!important}
+.nav-cta:hover{background:rgba(244,241,235,0.08)!important;border-color:rgba(244,241,235,0.6)!important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:100px;padding-bottom:clamp(64px,8vw,120px);position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero-bg-isotipo{position:absolute;right:-6%;bottom:-8%;width:min(680px,70vw);opacity:0;animation:heroIso 1.2s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;pointer-events:none;user-select:none}
+.hero-bg-isotipo svg{width:100%;height:auto}
+@keyframes heroIso{from{opacity:0;transform:translateX(40px) rotate(-2deg)}to{opacity:0.06;transform:translateX(0) rotate(0deg)}}
+.hero-content{position:relative;z-index:1;max-width:1440px;margin-inline:auto;padding-inline:var(--pad)}
+.hero-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--fog);margin-bottom:36px;opacity:0;animation:fadeUp 0.7s 0.4s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-h1{font-size:clamp(64px,10vw,160px);font-weight:300;letter-spacing:-0.03em;line-height:0.95;margin-bottom:48px}
+.hero-h1 span{display:block;opacity:0;transform:translateY(30px)}
+.hero-h1 span:nth-child(1){animation:fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-h1 span:nth-child(2){animation:fadeUp 0.8s 0.65s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;padding-top:48px;border-top:1px solid var(--rule);opacity:0;animation:fadeUp 0.8s 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-sub{font-size:clamp(18px,2vw,26px);font-weight:300;letter-spacing:-0.02em;line-height:1.3;max-width:44ch}
+.hero-sub em{font-style:normal;color:var(--copper)}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
+.hero-desc{font-size:15px;color:var(--fog);text-align:right;max-width:38ch;line-height:1.65}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--copper);color:var(--warm-bone);font-size:14px;font-weight:300;padding:16px 28px;letter-spacing:-0.01em;transition:background 220ms;white-space:nowrap}
+.btn-primary:hover{background:#9d5a2a}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--fog);font-size:14px;font-weight:300;padding-bottom:4px;border-bottom:1px solid rgba(140,151,160,0.5);letter-spacing:-0.01em;transition:color 200ms,border-color 200ms}
+.btn-ghost:hover{color:var(--warm-bone);border-color:var(--warm-bone)}
+.arrow{transition:transform 200ms}
+.btn-primary:hover .arrow,.btn-ghost:hover .arrow{transform:translateX(4px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{padding-block:20px;border-block:1px solid var(--rule);overflow:hidden;background:rgba(244,241,235,0.02)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 24s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:0;white-space:nowrap}
+.marquee-text{font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--fog);padding-inline:40px}
+.marquee-sep{color:var(--copper);font-size:16px;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── PROBLEMA ── */
+.problema{padding-block:var(--section-y);border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.problema-grid{display:grid;grid-template-columns:3fr 9fr;gap:64px;align-items:start}
+.section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--fog)}
+.problema-h2{font-size:clamp(40px,6vw,96px);font-weight:300;letter-spacing:-0.025em;line-height:1.0;margin-bottom:48px}
+.problema-h2 em{font-style:normal;color:var(--copper)}
+.body-lg{font-size:18px;line-height:1.75;color:rgba(244,241,235,0.78);max-width:62ch;margin-bottom:24px}
+.pull-quote{margin-top:56px;padding-left:28px;border-left:2px solid var(--copper)}
+.pull-quote p{font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.4;margin-bottom:14px}
+.pull-quote cite{font-size:12px;font-style:normal;color:var(--fog);letter-spacing:0.1em;text-transform:uppercase}
+.problema-number{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);font-size:clamp(180px,24vw,360px);font-weight:300;letter-spacing:-0.05em;color:rgba(244,241,235,0.025);line-height:1;pointer-events:none;user-select:none}
+
+/* ── PARA QUIÉN ── */
+.paraquien{padding-block:var(--section-y);background:var(--warm-bone);color:var(--type-black);border-bottom:1px solid var(--rule-light)}
+.paraquien .section-label{color:#8C97A0}
+.paraquien-header{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end;margin-bottom:64px}
+.paraquien-h2{font-size:clamp(36px,4.5vw,68px);font-weight:300;letter-spacing:-0.025em;line-height:1.05;color:var(--deep-ink)}
+.paraquien-desc{font-size:17px;line-height:1.75;color:#6b7280;max-width:48ch;align-self:end}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(13,27,42,0.1)}
+.card{padding:44px 40px;border-right:1px solid rgba(13,27,42,0.1);position:relative;overflow:hidden;transition:background 300ms}
+.card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform 400ms cubic-bezier(0.16,1,0.3,1)}
+.card:hover::after{transform:scaleX(1)}
+.card:hover{background:rgba(13,27,42,0.03)}
+.card:last-child{border-right:0}
+.card-n{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--copper);margin-bottom:28px}
+.card-title{font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.25;color:var(--deep-ink);margin-bottom:16px}
+.card-body{font-size:15px;line-height:1.7;color:#6b7280;margin-bottom:36px}
+.card-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--deep-ink);border-bottom:1px solid rgba(13,27,42,0.3);padding-bottom:3px;transition:gap 150ms,border-color 200ms}
+.card-link:hover{gap:12px;border-color:var(--deep-ink)}
+
+/* ── SERVICIOS ── */
+.servicios{padding-block:var(--section-y);border-bottom:1px solid var(--rule)}
+.servicios-header{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end;margin-bottom:0;padding-bottom:56px;border-bottom:1px solid var(--rule)}
+.servicios-h2{font-size:clamp(36px,4.5vw,68px);font-weight:300;letter-spacing:-0.025em;line-height:1.05}
+.servicios-intro{font-size:17px;line-height:1.7;color:var(--fog);max-width:52ch;align-self:end}
+.servicio{display:grid;grid-template-columns:160px 1fr auto;gap:48px;align-items:start;padding-block:52px;border-bottom:1px solid var(--rule);transition:background 300ms}
+.servicio:hover{background:rgba(244,241,235,0.02)}
+.servicio:last-child{border-bottom:0}
+.servicio-meta{padding-top:4px}
+.s-num{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
+.s-dur{font-size:13px;color:var(--fog)}
+.s-name{font-size:clamp(24px,2.8vw,40px);font-weight:300;letter-spacing:-0.02em;line-height:1.1;margin-bottom:20px}
+.s-body{font-size:16px;line-height:1.75;color:rgba(244,241,235,0.68);max-width:54ch}
+.s-cta{padding-top:4px}
+.s-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--fog);border-bottom:1px solid rgba(140,151,160,0.4);padding-bottom:3px;white-space:nowrap;transition:color 150ms,gap 150ms,border-color 150ms}
+.s-link:hover{color:var(--warm-bone);border-color:var(--warm-bone);gap:12px}
+.servicio--featured{border:1px solid rgba(184,115,51,0.25);padding-inline:40px;margin-top:24px;background:rgba(184,115,51,0.03)}
+.servicio--featured:hover{background:rgba(184,115,51,0.05)}
+.featured-badge{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--copper);border:1px solid rgba(184,115,51,0.4);padding:4px 10px;margin-bottom:16px}
+
+/* ── STATS BAND ── */
+.stats-band{padding-block:clamp(64px,8vw,100px);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:0 var(--pad);border-right:1px solid var(--rule);text-align:center}
+.stat:first-child{padding-left:var(--pad)}
+.stat:last-child{border-right:0}
+.stat-num{font-size:clamp(56px,7vw,96px);font-weight:300;letter-spacing:-0.04em;color:var(--copper);line-height:1;display:block}
+.stat-label{font-size:13px;color:var(--fog);margin-top:10px;line-height:1.4}
+
+/* ── SOBRE ── */
+.sobre{padding-block:var(--section-y);background:var(--warm-bone);color:var(--type-black);border-bottom:1px solid var(--rule-light)}
+.sobre .section-label{color:#8C97A0}
+.sobre-grid{display:grid;grid-template-columns:6fr 6fr;gap:96px;align-items:start}
+.sobre-h2{font-size:clamp(32px,4vw,60px);font-weight:300;letter-spacing:-0.025em;line-height:1.05;color:var(--deep-ink);margin-bottom:36px}
+.sobre-body{font-size:17px;line-height:1.8;color:#4a5568;margin-bottom:20px;max-width:54ch}
+.sobre-body:last-of-type{margin-bottom:40px}
+.sobre-cta{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--deep-ink);border-bottom:1px solid rgba(13,27,42,0.4);padding-bottom:4px;transition:gap 150ms}
+.sobre-cta:hover{gap:14px}
+.datos{border-top:1px solid rgba(13,27,42,0.1);padding-top:0;margin-bottom:40px}
+.dato{display:flex;justify-content:space-between;align-items:baseline;padding-block:16px;border-bottom:1px solid rgba(13,27,42,0.08)}
+.dato-k{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:#8C97A0}
+.dato-v{font-size:15px;font-weight:400;color:var(--deep-ink)}
+.quote-card{background:var(--deep-ink);color:var(--warm-bone);padding:36px 40px}
+.quote-card p{font-size:19px;font-weight:300;letter-spacing:-0.015em;line-height:1.5;margin-bottom:18px}
+.quote-card cite{font-size:11px;font-style:normal;letter-spacing:0.12em;text-transform:uppercase;color:var(--fog)}
+
+/* ── FAQ ── */
+.faq{padding-block:var(--section-y);border-bottom:1px solid var(--rule)}
+.faq-header{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end;margin-bottom:0;padding-bottom:56px;border-bottom:1px solid var(--rule)}
+.faq-h2{font-size:clamp(32px,4vw,60px);font-weight:300;letter-spacing:-0.025em;line-height:1.05}
+.faq-intro{font-size:17px;color:var(--fog);line-height:1.7;max-width:48ch;align-self:end}
+.faq-item{display:grid;grid-template-columns:5fr 7fr;gap:48px;padding-block:36px;border-bottom:1px solid var(--rule);cursor:pointer}
+.faq-item:last-child{border-bottom:0}
+.faq-q{font-size:17px;font-weight:400;letter-spacing:-0.01em;line-height:1.45;color:var(--warm-bone);transition:color 200ms}
+.faq-item:hover .faq-q{color:var(--copper)}
+.faq-a{font-size:16px;font-weight:300;line-height:1.8;color:rgba(244,241,235,0.65)}
+
+/* ── CTA FINAL ── */
+.cta-final{padding-block:var(--section-y);border-bottom:1px solid var(--rule);overflow:hidden;position:relative}
+.cta-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.cta-bg svg{width:min(600px,80vw);opacity:0.04}
+.cta-inner{position:relative;z-index:1;text-align:center}
+.cta-h2{font-size:clamp(40px,6vw,96px);font-weight:300;letter-spacing:-0.03em;line-height:1.0;max-width:14ch;margin-inline:auto;margin-bottom:24px}
+.cta-sub{font-size:17px;color:var(--fog);max-width:44ch;margin-inline:auto;margin-bottom:48px;line-height:1.65}
+
+/* ── FOOTER ── */
+footer{padding-block:52px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.f-brand{display:flex;align-items:center;gap:14px}
+.f-tagline{font-size:12px;color:var(--fog);margin-top:5px;letter-spacing:-0.01em}
+.footer-links{display:flex;gap:32px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--fog);transition:color 150ms}
+.footer-links a:hover{color:var(--warm-bone)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(140,151,160,0.45)}
+.footer-bottom-links{display:flex;gap:24px}
+.footer-bottom-links a{font-size:12px;color:rgba(140,151,160,0.45);transition:color 150ms}
+.footer-bottom-links a:hover{color:var(--fog)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-bottom,.problema-grid,.paraquien-header,.servicios-header,
+  .sobre-grid,.faq-header,.faq-item{grid-template-columns:1fr;gap:28px}
+  .cards{grid-template-columns:1fr}
+  .card{border-right:0;border-bottom:1px solid rgba(13,27,42,0.1)}
+  .card:last-child{border-bottom:0}
+  .servicio{grid-template-columns:1fr;gap:16px}
+  .s-cta{align-self:auto}
+  .stats-band{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--rule);padding:32px var(--pad)}
+  .stat:last-child{border-bottom:0}
+  .hero-actions{align-items:flex-start}
+  .hero-desc{text-align:left}
+  .nav-links{display:none}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .problema-number{display:none}
+}
+
+/* Display serif — headlines only */
+.hero-h1,.page-h1,.h2,.cta-h2,.problema-h2,.paraquien-h2,.servicios-h2,.sobre-h2,.faq-h2{font-family:var(--font-display);font-weight:400;letter-spacing:-0.01em}
+.hero-h1{letter-spacing:-0.02em}
+.h2{letter-spacing:-0.015em}
+
+/* === UX / A11Y FIXES === */
+:focus-visible{outline:none;box-shadow:0 0 0 2px var(--copper),0 0 0 4px rgba(184,115,51,0.15)!important}
+a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
+.btn,.btn-primary,.btn-ghost,.btn-outline,.btn-copper,.card,.card-link,.s-link,.faq-q,.session-block,.blog-card,.check-list li,.credential{cursor:pointer}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+  .marquee-track{animation:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+.skip-link{position:absolute;top:-100px;left:16px;background:var(--copper);color:var(--warm-bone);padding:12px 20px;font-size:14px;font-weight:400;letter-spacing:-0.01em;z-index:9999;border:none;transition:top 200ms}
+.skip-link:focus{top:16px}
+/* Hamburger */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:relative;z-index:210;-webkit-tap-highlight-color:transparent}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--warm-bone);transition:all 300ms cubic-bezier(0.16,1,0.3,1);transform-origin:center}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-mobile-overlay{position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:200;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;opacity:0;pointer-events:none;transition:opacity 350ms ease;padding:40px}
+.nav-mobile-overlay.open{opacity:1;pointer-events:auto}
+.nav-mobile-overlay a{font-size:clamp(20px,5.5vw,34px);font-weight:300;letter-spacing:-0.02em;color:rgba(244,241,235,0.6);transition:color 200ms,opacity 200ms;padding:12px 0;width:100%;text-align:center;border-bottom:1px solid rgba(244,241,235,0.06)}
+.nav-mobile-overlay a:hover,.nav-mobile-overlay a.active{color:var(--warm-bone)}
+.nav-mobile-overlay a:last-child{border-bottom:0;margin-top:16px;color:var(--warm-bone);border:1px solid rgba(244,241,235,0.3);padding:14px 32px;width:auto;font-size:15px}
+.nav-mobile-overlay a:last-child:hover{background:rgba(244,241,235,0.06)}
+.nav-links a.active{color:var(--warm-bone)}
+/* Sticky mobile CTA */
+.sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-top:1px solid var(--rule);padding:12px 20px;z-index:89;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform 350ms cubic-bezier(0.16,1,0.3,1)}
+.sticky-mobile-cta.visible{transform:none}
+.sticky-mobile-cta-text{font-size:13px;color:var(--fog);line-height:1.3;flex:1}
+.sticky-mobile-cta-text strong{display:block;color:var(--warm-bone);font-weight:400}
+.sticky-mobile-cta a{font-size:13px;font-weight:400;padding:10px 18px;background:var(--copper);color:var(--warm-bone);white-space:nowrap;flex-shrink:0;transition:background 200ms}
+.sticky-mobile-cta a:hover{background:#9d5a2a}
+@media(max-width:960px){.nav-hamburger{display:flex}}
+@media(max-width:640px){.sticky-mobile-cta{display:flex}}
+/* Label size fix */
+.label{font-size:12px}
+/* SVG icon sizing */
+.dlv-icon svg,.logistics-icon svg{width:28px;height:28px}
+
+
+@media(max-width:760px){
+  [style*="grid-template-columns:repeat(3,1fr)"][style*="border"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"][style*="gap:56px"]{grid-template-columns:1fr!important;gap:32px!important}
+  .sticky-mobile-cta{padding:10px 16px}
+}
+</style>
+<link rel="canonical" href="https://felipeavinzano.com/">
+<meta property="og:title" content="felipe avinzano — formación y consultoría ejecutiva de IA">
+<meta property="og:description" content="Convierte experiencia acumulada en sistemas de IA accionables. Consultoría y formación para directores y empresas B2B.">
+<meta property="og:url" content="https://felipeavinzano.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="felipe avinzano — formación y consultoría ejecutiva de IA">
+<meta name="twitter:description" content="Convierte experiencia acumulada en sistemas de IA accionables. Consultoría y formación para directores y empresas B2B.">
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0D1B2A">
+</head>
+<body>
+<a href="#main-content" class="skip-link">saltar al contenido principal</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg width="34" height="34" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+          <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+        </svg>
+        <span class="nav-wordmark">felipe avinzano</span>
+      </a>
+      <div class="nav-links">
+        <a href="#servicios">servicios</a>
+        <a href="bootcamp.html">bootcamp</a>
+        <a href="sobre-felipe.html">sobre felipe</a>
+        <a href="blog.html">blog</a>
+        <a href="#contacto" class="nav-cta">agenda una llamada</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="main-content">
+  <div class="hero-bg-isotipo">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+      <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">formación y consultoría ejecutiva de ia</p>
+    <h1 class="hero-h1">
+      <span>felipe</span>
+      <span>avinzano</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">convirtiendo experiencia acumulada en sistemas de ia <em>accionables.</em></p>
+      <div class="hero-actions">
+        <p class="hero-desc">25 años en TI. 10 como CIO. Ayudo a directores y empresas B2B a convertir ese tipo de experiencia en ventaja operativa con IA.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end">
+          <a href="bootcamp.html" class="btn-primary">bootcamp — desde $197 <span class="arrow">→</span></a>
+          <a href="#contacto" class="btn-ghost">agenda una llamada <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-text">diagnóstico de ia</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">automatización de procesos</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">capacitación corporativa</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">bootcamp ai: zero to pro</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">gpts personalizados</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">latam · españa · ee.uu.</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">diagnóstico de ia</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">automatización de procesos</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">capacitación corporativa</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">bootcamp ai: zero to pro</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">gpts personalizados</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">latam · españa · ee.uu.</span><span class="marquee-sep">·</span></div>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section class="problema">
+  <span class="problema-number">IA</span>
+  <div class="container">
+    <div class="problema-grid">
+      <div class="reveal">
+        <p class="section-label">el contexto</p>
+      </div>
+      <div>
+        <h2 class="problema-h2 reveal">la ia no se implementa.<br><em>se injerta.</em></h2>
+        <p class="body-lg reveal reveal-delay-1">Si la operación está desordenada, la IA no la transforma. La vuelve más rápida, más opaca y más peligrosa.</p>
+        <p class="body-lg reveal reveal-delay-2">Eso es lo que nadie dice en los webinars ni en las propuestas de consultoría de 35 páginas. La promesa es enorme. La ejecución termina en un PDF elegante, un piloto abandonado y un equipo que volvió a trabajar como siempre.</p>
+        <p class="body-lg reveal reveal-delay-3">La directora de operaciones con 60 personas a cargo no necesita otro curso de ChatGPT. Necesita a alguien que entienda su operación, diagnostique con criterio, y le diga exactamente dónde la IA merece entrar — y dónde todavía no.</p>
+        <div class="pull-quote reveal reveal-delay-4">
+          <p>"No prometo transformación. Prometo estructura: diagnóstico, criterio, diseño, implementación y adopción."</p>
+          <cite>— Felipe Avinzano</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat reveal">
+    <span class="stat-num" data-count="25">0</span>
+    <span class="stat-label">años gestionando tecnología<br>en empresas reales</span>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <span class="stat-num" data-count="10">0</span>
+    <span class="stat-label">años como CIO en<br>organizaciones B2B</span>
+  </div>
+  <div class="stat reveal reveal-delay-4">
+    <span class="stat-num" id="globe-stat">
+      <svg id="globe-svg" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:80px;display:block;margin-inline:auto">
+        <circle cx="48" cy="48" r="38" stroke="#B87333" stroke-width="3.5"/>
+        <ellipse cx="48" cy="48" rx="18" ry="38" stroke="#B87333" stroke-width="3.5"/>
+        <line x1="10" y1="48" x2="86" y2="48" stroke="#B87333" stroke-width="3.5"/>
+        <line x1="18" y1="28" x2="78" y2="28" stroke="#B87333" stroke-width="2.5"/>
+        <line x1="18" y1="68" x2="78" y2="68" stroke="#B87333" stroke-width="2.5"/>
+      </svg>
+    </span>
+    <span class="stat-label">presencia global</span>
+  </div>
+</div>
+
+<!-- PARA QUIÉN -->
+<section class="paraquien">
+  <div class="container">
+    <div class="paraquien-header">
+      <div class="reveal">
+        <p class="section-label" style="margin-bottom:20px">¿esto es para ti?</p>
+        <h2 class="paraquien-h2">tres caminos.<br>un criterio.</h2>
+      </div>
+      <p class="paraquien-desc reveal reveal-delay-2">Felipe no trabaja con todo el mundo. Si tu empresa tiene entre 25 y 150 personas y necesitas claridad antes de invertir en IA, estás en el lugar correcto.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <p class="card-n">01 · empresas b2b</p>
+        <h3 class="card-title">tu empresa tiene entre 1 y 150 personas</h3>
+        <p class="card-body">Tienes procesos que podrían ser más inteligentes, pero nadie te ha dado un mapa claro de por dónde empezar, qué cuesta y qué retorno esperar.</p>
+        <a href="diagnostico-ia.html" class="card-link">ver servicios de consultoría <span>→</span></a>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <p class="card-n">02 · profesionales</p>
+        <h3 class="card-title">tienes experiencia. quieres que trabaje para ti.</h3>
+        <p class="card-body">Llevas años acumulando criterio y conocimiento tácito. La IA puede convertir todo eso en sistemas repetibles. Sin empezar desde cero.</p>
+        <a href="bootcamp.html" class="card-link">ver el bootcamp <span>→</span></a>
+      </div>
+      <div class="card reveal reveal-delay-4">
+        <p class="card-n">03 · todo público</p>
+        <h3 class="card-title">necesitas un asistente que entienda tu negocio</h3>
+        <p class="card-body">Un GPT diseñado para tu operación específica, tus procesos, tu lenguaje. Sin horas de prueba y error.</p>
+        <a href="gpts.html" class="card-link">ver gpts personalizados <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="container">
+    <div class="servicios-header">
+      <div class="reveal">
+        <p class="section-label" style="margin-bottom:20px">servicios</p>
+        <h2 class="servicios-h2">resultado definido.<br>tiempo acotado.</h2>
+      </div>
+      <p class="servicios-intro reveal reveal-delay-2">No trabajo con empresas que buscan explorar la IA sin intención de cambiar nada. Trabajo con directivos dispuestos a revisar procesos, tomar decisiones y medir impacto.</p>
+    </div>
+    <div class="servicio reveal">
+      <div class="servicio-meta"><p class="s-num">01</p><p class="s-dur">4 semanas</p></div>
+      <div>
+        <h3 class="s-name">diagnóstico de ia</h3>
+        <p class="s-body">¿Dónde entra la IA en tu empresa y dónde todavía no? Mapa de prioridades con criterio de decisión, estimación de impacto y hoja de ruta. Sin humo. Sin propuesta genérica.</p>
+      </div>
+      <div class="s-cta"><a href="diagnostico-ia.html" class="s-link">ver más <span>→</span></a></div>
+    </div>
+    <div class="servicio reveal">
+      <div class="servicio-meta"><p class="s-num">02</p><p class="s-dur">6–12 semanas</p></div>
+      <div>
+        <h3 class="s-name">automatización e ia en procesos</h3>
+        <p class="s-body">Para empresas que ya saben dónde quieren ir y necesitan ejecución real. Diseño, implementación y adopción. El equipo termina usando la herramienta, no archivándola.</p>
+      </div>
+      <div class="s-cta"><a href="automatizacion-ia.html" class="s-link">ver más <span>→</span></a></div>
+    </div>
+    <div class="servicio reveal">
+      <div class="servicio-meta"><p class="s-num">03</p><p class="s-dur">2–4 semanas</p></div>
+      <div>
+        <h3 class="s-name">capacitación corporativa en ia</h3>
+        <p class="s-body">No una lista de herramientas. Formación ejecutiva con criterio: cómo evaluar qué procesos merecen IA, cómo liderar la adopción sin generar resistencia, cómo medir si funciona.</p>
+      </div>
+      <div class="s-cta"><a href="capacitacion-corporativa.html" class="s-link">ver más <span>→</span></a></div>
+    </div>
+    <div class="servicio servicio--featured reveal">
+      <div class="servicio-meta">
+        <span class="featured-badge">punto de entrada</span>
+        <p class="s-num">04</p>
+        <p class="s-dur" style="color:var(--copper)">desde $197 · 8 sesiones</p>
+      </div>
+      <div>
+        <h3 class="s-name">bootcamp ai: zero to pro</h3>
+        <p class="s-body">Para profesionales que quieren dominar la IA con estructura, no con tutoriales ensamblados sin criterio. 8 sesiones en vivo. Q&A en tiempo real. Cohorte de profesionales convirtiendo su experiencia en sistemas.</p>
+      </div>
+      <div class="s-cta"><a href="bootcamp.html" class="btn-primary">reservar lugar <span class="arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div>
+        <p class="section-label reveal" style="margin-bottom:28px">sobre felipe</p>
+        <h2 class="sobre-h2 reveal">25 años gestionando tecnología en empresas reales.<br>10 como CIO.</h2>
+        <p class="sobre-body reveal reveal-delay-1">Felipe Avinzano existe porque el mercado dejó de saber leer cierto tipo de valor — y en lugar de adaptarse a las reglas de otros, decidió reescribir las propias.</p>
+        <p class="sobre-body reveal reveal-delay-2">Después de más de dos décadas como responsable de tecnología en empresas, llegó una realidad incómoda: las empresas se ahogan en procesos que podrían ser más simples. Y la IA, lejos de resolverlo, amplifica el problema cuando llega sin criterio.</p>
+        <p class="sobre-body reveal reveal-delay-3">La práctica nació de esa tensión. De convertir 25 años de experiencia ejecutiva en un sistema de decisión y adopción que le ahorra a las empresas el costo más alto de todos: el de elegir mal.</p>
+        <a href="sobre-felipe.html" class="sobre-cta reveal reveal-delay-4">conocer más sobre felipe <span class="arrow" style="font-size:14px">→</span></a>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="datos">
+          <div class="dato"><span class="dato-k">experiencia</span><span class="dato-v">25+ años en TI</span></div>
+          <div class="dato"><span class="dato-k">cargo previo</span><span class="dato-v">CIO · 10 años</span></div>
+          <div class="dato"><span class="dato-k">especialidad</span><span class="dato-v">IA aplicada a operaciones B2B</span></div>
+          <div class="dato"><span class="dato-k">mercados</span><span class="dato-v">Global</span></div>
+          <div class="dato"><span class="dato-k">idiomas</span><span class="dato-v">Español nativo</span></div>
+        </div>
+        <div class="quote-card">
+          <p>"Cuando todos tengan acceso a la misma tecnología, lo que diferenciará a las empresas no será qué herramienta usan, sino qué criterio tienen para usarla."</p>
+          <cite>— Felipe Avinzano</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- LEAD MAGNET -->
+<section style="padding-block:clamp(56px,6vw,80px);background:rgba(184,115,51,0.05);border-block:1px solid rgba(184,115,51,0.18)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center" class="reveal">
+      <div>
+        <p class="label" style="margin-bottom:16px;color:var(--copper)">recurso gratuito</p>
+        <h2 style="font-size:clamp(22px,3vw,38px);font-weight:300;letter-spacing:-0.02em;line-height:1.1;font-family:var(--font-display);margin-bottom:14px">10 prompts que todo profesional necesita dominar.</h2>
+        <p style="font-size:15px;color:var(--fog);line-height:1.65;max-width:42ch">Anatomía de un prompt perfecto, errores más comunes y ejemplos reales. Gratis, sin spam.</p>
+      </div>
+      <form action="https://felipeavinzano.com/guia" method="GET" style="display:flex;flex-direction:column;gap:10px">
+        <input type="email" name="email" placeholder="tu@email.com" required
+          style="background:rgba(244,241,235,0.06);border:1px solid rgba(244,241,235,0.2);color:var(--warm-bone);padding:14px 18px;font-family:var(--font);font-size:15px;font-weight:300;width:100%;outline:none;transition:border-color 200ms"
+          aria-label="Tu email para recibir la guía gratuita"
+          onfocus="this.style.borderColor='var(--copper)'" onblur="this.style.borderColor='rgba(244,241,235,0.2)'">
+        <button type="submit" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--copper);color:var(--warm-bone);font-size:14px;font-weight:300;padding:15px 28px;font-family:var(--font);border:none;cursor:pointer;transition:background 220ms" onmouseenter="this.style.background='#9d5a2a'" onmouseleave="this.style.background='var(--copper)'">descargar guía gratis →</button>
+        <p style="font-size:12px;color:rgba(140,151,160,0.45);text-align:center">Sin spam. Solo contenido de valor.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding-block:var(--section-y);border-bottom:1px solid var(--rule)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:4fr 8fr;gap:48px;align-items:end;margin-bottom:56px;padding-bottom:48px;border-bottom:1px solid var(--rule)" class="reveal">
+      <div>
+        <p class="label" style="margin-bottom:20px;color:var(--copper)">resultados reales</p>
+        <h2 style="font-size:clamp(28px,3.5vw,52px);font-weight:300;letter-spacing:-0.02em;line-height:1.05;font-family:var(--font-display)">profesionales que ya construyeron sus sistemas.</h2>
+      </div>
+      <p style="font-size:17px;color:var(--fog);line-height:1.7;max-width:48ch;align-self:end">Del Bootcamp AI: Zero to Pro. Resultados aplicados el lunes siguiente a cada sesión.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)">
+      <div class="reveal" style="padding:36px 32px;border-right:1px solid var(--rule)">
+        <p style="font-size:15px;line-height:1.75;color:rgba(244,241,235,0.78);margin-bottom:28px;font-style:italic">"Apliqué el Framework RTF y reduje mi tiempo de generación de informes técnicos de 4 horas a 30 minutos. Todo lo que aprendí pude aplicarlo casi de inmediato."</p>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--copper);flex-shrink:0">OM</div>
+          <div><p style="font-size:14px;font-weight:400">Oscar Morillo</p><p style="font-size:12px;color:var(--fog)">Ingeniero Civil</p><p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--copper);margin-top:4px">87.5% reducción en tiempo</p></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2" style="padding:36px 32px;border-right:1px solid var(--rule)">
+        <p style="font-size:15px;line-height:1.75;color:rgba(244,241,235,0.78);margin-bottom:28px;font-style:italic">"El Custom GPT Workbook me permitió crear un asistente especializado que ahora usa todo mi equipo. Me catapultó en la empresa."</p>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--copper);flex-shrink:0">JA</div>
+          <div><p style="font-size:14px;font-weight:400">José Ahumada</p><p style="font-size:12px;color:var(--fog)">Ingeniero Estructural</p><p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--copper);margin-top:4px">GPT adoptado por equipo completo</p></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-4" style="padding:36px 32px">
+        <p style="font-size:15px;line-height:1.75;color:rgba(244,241,235,0.78);margin-bottom:28px;font-style:italic">"La instrucción por parte de un profesional en activo que emplea IA ha elevado significativamente el nivel de exigencia y la calidad del trabajo realizado."</p>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--copper);flex-shrink:0">NP</div>
+          <div><p style="font-size:14px;font-weight:400">Narle Paz</p><p style="font-size:12px;color:var(--fog)">Ingeniero Petrolero</p><p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--copper);margin-top:4px">Nivel técnico profesional</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="reveal">
+        <p class="section-label" style="margin-bottom:20px">preguntas frecuentes</p>
+        <h2 class="faq-h2">lo que se pregunta antes de decidir.</h2>
+      </div>
+      <p class="faq-intro reveal reveal-delay-2">Respuestas directas. Sin rodeos.</p>
+    </div>
+    <div class="faq-item reveal"><p class="faq-q">¿Esto es para empresas grandes o también para las mías?</p><p class="faq-a">Para empresas de 1 a 150 personas. Las grandes tienen departamentos de transformación digital. Las tuyas necesitan criterio ejecutivo, no burocracia de consultoría. Ese es exactamente el espacio donde trabaja Felipe Avinzano.</p></div>
+    <div class="faq-item reveal"><p class="faq-q">¿Cómo sé que no será otro proyecto bonito que no cambia nada?</p><p class="faq-a">Esa es la objeción correcta. Cada servicio tiene un entregable concreto, un tiempo definido y un criterio de éxito acordado antes de empezar. Si no hay disposición a revisar procesos y medir impacto, no es el cliente adecuado para esta práctica.</p></div>
+    <div class="faq-item reveal"><p class="faq-q">¿En qué se diferencia de otros consultores de IA?</p><p class="faq-a">La mayoría parte desde la herramienta. Felipe parte desde la decisión de negocio. No vende ChatGPT, no vende automatización genérica, no certifica plataformas. Convierte lo que una empresa ya sabe hacer en sistemas que producen resultados medibles.</p></div>
+    <div class="faq-item reveal"><p class="faq-q">¿Cuánto cuesta trabajar con Felipe Avinzano?</p><p class="faq-a">El punto de entrada es el Bootcamp AI: Zero to Pro, desde $197 por participante (Early Bird). Los servicios de consultoría corporativa se cotizan según alcance y duración. La primera conversación es sin costo y sin propuesta genérica.</p></div>
+    <div class="faq-item reveal"><p class="faq-q">¿Trabaja con empresas en cualquier país?</p><p class="faq-a">Sí. Felipe está basado en EE.UU. y atiende empresas y profesionales de habla hispana en cualquier parte del mundo. El trabajo es 100% remoto por defecto — lo que significa que la ubicación nunca es un obstáculo. Si el proyecto lo justifica, se puede coordinar presencia física.</p></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contacto">
+  <div class="cta-bg">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+      <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2 reveal">¿listo para convertir experiencia en sistemas?</h2>
+      <p class="cta-sub reveal reveal-delay-2">Primera conversación sin costo. Sin pitch. Sin propuesta de 35 páginas. Solo claridad sobre si tiene sentido trabajar juntos.</p>
+      <a href="mailto:felipe@felipeavinzano.com" class="btn-primary reveal reveal-delay-3">agenda una llamada <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="f-brand">
+        <svg width="28" height="28" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+          <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+        </svg>
+        <div>
+          <div style="font-size:14px;font-weight:300;letter-spacing:-0.015em">felipe avinzano</div>
+          <div class="f-tagline">convirtiendo experiencia acumulada en sistemas de ia accionables.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#servicios">servicios</a>
+        <a href="bootcamp.html">bootcamp</a>
+        <a href="sobre-felipe.html">sobre felipe</a>
+        <a href="blog.html">blog</a>
+        <a href="faq.html">faq</a>
+        <a href="#contacto">contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 felipe avinzano · felipeavinzano.com</p>
+      <div class="footer-bottom-links">
+        <a href="/llms.txt">llms.txt</a>
+        <a href="/sitemap.xml">sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{ passive:true});
+
+// REVEAL on scroll
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
+},{threshold:0.12});
+reveals.forEach(el=>io.observe(el));
+
+// GLOBE spin on reveal
+const globeStat=document.getElementById('globe-stat');
+const globeSvg=document.getElementById('globe-svg');
+if(globeSvg){
+  globeSvg.style.transform='rotate(-20deg)';
+  globeSvg.style.transition='transform 0s';
+  const gObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      globeSvg.style.transition='transform 1.4s cubic-bezier(0.16,1,0.3,1)';
+      globeSvg.style.transform='rotate(360deg)';
+      gObs.unobserve(e.target);
+    });
+  },{threshold:0.5});
+  gObs.observe(globeStat);
+}
+const counters=document.querySelectorAll('[data-count]');
+const cio=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=+el.dataset.count,dur=1400;
+    let start=null;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      el.textContent=Math.round(ease*target)+(target===3?'':'+');
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=target+(target===3?'':'+');
+    };
+    requestAnimationFrame(step);
+    cio.unobserve(el);
+  })
+},{threshold:0.5});
+counters.forEach(el=>cio.observe(el));
+</script>
+<script>
+// Hamburger
+(function(){
+  const btn=document.getElementById("nav-hamburger");
+  const overlay=document.getElementById("nav-mobile-overlay");
+  if(!btn||!overlay)return;
+  btn.addEventListener("click",()=>{
+    const open=btn.classList.toggle("open");
+    overlay.classList.toggle("open");
+    btn.setAttribute("aria-expanded",open);
+    document.body.style.overflow=open?"hidden":"";
+  });
+  overlay.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    btn.classList.remove("open");overlay.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");document.body.style.overflow="";
+  }));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open")){btn.classList.remove("open");overlay.classList.remove("open");btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}});
+})();
+// Active nav state
+(function(){
+  const p=window.location.pathname.split("/").pop()||"index";
+  document.querySelectorAll(".nav-links a,.nav-mobile-overlay a").forEach(a=>{
+    const h=a.getAttribute("href")||"";
+    if(h===p||(p===""&&h==="/")||h.replace(".html","")===p.replace(".html",""))
+      a.classList.add("active");
+  });
+})();
+// Sticky CTA
+(function(){
+  const el=document.getElementById("sticky-cta");
+  if(!el)return;
+  const handler=()=>el.classList.toggle("visible",window.scrollY>500);
+  window.addEventListener("scroll",handler,{passive:true});
+})();
+</script>
+</body>
+</html>

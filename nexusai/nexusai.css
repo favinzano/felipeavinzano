@@ -1,0 +1,71 @@
+/* ── NexusAI Legal Copilot — App Styles ─────────────────────────── */
+
+* { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* ── View system ─────────────────────────────────────────────────── */
+#main-content { position: relative; flex: 1; overflow: hidden; }
+
+.view {
+  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+.view.active {
+  display: flex;
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────────────── */
+.nav-link {
+  border-left: 3px solid transparent;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+.nav-link:hover {
+  background: rgba(255,255,255,0.07);
+  color: white;
+}
+.nav-link.active {
+  background: rgba(255,255,255,0.1);
+  border-left-color: #00D4AA;
+  color: white !important;
+}
+
+/* ── Score ring ──────────────────────────────────────────────────── */
+.score-ring {
+  background:
+    radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    conic-gradient(#00D4AA var(--pct, 0%), #e2e8f0 0);
+  border-radius: 50%;
+  width: 7rem; height: 7rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────── */
+.tab-active  { border-bottom: 2px solid #0a1f43; color: #0a1f43; font-weight: 700; }
+.tab-inactive { border-bottom: 2px solid transparent; color: #94a3b8; }
+.tab-inactive:hover { color: #475569; }
+
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+.scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+.scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+/* ── Animations ──────────────────────────────────────────────────── */
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dragover { border-color: #00D4AA !important; background: #f0fdf9 !important; }
+
+@media print {
+  aside, header, nav { display: none !important; }
+}

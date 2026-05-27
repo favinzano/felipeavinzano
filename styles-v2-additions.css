@@ -1,0 +1,40 @@
+/* ========================================
+   BOOTCAMP AI - STYLES.CSS (OPTIMIZADO v2)
+   Fecha: 2026-02-24
+   Cambios: Escasez, viewers counter, estilos pricing
+   ======================================== */
+
+/* === NUEVOS ESTILOS v2 === */
+.urgency-viewers {
+    color: #88C0D0;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.pricing-cta.sold-out {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.pricing-cta.sold-out:hover {
+    transform: none;
+    background: #666;
+}
+
+/* === RESPONSIVE MOBILE FIXES === */
+@media (max-width: 768px) {
+    .urgency-bar {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .urgency-viewers {
+        font-size: 13px;
+    }
+}

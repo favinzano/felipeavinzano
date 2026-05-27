@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bootcamp AI: Zero to Pro — Felipe Avinzano · $197</title>
+<meta name="description" content="8 sesiones en vivo donde construirás Custom GPTs, bibliotecas de prompts y sistemas de IA completos. Frameworks RTF y CREATE. Desde $197. Con Felipe Avinzano, ex-CIO con 25+ años de experiencia.">
+<meta property="og:title" content="Bootcamp AI: Zero to Pro — Felipe Avinzano">
+<meta property="og:description" content="8 sesiones técnicas en vivo. Custom GPTs, frameworks profesionales, análisis de datos. Desde $197.">
+<meta property="og:url" content="https://felipeavinzano.com/bootcamp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Bootcamp AI: Zero to Pro","description":"8 sesiones en vivo para dominar IA con frameworks probados en producción.","provider":{"@type":"Person","name":"Felipe Avinzano","url":"https://felipeavinzano.com"},"offers":[{"@type":"Offer","price":"197","priceCurrency":"USD","name":"Early Bird"},{"@type":"Offer","price":"227","priceCurrency":"USD","name":"Regular"},{"@type":"Offer","price":"257","priceCurrency":"USD","name":"Last Minute"}],"inLanguage":"es","courseMode":"online","availableLanguage":"es"}</script>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--deep-ink:#0D1B2A;--warm-bone:#F4F1EB;--fog:#8C97A0;--type-black:#1A1A1A;--copper:#B87333;--rule:rgba(244,241,235,0.12);--font-display:"DM Serif Display",Georgia,serif;
+  --font:"Inter",-apple-system,sans-serif;--pad:clamp(24px,5vw,96px);--section-y:clamp(80px,10vw,130px)}
+html{scroll-behavior:smooth}
+body{background:var(--deep-ink);color:var(--warm-bone);font-family:var(--font);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}.reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
+.container{width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--pad)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(13,27,42,0.93);backdrop-filter:blur(12px);border-color:var(--rule)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:20px}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-wordmark{font-size:15px;font-weight:300;letter-spacing:-0.02em}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:13px;font-weight:300;color:var(--fog);letter-spacing:-0.01em;transition:color 200ms}
+.nav-links a:hover{color:var(--warm-bone)}
+.nav-cta{padding:9px 20px;border:1px solid rgba(244,241,235,0.28);color:var(--warm-bone)!important;transition:background 200ms!important}
+.nav-cta:hover{background:rgba(244,241,235,0.08)!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:400;padding:18px 36px;letter-spacing:-0.01em;transition:all 220ms;cursor:pointer;border:none;font-family:var(--font)}
+.btn-copper{background:var(--copper);color:var(--warm-bone)}
+.btn-copper:hover{background:#9d5a2a}
+.btn-outline{background:transparent;color:var(--warm-bone);border:1px solid rgba(244,241,235,0.32)}
+.btn-outline:hover{background:rgba(244,241,235,0.06);border-color:rgba(244,241,235,0.6)}
+.btn-sm{font-size:14px;padding:14px 28px}
+.btn-full{width:100%;justify-content:center}
+.arrow{transition:transform 200ms}
+.btn:hover .arrow{transform:translateX(4px)}
+.label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--fog)}
+.label--copper{color:var(--copper)}
+.section{padding-block:var(--section-y)}
+.section--border{border-bottom:1px solid var(--rule)}
+.section--alt{background:rgba(244,241,235,0.025)}
+.section--light{background:var(--warm-bone);color:var(--type-black)}
+.h2{font-size:clamp(30px,4vw,56px);font-weight:300;letter-spacing:-0.025em;line-height:1.05;margin-bottom:32px}
+.h3{font-size:clamp(18px,2vw,26px);font-weight:300;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px}
+.body-lg{font-size:18px;line-height:1.8;color:rgba(244,241,235,0.78);max-width:60ch;margin-bottom:20px}
+.body{font-size:16px;line-height:1.75;color:rgba(244,241,235,0.68);margin-bottom:14px}
+.rule{border:0;border-top:1px solid var(--rule);margin:0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+.grid-asym{display:grid;grid-template-columns:6fr 5fr;gap:64px;align-items:start}
+.check{display:flex;gap:12px;padding-block:12px;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.6;color:rgba(244,241,235,0.78)}
+.check::before{content:"—";color:var(--copper);flex-shrink:0}
+.check:last-child{border-bottom:0}
+footer{padding-block:52px;border-top:1px solid var(--rule)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;padding-bottom:28px;border-bottom:1px solid var(--rule)}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--fog);transition:color 150ms}
+.footer-links a:hover{color:var(--warm-bone)}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:24px;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(140,151,160,0.4)}
+@media(max-width:900px){.grid-2,.grid-asym{grid-template-columns:1fr;gap:32px}.grid-3{grid-template-columns:1fr}.nav-links{display:none}.footer-inner{flex-direction:column;align-items:flex-start}}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:100px;padding-bottom:clamp(56px,8vw,100px);position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero-bg{position:absolute;right:-4%;bottom:-6%;width:min(560px,60vw);opacity:0;animation:heroIso 1.2s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;pointer-events:none}
+@keyframes heroIso{from{opacity:0;transform:translateX(30px)}to{opacity:0.055;transform:none}}
+.hero-content{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);border:1px solid rgba(184,115,51,0.35);padding:8px 14px;margin-bottom:32px;opacity:0;animation:fadeUp 0.6s 0.3s forwards}
+.hero-h1{font-size:clamp(44px,7vw,108px);font-weight:300;letter-spacing:-0.03em;line-height:0.95;margin-bottom:40px}
+.hero-h1 span{display:block;opacity:0;transform:translateY(28px)}
+.hero-h1 span:nth-child(1){animation:fadeUp 0.8s 0.45s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-h1 span:nth-child(2){animation:fadeUp 0.8s 0.58s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-h1 span:nth-child(3){animation:fadeUp 0.8s 0.71s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;padding-top:40px;border-top:1px solid var(--rule);opacity:0;animation:fadeUp 0.8s 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-desc{font-size:clamp(16px,1.8vw,20px);font-weight:300;letter-spacing:-0.015em;line-height:1.5;color:rgba(244,241,235,0.75);max-width:44ch}
+.hero-desc em{font-style:normal;color:var(--warm-bone)}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.hero-notice{font-size:13px;color:var(--fog);text-align:right}
+.hero-notice strong{color:var(--copper)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+/* MARQUEE */
+.marquee-wrap{padding-block:18px;border-block:1px solid var(--rule);overflow:hidden;background:rgba(244,241,235,0.02)}
+.marquee-track{display:flex;width:max-content;animation:marquee 20s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;white-space:nowrap}
+.marquee-text{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--fog);padding-inline:36px}
+.marquee-sep{color:var(--copper)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.stat{padding:clamp(36px,5vw,64px) var(--pad);text-align:center;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:0}
+.stat-n{font-size:clamp(52px,6vw,88px);font-weight:300;letter-spacing:-0.04em;color:var(--copper);line-height:1;display:block}
+.stat-l{font-size:13px;color:var(--fog);margin-top:10px;line-height:1.4;display:block}
+/* DELIVERABLES */
+.deliverable-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+.dlv{padding:32px 28px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.dlv:nth-child(3n){border-right:0}
+.dlv:nth-last-child(-n+3){border-bottom:0}
+.dlv-icon{font-size:24px;margin-bottom:14px;display:block}
+.dlv-title{font-size:15px;font-weight:400;letter-spacing:-0.01em;margin-bottom:8px}
+.dlv-body{font-size:13px;line-height:1.6;color:var(--fog)}
+/* SESSIONS */
+.sessions{border:1px solid var(--rule)}
+.session-block{padding:36px 40px;border-bottom:1px solid var(--rule)}
+.session-block:last-child{border-bottom:0}
+.session-block:hover{background:rgba(244,241,235,0.02)}
+.session-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.session-tag{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper)}
+.session-date{font-size:12px;color:var(--fog)}
+.session-title{font-size:20px;font-weight:300;letter-spacing:-0.015em;margin-bottom:10px}
+.session-body{font-size:15px;line-height:1.65;color:var(--fog);margin-bottom:14px}
+.session-deliverable{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--copper);border:1px solid rgba(184,115,51,0.3);padding:6px 12px}
+/* TESTIMONIALS */
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+.testimonial{padding:36px 32px;border-right:1px solid var(--rule);position:relative}
+.testimonial:last-child{border-right:0}
+.testimonial-quote{font-size:15px;line-height:1.75;color:rgba(244,241,235,0.78);margin-bottom:28px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:40px;height:40px;background:rgba(184,115,51,0.15);border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--copper);flex-shrink:0}
+.testimonial-name{font-size:14px;font-weight:400;color:var(--warm-bone)}
+.testimonial-role{font-size:12px;color:var(--fog)}
+.testimonial-result{display:inline-block;margin-top:10px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--copper)}
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+.price-card{padding:44px 36px;border-right:1px solid var(--rule);position:relative}
+.price-card:last-child{border-right:0}
+.price-card--featured{background:rgba(184,115,51,0.04);border:2px solid rgba(184,115,51,0.4)}
+.price-badge{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:var(--copper);color:var(--warm-bone);padding:4px 10px;margin-bottom:20px}
+.price-name{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--fog);margin-bottom:12px}
+.price-amount{font-size:clamp(40px,4vw,64px);font-weight:300;letter-spacing:-0.03em;color:var(--copper);line-height:1;margin-bottom:6px}
+.price-note{font-size:13px;color:var(--fog);margin-bottom:32px}
+.price-includes{list-style:none;margin-bottom:36px}
+.price-includes li{display:flex;gap:10px;padding-block:10px;border-bottom:1px solid var(--rule);font-size:14px;color:rgba(244,241,235,0.75)}
+.price-includes li::before{content:"—";color:var(--copper);flex-shrink:0}
+/* INSTRUCTOR */
+.instructor-grid{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:start}
+.instructor-photo{width:100%;aspect-ratio:3/4;object-fit:cover;background:rgba(244,241,235,0.05);border:1px solid var(--rule);display:block}
+.credential{display:flex;gap:14px;padding-block:14px;border-bottom:1px solid var(--rule);font-size:15px;color:rgba(244,241,235,0.78)}
+.credential::before{content:"—";color:var(--copper);flex-shrink:0}
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--rule)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding-block:22px;cursor:pointer;font-size:16px;font-weight:400;letter-spacing:-0.01em;gap:24px;transition:color 200ms}
+.faq-item:hover .faq-q{color:var(--copper)}
+.faq-q-icon{flex-shrink:0;width:20px;height:20px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 300ms,background 200ms;color:var(--fog)}
+.faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(184,115,51,0.1);border-color:rgba(184,115,51,0.4);color:var(--copper)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 400ms cubic-bezier(0.16,1,0.3,1)}
+.faq-item.open .faq-a{max-height:500px}
+.faq-a-inner{padding-bottom:24px;font-size:16px;line-height:1.8;color:rgba(244,241,235,0.65)}
+.faq-a-inner ul{list-style:none;margin-top:12px}
+.faq-a-inner ul li{display:flex;gap:10px;padding-block:6px;color:rgba(244,241,235,0.65);font-size:15px}
+.faq-a-inner ul li::before{content:"·";color:var(--copper);flex-shrink:0}
+/* LOGISTICS */
+.logistics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+.logistics-cell{padding:28px 24px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.logistics-cell:nth-child(3n){border-right:0}
+.logistics-cell:nth-last-child(-n+3){border-bottom:0}
+.logistics-icon{font-size:20px;margin-bottom:10px}
+.logistics-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--fog);margin-bottom:6px}
+.logistics-value{font-size:15px;font-weight:400;color:var(--warm-bone);line-height:1.4}
+.logistics-sub{font-size:13px;color:var(--fog);margin-top:4px}
+@media(max-width:900px){.stats-grid,.deliverable-grid,.testimonial-grid,.pricing-grid,.logistics-grid{grid-template-columns:1fr}.stat,.dlv,.testimonial,.price-card,.logistics-cell{border-right:0!important}.hero-bottom{grid-template-columns:1fr;gap:28px}.hero-actions{align-items:flex-start}.hero-notice{text-align:left}.instructor-grid{grid-template-columns:1fr}}
+
+/* Display serif — headlines only */
+.hero-h1,.page-h1,.h2,.cta-h2,.problema-h2,.paraquien-h2,.servicios-h2,.sobre-h2,.faq-h2{font-family:var(--font-display);font-weight:400;letter-spacing:-0.01em}
+.hero-h1{letter-spacing:-0.02em}
+.h2{letter-spacing:-0.015em}
+
+/* === UX / A11Y FIXES === */
+:focus-visible{outline:none;box-shadow:0 0 0 2px var(--copper),0 0 0 4px rgba(184,115,51,0.15)!important}
+a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
+.btn,.btn-primary,.btn-ghost,.btn-outline,.btn-copper,.card,.card-link,.s-link,.faq-q,.session-block,.blog-card,.check-list li,.credential{cursor:pointer}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+  .marquee-track{animation:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+.skip-link{position:absolute;top:-100px;left:16px;background:var(--copper);color:var(--warm-bone);padding:12px 20px;font-size:14px;font-weight:400;letter-spacing:-0.01em;z-index:9999;border:none;transition:top 200ms}
+.skip-link:focus{top:16px}
+/* Hamburger */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:relative;z-index:210;-webkit-tap-highlight-color:transparent}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--warm-bone);transition:all 300ms cubic-bezier(0.16,1,0.3,1);transform-origin:center}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-mobile-overlay{position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:200;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;opacity:0;pointer-events:none;transition:opacity 350ms ease;padding:40px}
+.nav-mobile-overlay.open{opacity:1;pointer-events:auto}
+.nav-mobile-overlay a{font-size:clamp(20px,5.5vw,34px);font-weight:300;letter-spacing:-0.02em;color:rgba(244,241,235,0.6);transition:color 200ms,opacity 200ms;padding:12px 0;width:100%;text-align:center;border-bottom:1px solid rgba(244,241,235,0.06)}
+.nav-mobile-overlay a:hover,.nav-mobile-overlay a.active{color:var(--warm-bone)}
+.nav-mobile-overlay a:last-child{border-bottom:0;margin-top:16px;color:var(--warm-bone);border:1px solid rgba(244,241,235,0.3);padding:14px 32px;width:auto;font-size:15px}
+.nav-mobile-overlay a:last-child:hover{background:rgba(244,241,235,0.06)}
+.nav-links a.active{color:var(--warm-bone)}
+/* Sticky mobile CTA */
+.sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-top:1px solid var(--rule);padding:12px 20px;z-index:89;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform 350ms cubic-bezier(0.16,1,0.3,1)}
+.sticky-mobile-cta.visible{transform:none}
+.sticky-mobile-cta-text{font-size:13px;color:var(--fog);line-height:1.3;flex:1}
+.sticky-mobile-cta-text strong{display:block;color:var(--warm-bone);font-weight:400}
+.sticky-mobile-cta a{font-size:13px;font-weight:400;padding:10px 18px;background:var(--copper);color:var(--warm-bone);white-space:nowrap;flex-shrink:0;transition:background 200ms}
+.sticky-mobile-cta a:hover{background:#9d5a2a}
+@media(max-width:960px){.nav-hamburger{display:flex}}
+@media(max-width:640px){.sticky-mobile-cta{display:flex}}
+/* Label size fix */
+.label{font-size:12px}
+/* SVG icon sizing */
+.dlv-icon svg,.logistics-icon svg{width:28px;height:28px}
+
+</style>
+<link rel="canonical" href="https://felipeavinzano.com/bootcamp">
+<meta property="og:title" content="Bootcamp AI: Zero to Pro — Felipe Avinzano · $197">
+<meta property="og:description" content="8 sesiones técnicas en vivo. Custom GPTs, frameworks RTF y CREATE, análisis de datos. Desde $197.">
+<meta property="og:url" content="https://felipeavinzano.com/bootcamp">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bootcamp AI: Zero to Pro — Felipe Avinzano · $197">
+<meta name="twitter:description" content="8 sesiones técnicas en vivo. Custom GPTs, frameworks RTF y CREATE, análisis de datos. Desde $197.">
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0D1B2A">
+</head>
+<body>
+<a href="#main-content" class="skip-link">saltar al contenido principal</a>
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><svg width="32" height="32" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/></svg><span class="nav-wordmark">felipe avinzano</span></a>
+      <div class="nav-links">
+        <a href="#sesiones">sesiones</a>
+        <a href="#instructor">instructor</a>
+        <a href="#pricing">precios</a>
+        <a href="#faq">faq</a>
+        <a href="#pricing" class="nav-cta">reservar cupo</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="main-content">
+  <div class="hero-bg"><svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/></svg></div>
+  <div class="container hero-content">
+    <div class="hero-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> nueva cohorte 2026 — próxima apertura</div>
+    <h1 class="hero-h1">
+      <span>bootcamp ai:</span>
+      <span>zero</span>
+      <span>to pro.</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">8 sesiones técnicas en vivo donde construirás <em>Custom GPTs, bibliotecas de prompts y sistemas de IA completos</em> con frameworks probados en producción.</p>
+      <div class="hero-actions">
+        <p class="hero-notice">Early Bird: <strong>$197</strong> · solo 10 cupos</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+          <a href="#pricing" class="btn btn-copper">reservar cupo <span class="arrow">→</span></a>
+          <a href="#sesiones" class="btn btn-outline btn-sm">ver sesiones</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-text">framework rtf</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">framework create</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">custom gpts</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">análisis de datos</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">visualización fotorrealista</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">8 sesiones en vivo</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">framework rtf</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">framework create</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">custom gpts</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">análisis de datos</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">visualización fotorrealista</span><span class="marquee-sep">·</span></div>
+    <div class="marquee-item"><span class="marquee-text">8 sesiones en vivo</span><span class="marquee-sep">·</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-grid">
+  <div class="stat reveal"><span class="stat-n" data-count="1000" data-suffix="+">0</span><span class="stat-l">estudiantes formados</span></div>
+  <div class="stat reveal reveal-delay-2"><span class="stat-n" data-count="1600" data-suffix="+">0</span><span class="stat-l">custom gpts creados</span></div>
+  <div class="stat reveal reveal-delay-4"><span class="stat-n">100%</span><span class="stat-l">satisfacción garantizada</span></div>
+</div>
+
+<!-- NO ES -->
+<section class="section section--border">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:4fr 8fr;gap:64px;align-items:start" class="reveal">
+      <div>
+        <p class="label" style="margin-bottom:24px">esto no es</p>
+        <h2 class="h2">no es chatgpt básico.</h2>
+      </div>
+      <div>
+        <div class="grid-2" style="gap:0;border:1px solid var(--rule)">
+          <div style="padding:28px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)" class="reveal">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Teoría pura sin aplicación</p>
+          </div>
+          <div style="padding:28px;border-bottom:1px solid var(--rule)" class="reveal reveal-delay-1">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Tips virales de LinkedIn</p>
+          </div>
+          <div style="padding:28px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)" class="reveal">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Contenido grabado sin Q&A</p>
+          </div>
+          <div style="padding:28px;border-bottom:1px solid var(--rule)" class="reveal reveal-delay-1">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Certificación genérica de Coursera</p>
+          </div>
+          <div style="padding:28px;border-right:1px solid var(--rule)" class="reveal">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Solo para expertos técnicos</p>
+          </div>
+          <div style="padding:28px" class="reveal reveal-delay-1">
+            <p style="font-size:12px;color:var(--copper);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">× no es</p>
+            <p style="font-size:15px;color:rgba(244,241,235,0.65)">Requiere saber programar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="section section--alt section--border">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:20px">lo que construirás</p>
+    <h2 class="h2 reveal" style="max-width:24ch">6 activos listos para producción.</h2>
+    <div class="deliverable-grid reveal reveal-delay-1">
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><p class="dlv-title">Framework RTF + Sintaxis</p><p class="dlv-body">Estructura profesional para prompts de producción. El 80% de tus prompts diarios.</p></div>
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></span><p class="dlv-title">Custom GPT completo</p><p class="dlv-body">Con RAG, guardrails y Workbook técnico. Listo para usar en tu trabajo el lunes.</p></div>
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M3 20h18M8 20V10m4 10V4m4 16v-7"/></svg></span><p class="dlv-title">Análisis de datos</p><p class="dlv-body">Dashboard de visualización e insights empresariales sobre tus propios datasets.</p></div>
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 2L2 7l10 5 10-5-10-5M2 12l10 5 10-5M2 17l10 5 10-5"/></svg></span><p class="dlv-title">Sistema visual</p><p class="dlv-body">Framework 5 Capas para renders fotorrealistas. 20+ plantillas listas para usar.</p></div>
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><p class="dlv-title">Biblioteca 100+ prompts</p><p class="dlv-body">Template Excel con activos digitales categorizados por caso de uso.</p></div>
+      <div class="dlv"><span class="dlv-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><p class="dlv-title">Projects configurados</p><p class="dlv-body">Contexto persistente para tareas recurrentes. 3+ projects operativos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS -->
+<section class="section section--border" id="sesiones">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:20px">programa completo</p>
+    <h2 class="h2 reveal" style="max-width:22ch;margin-bottom:48px">8 sesiones técnicas = 8 deliverables concretos.</h2>
+    <div class="sessions reveal">
+      <div class="session-block">
+        <div class="session-head"><span class="session-tag">sesiones 1–2</span><span class="session-date">Mar 17 y 19 · 7–9 PM EST</span></div>
+        <p class="session-title">frameworks + sintaxis técnica</p>
+        <p class="session-body">RTF, CREATE, selección de modelos, roles especializados. La base que hace que todo lo que sigue tenga sentido.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Biblioteca de Prompts + Roles Collection + Matriz de decisión</span>
+      </div>
+      <div class="session-block">
+        <div class="session-head"><span class="session-tag">sesión 3</span><span class="session-date">Mar 24 · 7–9 PM EST</span></div>
+        <p class="session-title">prompting avanzado</p>
+        <p class="session-body">Sintaxis técnica ([ ] { } * *), 10 tipos de prompts, Chain of Thought. De prompts básicos a ingeniería estructurada.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Cheat Sheet de sintaxis + 10 plantillas avanzadas + Checklist</span>
+      </div>
+      <div class="session-block">
+        <div class="session-head"><span class="session-tag">sesiones 4–5</span><span class="session-date">Mar 26 y 31 · 7–9 PM EST</span></div>
+        <p class="session-title">custom gpts + análisis de datos</p>
+        <p class="session-body">RAG, guardrails, system prompts, visualización de datasets. Tu asistente de IA entrenado con tu propio conocimiento.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Custom GPT funcional + Workbook completo + Dashboard de análisis</span>
+      </div>
+      <div class="session-block">
+        <div class="session-head"><span class="session-tag">sesión 6</span><span class="session-date">Abr 2 · 7–9 PM EST</span></div>
+        <p class="session-title">projects + contexto persistente</p>
+        <p class="session-body">Configuración de entornos, custom instructions, troubleshooting. Contexto que persiste entre conversaciones.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> 3+ Projects configurados + 20 plantillas + Guía de troubleshooting</span>
+      </div>
+      <div class="session-block">
+        <div class="session-head"><span class="session-tag">sesiones 7–8</span><span class="session-date">Abr 7 y 9 · 7–9 PM EST</span></div>
+        <p class="session-title">visualización fotorrealista</p>
+        <p class="session-body">Framework 5 Capas, DALL-E / Midjourney, renders arquitectónicos. De bocetos a resultados profesionales.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> 20+ plantillas visuales + Checklist + Biblioteca de estilos técnicos</span>
+      </div>
+      <div class="session-block" style="background:rgba(184,115,51,0.03)">
+        <div class="session-head"><span class="session-tag" style="color:var(--fog)">bonus</span></div>
+        <p class="session-title">material complementario</p>
+        <p class="session-body">Recursos adicionales, casos de estudio, ejercicios prácticos y comunidad privada de WhatsApp.</p>
+        <span class="session-deliverable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Certificado profesional + 90 días acceso + Comunidad privada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section--border">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:20px">resultados reales</p>
+    <h2 class="h2 reveal" style="max-width:22ch;margin-bottom:48px">profesionales técnicos que ya construyeron sus sistemas.</h2>
+    <div class="testimonial-grid reveal">
+      <div class="testimonial">
+        <p class="testimonial-quote">"Apliqué el Framework RTF y reduje mi tiempo de generación de informes técnicos de 4 horas a 30 minutos. Todo lo que aprendí pude aplicarlo casi de inmediato en la empresa donde trabajo."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">OM</div>
+          <div>
+            <p class="testimonial-name">Oscar Morillo</p>
+            <p class="testimonial-role">Ingeniero Civil</p>
+            <p class="testimonial-result">87.5% reducción en tiempo</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"El Custom GPT Workbook me permitió crear un asistente especializado que ahora usa todo mi equipo. Me catapultó en la empresa."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JA</div>
+          <div>
+            <p class="testimonial-name">José Ahumada</p>
+            <p class="testimonial-role">Ingeniero Estructural</p>
+            <p class="testimonial-result">Custom GPT adoptado por equipo completo</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"La instrucción por parte de un profesional en activo que emplea IA ha elevado significativamente el nivel de exigencia y la calidad del trabajo realizado."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">NP</div>
+          <div>
+            <p class="testimonial-name">Narle Paz</p>
+            <p class="testimonial-role">Ingeniero Petrolero</p>
+            <p class="testimonial-result">Nivel técnico profesional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTOR -->
+<section class="section section--alt section--border" id="instructor">
+  <div class="container">
+    <div class="instructor-grid">
+      <div class="reveal">
+        <img src="https://felipeavinzano.com/felipe-photo.webp" alt="Felipe Avinzano" class="instructor-photo" onerror="this.style.background='rgba(244,241,235,0.05)'">
+      </div>
+      <div>
+        <p class="label label--copper reveal" style="margin-bottom:20px">tu instructor</p>
+        <h2 class="h2 reveal">Felipe Avinzano</h2>
+        <p style="font-size:15px;color:var(--fog);margin-bottom:28px" class="reveal reveal-delay-1">Ex CIO · Especialista en IA · Creador de 1,600+ Custom GPTs</p>
+        <p class="body-lg reveal reveal-delay-2">Con más de 25 años liderando transformación tecnológica, Felipe ha creado sistemas de IA que han reducido trabajo manual en miles de horas para profesionales técnicos en toda América Latina y España.</p>
+        <div style="margin-top:32px" class="reveal reveal-delay-3">
+          <div class="credential">Gestionó equipos de 165+ profesionales como CIO</div>
+          <div class="credential">1,600+ Custom GPTs y asistentes de IA creados en producción</div>
+          <div class="credential">Prompt Engineering Specialization — Vanderbilt University</div>
+          <div class="credential">Certificaciones CEH, CHFI (EC-Council), ITIL Foundation</div>
+          <div class="credential">Basado en Stuart, Florida, USA · Práctica global</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section section--border" id="pricing">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:20px">inversión</p>
+    <h2 class="h2 reveal" style="max-width:20ch;margin-bottom:48px">tres opciones. mismo contenido. diferente timing.</h2>
+    <div class="pricing-grid reveal">
+      <div class="price-card price-card--featured">
+        <span class="price-badge">más popular</span>
+        <p class="price-name">Early Bird</p>
+        <p class="price-amount">$197</p>
+        <p class="price-note">Primeros 10 cupos · USD</p>
+        <ul class="price-includes">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+          <li>6 deliverables técnicos</li>
+          <li>Grabaciones 90 días</li>
+          <li>Certificado profesional</li>
+          <li>Comunidad WhatsApp privada</li>
+        </ul>
+        <a href="https://buy.stripe.com/aFacN50AT0f9as65wacIE04" class="btn btn-copper btn-full">reservar ahora <span class="arrow">→</span></a>
+      </div>
+      <div class="price-card">
+        <p class="price-name">Regular</p>
+        <p class="price-amount">$227</p>
+        <p class="price-note">Hasta 3 días antes del inicio</p>
+        <ul class="price-includes">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+          <li>6 deliverables técnicos</li>
+          <li>Grabaciones 90 días</li>
+          <li>Certificado profesional</li>
+          <li>Comunidad WhatsApp privada</li>
+        </ul>
+        <a href="https://buy.stripe.com/7sY14n83lfa38jYcYCcIE05" class="btn btn-outline btn-full">reservar ahora <span class="arrow">→</span></a>
+      </div>
+      <div class="price-card">
+        <p class="price-name">Last Minute</p>
+        <p class="price-amount">$257</p>
+        <p class="price-note">Últimos 3 días antes del inicio</p>
+        <ul class="price-includes">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+          <li>6 deliverables técnicos</li>
+          <li>Grabaciones 90 días</li>
+          <li>Certificado profesional</li>
+          <li>Comunidad WhatsApp privada</li>
+        </ul>
+        <a href="https://buy.stripe.com/3cI3cvdnFge71VA8ImcIE06" class="btn btn-outline btn-full">reservar ahora <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:20px 28px;border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;gap:16px" class="reveal">
+      <span style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      <p style="font-size:14px;color:var(--fog);line-height:1.6"><strong style="color:var(--warm-bone)">Garantía de satisfacción:</strong> Si después de la primera sesión no cumple tus expectativas, reembolso completo. Sin preguntas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section class="section section--alt section--border">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:32px">detalles de logística</p>
+    <div class="logistics-grid reveal">
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <p class="logistics-label">modalidad</p>
+        <p class="logistics-value">100% Online en Vivo</p>
+        <p class="logistics-sub">Vía Zoom con Q&A en tiempo real</p>
+      </div>
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <p class="logistics-label">duración</p>
+        <p class="logistics-value">8 sesiones × 2 horas</p>
+        <p class="logistics-sub">Martes y Jueves por 4 semanas</p>
+      </div>
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <p class="logistics-label">horario</p>
+        <p class="logistics-value">7–9 PM EST</p>
+        <p class="logistics-sub">México 6PM · Colombia 7PM · Argentina 9PM · España 1AM</p>
+      </div>
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <p class="logistics-label">tamaño del grupo</p>
+        <p class="logistics-value">Máximo 20 participantes</p>
+        <p class="logistics-sub">Garantiza atención personalizada</p>
+      </div>
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <p class="logistics-label">material incluido</p>
+        <p class="logistics-value">Templates + Workbooks + Checklists</p>
+        <p class="logistics-sub">Todo descargable, listo para usar</p>
+      </div>
+      <div class="logistics-cell">
+        <div class="logistics-icon" style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <p class="logistics-label">soporte</p>
+        <p class="logistics-value">Comunidad WhatsApp privada</p>
+        <p class="logistics-sub">Acceso durante y post-bootcamp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--border" id="faq">
+  <div class="container">
+    <p class="label label--copper reveal" style="margin-bottom:20px">preguntas frecuentes</p>
+    <h2 class="h2 reveal" style="max-width:20ch;margin-bottom:48px">respuestas directas.</h2>
+    <div class="reveal">
+      <div class="faq-item">
+        <div class="faq-q">¿Cuándo son exactamente las sesiones?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Martes y Jueves, 7:00–9:00 PM EST. Calendario completo:<ul><li>Sesión 1: Martes 17 de Marzo</li><li>Sesión 2: Jueves 19 de Marzo</li><li>Sesión 3: Martes 24 de Marzo</li><li>Sesión 4: Jueves 26 de Marzo</li><li>Sesión 5: Martes 31 de Marzo</li><li>Sesión 6: Jueves 2 de Abril</li><li>Sesión 7: Martes 7 de Abril</li><li>Sesión 8: Jueves 9 de Abril</li></ul></div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué pasa si me pierdo una sesión?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Todas las sesiones quedan grabadas y disponibles en tu portal privado por 90 días. Además recibes todos los templates, workbooks y checklists en formato descargable.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Necesito experiencia previa en programación?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">No. El bootcamp usa frameworks de lenguaje natural, no código. Solo necesitas alfabetización digital básica (saber usar email y navegador web) y motivación por dominar IA como herramienta de producción profesional.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué herramientas necesito?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Trabajaremos principalmente con ChatGPT, Claude y Gemini. Las versiones gratuitas son suficientes para empezar. ChatGPT Plus ($20/mes) es opcional pero recomendado para Custom GPTs y análisis de datos avanzado.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ya tomé cursos de IA y no me sirvieron. ¿En qué es diferente este?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">La mayoría de cursos enseñan "cómo usar ChatGPT" con tips virales. Este bootcamp enseña ingeniería de IA: frameworks técnicos probados en producción (RTF, CREATE), arquitectura de Custom GPTs, sintaxis avanzada y deliverables medibles. Es la diferencia entre saber usar una herramienta vs. construir sistemas completos que ahorran horas cada semana.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué incluye exactamente el acceso de 90 días?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Acceso completo a las 8 grabaciones en HD, todos los templates descargables (Excel, Word, PDF), workbooks técnicos completos, biblioteca de prompts actualizada, comunidad privada de WhatsApp y actualizaciones de materiales durante esos 90 días.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Ofrecen certificado?<span class="faq-q-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Sí. Al completar las 8 sesiones recibes un Certificado Profesional de Ingeniería de IA que puedes agregar a tu perfil de LinkedIn. Incluye las competencias específicas dominadas: frameworks, Custom GPTs, análisis de datos y visualización.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section" style="text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0.04"><svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/></svg></div>
+  <div class="container" style="position:relative;z-index:1">
+    <p class="label label--copper reveal" style="margin-bottom:20px">próxima cohorte</p>
+    <h2 style="font-size:clamp(40px,6vw,88px);font-weight:300;letter-spacing:-0.03em;line-height:1.0;max-width:14ch;margin-inline:auto;margin-bottom:20px" class="reveal">de usuario casual a ingeniero de ia.</h2>
+    <p style="font-size:17px;color:var(--fog);max-width:44ch;margin-inline:auto;margin-bottom:44px;line-height:1.65" class="reveal reveal-delay-2">La próxima cohorte abre pronto. Solo 10 cupos al precio Early Bird de <strong style="color:var(--copper)">$197</strong>.</p>
+    <a href="https://buy.stripe.com/aFacN50AT0f9as65wacIE04" class="btn btn-copper reveal reveal-delay-3">asegurar cupo — $197 <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div style="display:flex;align-items:center;gap:14px"><svg width="32" height="32" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/></svg>
+        <div>
+          <div style="font-size:14px;font-weight:300;letter-spacing:-0.015em">felipe avinzano</div>
+          <div style="font-size:12px;color:var(--fog);margin-top:4px">Stuart, Florida, USA</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/">inicio</a>
+        <a href="sobre-felipe.html">sobre felipe</a>
+        <a href="/#servicios">servicios</a>
+        <a href="blog.html">blog</a>
+        <a href="mailto:felipe@felipeavinzano.com">felipe@felipeavinzano.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Felipe Avinzano · Todos los derechos reservados.</p>
+      <div style="display:flex;gap:20px">
+        <a href="terminos-condiciones.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Términos</a>
+        <a href="politica-privacidad.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Privacidad</a>
+        <a href="politica-reembolso.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Reembolso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById("nav");
+window.addEventListener("scroll",()=>{nav.classList.toggle("scrolled",window.scrollY>40)},{passive:true});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}})},{threshold:0.08});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+// FAQ accordion
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-q").addEventListener("click",()=>{
+    const isOpen=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i=>i.classList.remove("open"));
+    if(!isOpen)item.classList.add("open");
+  });
+});
+// Countup
+const cio=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||"",dur=1400;let start=null;const step=ts=>{if(!start)start=ts;const p=Math.min((ts-start)/dur,1);const ease=1-Math.pow(1-p,3);el.textContent=Math.round(ease*target)+suffix;if(p<1)requestAnimationFrame(step);else el.textContent=target+suffix;};requestAnimationFrame(step);cio.unobserve(el);})},{threshold:0.5});
+document.querySelectorAll("[data-count]").forEach(el=>cio.observe(el));
+</script>
+<script>
+// Hamburger
+(function(){
+  const btn=document.getElementById("nav-hamburger");
+  const overlay=document.getElementById("nav-mobile-overlay");
+  if(!btn||!overlay)return;
+  btn.addEventListener("click",()=>{
+    const open=btn.classList.toggle("open");
+    overlay.classList.toggle("open");
+    btn.setAttribute("aria-expanded",open);
+    document.body.style.overflow=open?"hidden":"";
+  });
+  overlay.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    btn.classList.remove("open");overlay.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");document.body.style.overflow="";
+  }));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open")){btn.classList.remove("open");overlay.classList.remove("open");btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}});
+})();
+// Active nav state
+(function(){
+  const p=window.location.pathname.split("/").pop()||"index";
+  document.querySelectorAll(".nav-links a,.nav-mobile-overlay a").forEach(a=>{
+    const h=a.getAttribute("href")||"";
+    if(h===p||(p===""&&h==="/")||h.replace(".html","")===p.replace(".html",""))
+      a.classList.add("active");
+  });
+})();
+// Sticky CTA
+(function(){
+  const el=document.getElementById("sticky-cta");
+  if(!el)return;
+  const handler=()=>el.classList.toggle("visible",window.scrollY>500);
+  window.addEventListener("scroll",handler,{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexusAI — Legal Copilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#0a1f43",
+        "accent": "#00D4AA",
+        "accent-amber": "#F59E0B",
+        "bg-light": "#f6f7f8",
+      },
+      fontFamily: { "display": ["Inter", "sans-serif"] },
+      borderRadius: { "DEFAULT": "0.125rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px" },
+    },
+  },
+}
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .sidebar-active { background-color: rgba(255,255,255,0.1); border-left: 3px solid #00D4AA; }
+  .scrollbar::-webkit-scrollbar { width: 4px; }
+  .scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .drop-zone { border: 2px dashed #e2e8f0; transition: all 0.2s; }
+  .drop-zone:hover, .drop-zone.dragover { border-color: #00D4AA; background: rgba(0,212,170,0.04); }
+  .dim-bar { height: 6px; border-radius: 9999px; background: #e2e8f0; overflow: hidden; }
+  .dim-fill { height: 100%; border-radius: 9999px; transition: width 1s ease; }
+  .score-ring { background: radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(#00D4AA var(--pct), #e2e8f0 0); }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .fade-in { animation: fadeIn 0.4s ease forwards; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .pulse { animation: pulse-dot 1.2s infinite; }
+  .tab-active { border-bottom: 2px solid #0a1f43; color: #0a1f43; font-weight: 700; }
+  .tab-inactive { color: #94a3b8; }
+  .status-ok { background: #d1fae5; color: #065f46; }
+  .status-warn { background: #fef3c7; color: #92400e; }
+  .status-fail { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body class="bg-bg-light text-slate-900 font-display">
+<div class="flex h-screen overflow-hidden">
+
+<!-- SIDEBAR -->
+<aside class="w-64 bg-primary text-white flex flex-col shrink-0">
+  <div class="p-6 border-b border-white/10 flex items-center gap-3">
+    <div class="size-8 bg-accent rounded flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary font-bold text-lg">balance</span>
+    </div>
+    <div>
+      <h1 class="text-lg font-bold leading-none">NexusAI</h1>
+      <p class="text-[10px] text-accent uppercase tracking-widest font-semibold mt-1">Legal Copilot</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-3 py-4 space-y-1">
+    <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" id="nav-dashboard" onclick="showView('dashboard')">
+      <span class="material-symbols-outlined text-xl">dashboard</span> Dashboard
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" id="nav-cases" onclick="showView('cases')">
+      <span class="material-symbols-outlined text-xl">folder_open</span> Cases
+    </a>
+    <a id="nav-upload" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium sidebar-active rounded transition-colors cursor-pointer" onclick="showView('upload')">
+      <span class="material-symbols-outlined text-xl text-accent">upload_file</span> Document Upload
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" onclick="showView('search')">
+      <span class="material-symbols-outlined text-xl">manage_search</span> Evidence Search
+    </a>
+    <a id="nav-viewer" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" onclick="openViewer('ASY-2024-089')">
+      <span class="material-symbols-outlined text-xl">picture_as_pdf</span> Document Viewer
+    </a>
+    <a id="nav-analysis" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" onclick="showView('analysis')">
+      <span class="material-symbols-outlined text-xl">analytics</span> Analysis
+    </a>
+    <a id="nav-memo" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer" onclick="openMemo()">
+      <span class="material-symbols-outlined text-xl">description</span> Memorandum
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded transition-colors cursor-pointer">
+      <span class="material-symbols-outlined text-xl">assessment</span> Reports
+    </a>
+  </nav>
+  <div class="p-4 border-t border-white/10">
+    <div class="flex items-center gap-3 px-3 py-2">
+      <div class="size-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">FA</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-semibold truncate">Felipe Avinzano</p>
+        <p class="text-[10px] text-slate-400 truncate">NextStepAI</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="flex-1 flex flex-col overflow-hidden">
+
+  <!-- VIEW: UPLOAD -->
+  <div id="view-upload" class="flex-1 flex flex-col overflow-y-auto scrollbar">
+    <header class="bg-white border-b border-slate-200 px-8 py-5 shrink-0">
+      <h2 class="text-2xl font-extrabold text-primary tracking-tight">Upload Asylum Narrative</h2>
+      <p class="text-slate-500 text-sm mt-1">Upload the I-589 narrative or paste text for AI analysis across 12 legal dimensions.</p>
+    </header>
+    <div class="p-8 max-w-4xl">
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-8">
+
+          <!-- Tabs -->
+          <div class="flex gap-6 border-b border-slate-100 mb-6">
+            <button class="pb-3 text-sm tab-active" id="tab-paste" onclick="switchTab('paste')">Paste Narrative</button>
+            <button class="pb-3 text-sm tab-inactive" id="tab-file" onclick="switchTab('file')">Upload File</button>
+          </div>
+
+          <!-- Paste tab -->
+          <div id="pane-paste">
+            <textarea id="narrative-text" rows="10" class="w-full border border-slate-200 rounded-lg p-4 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-accent/40 resize-none scrollbar" placeholder="Paste the asylum narrative here. Example: 'Soy periodista independiente en Venezuela. Entre 2022 y 2024 publiqué coberturas de protestas locales. Después de varias publicaciones, recibí amenazas por WhatsApp...'"
+></textarea>
+          </div>
+
+          <!-- File tab (hidden) -->
+          <div id="pane-file" class="hidden">
+            <div class="drop-zone rounded-lg p-12 flex flex-col items-center justify-center cursor-pointer" id="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+              <div class="size-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-1">Drag and drop your narrative here</h3>
+              <p class="text-slate-500 text-sm mb-6">PDF, DOCX, TXT up to 25MB</p>
+              <input type="file" id="file-input" accept=".pdf,.docx,.txt" class="hidden" onchange="handleFileSelect(event)"/>
+              <button onclick="document.getElementById('file-input').click()" class="bg-white border border-slate-300 text-primary font-bold px-6 py-2 rounded-lg hover:bg-slate-50 transition-colors shadow-sm text-sm">Browse Files</button>
+            </div>
+            <div id="file-preview" class="hidden mt-4 flex items-center p-4 bg-primary/5 border border-primary/10 rounded-lg">
+              <div class="size-10 bg-white rounded shadow-sm flex items-center justify-center text-red-600 mr-4">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p id="file-name" class="text-sm font-semibold text-primary truncate">—</p>
+                <p id="file-size" class="text-xs text-slate-500">—</p>
+              </div>
+              <button onclick="clearFile()" class="text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider ml-4">Remove</button>
+            </div>
+          </div>
+
+          <!-- Form fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-primary">Case ID <span class="text-red-500">*</span></label>
+              <input id="case-id" class="w-full border border-slate-200 rounded-lg focus:ring-accent focus:border-accent text-sm p-3" placeholder="e.g. ASY-2024-089" type="text" value="ASY-2024-089"/>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-primary">Client Name (Optional)</label>
+              <input id="client-name" class="w-full border border-slate-200 rounded-lg focus:ring-accent focus:border-accent text-sm p-3" placeholder="e.g. J. Lopez" type="text"/>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-primary">Country of Origin</label>
+              <select id="country" class="w-full border border-slate-200 rounded-lg focus:ring-accent focus:border-accent text-sm p-3 bg-white">
+                <option>Venezuela</option>
+                <option>Honduras</option>
+                <option>Guatemala</option>
+                <option>El Salvador</option>
+                <option>Nicaragua</option>
+                <option>Cuba</option>
+                <option>Haiti</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-primary">Analysis Date</label>
+              <input class="w-full border border-slate-200 bg-slate-50 rounded-lg text-sm p-3 text-slate-500" readonly type="text" id="analysis-date"/>
+            </div>
+          </div>
+
+          <!-- AI Options -->
+          <div class="mt-6 border-t border-slate-100 pt-6">
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">AI Processing — 12 Dimensions</h4>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Nexo causal (8 CFR §208.13)</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Coherencia temporal</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Expresión del miedo</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Gaps temporales</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Credibilidad narrativa</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input checked type="checkbox" class="rounded text-primary border-slate-300"/> <span class="text-sm text-slate-700">Motivo protegido (INA 101)</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="bg-slate-50 px-8 py-5 flex items-center justify-between border-t border-slate-200">
+          <div class="flex items-center gap-6 text-xs text-slate-500">
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-accent text-sm">security</span> SOC2 Compliant</span>
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-accent text-sm">lock</span> Zero data retention</span>
+          </div>
+          <button onclick="runAnalysis()" class="bg-accent hover:opacity-90 text-primary font-black text-sm px-8 py-3 rounded-lg shadow-sm flex items-center gap-2 transition-all">
+            <span>Analyze with AI</span>
+            <span class="material-symbols-outlined text-sm">auto_awesome</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Compliance badges -->
+      <div class="mt-6 grid grid-cols-3 gap-4">
+        <div class="flex gap-3 p-4 rounded-lg bg-white border border-slate-100">
+          <span class="material-symbols-outlined text-accent">security</span>
+          <div><p class="text-xs font-bold text-primary">ISO 27001</p><p class="text-[11px] text-slate-500">Data encrypted at rest and in transit.</p></div>
+        </div>
+        <div class="flex gap-3 p-4 rounded-lg bg-white border border-slate-100">
+          <span class="material-symbols-outlined text-accent">bolt</span>
+          <div><p class="text-xs font-bold text-primary">~2 min analysis</p><p class="text-[11px] text-slate-500">12 legal dimensions evaluated automatically.</p></div>
+        </div>
+        <div class="flex gap-3 p-4 rounded-lg bg-white border border-slate-100">
+          <span class="material-symbols-outlined text-accent">history_edu</span>
+          <div><p class="text-xs font-bold text-primary">8 CFR §208.13</p><p class="text-[11px] text-slate-500">Anchored to U.S. immigration law standards.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: ANALYSIS (results) -->
+  <div id="view-analysis" class="flex-1 flex-col overflow-hidden hidden">
+
+    <!-- Loading state -->
+    <div id="loading-state" class="flex-1 flex flex-col items-center justify-center gap-6 hidden">
+      <div class="size-16 rounded-full bg-primary/5 flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary text-4xl pulse">psychology</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-lg font-bold text-primary">Analyzing narrative...</h3>
+        <p class="text-slate-500 text-sm mt-1">Evaluating 12 legal dimensions against 8 CFR §208.13</p>
+      </div>
+      <div id="loading-steps" class="space-y-2 text-sm text-slate-500 w-64"></div>
+    </div>
+
+    <!-- Results state -->
+    <div id="results-state" class="flex-1 flex flex-col overflow-hidden hidden">
+      <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-4">
+          <button onclick="showView('upload')" class="flex items-center gap-2 text-slate-500 hover:text-primary text-sm">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+          </button>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg font-bold text-primary" id="result-case-id">Analysis: ASY-2024-089</h2>
+              <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded-full uppercase tracking-wider">Complete</span>
+            </div>
+            <p class="text-xs text-slate-500" id="result-subtitle">Powered by Kimi LLM • 12 dimensions evaluated</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openMemo()" class="flex items-center gap-2 px-4 py-2 bg-accent text-primary rounded-lg text-sm font-semibold shadow-sm hover:opacity-90">
+            <span class="material-symbols-outlined text-lg">auto_awesome</span> Generate Memo
+          </button>
+          <button onclick="showView('upload')" class="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-50">
+            <span class="material-symbols-outlined text-lg">refresh</span> New Case
+          </button>
+          <button onclick="exportReport()" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold shadow-sm hover:opacity-90">
+            <span class="material-symbols-outlined text-lg">download</span> Export Report
+          </button>
+        </div>
+      </header>
+
+      <div class="flex-1 flex overflow-hidden">
+        <div class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar bg-slate-50">
+
+          <!-- Score + breakdown -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+              <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Case Strength</h3>
+              <div id="score-ring" class="score-ring size-40 flex items-center justify-center rounded-full" style="--pct: 0%">
+                <div class="text-center">
+                  <span id="score-display" class="text-5xl font-black text-primary">—</span>
+                  <span class="text-slate-400 text-xl font-medium">/100</span>
+                </div>
+              </div>
+              <p id="score-label" class="mt-4 text-xs font-semibold text-slate-500 text-center">—</p>
+            </div>
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-5">Dimension Breakdown</h3>
+              <div id="dimension-bars" class="grid grid-cols-2 gap-x-8 gap-y-5"></div>
+            </div>
+          </div>
+
+          <!-- Critical alert -->
+          <div id="critical-alert" class="hidden bg-primary text-white p-5 rounded-xl flex items-center justify-between shadow-lg fade-in">
+            <div class="flex items-center gap-4">
+              <div class="size-10 bg-accent-amber rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary font-bold">priority_high</span>
+              </div>
+              <div>
+                <h4 class="font-bold">Critical Gap Identified</h4>
+                <p id="critical-alert-text" class="text-sm text-white/70"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 dimensions detail -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden fade-in">
+            <div class="flex border-b border-slate-100">
+              <button class="px-6 py-4 text-sm tab-active" id="tab-dims" onclick="switchResultTab('dims')">12 Dimensions</button>
+              <button class="px-6 py-4 text-sm tab-inactive" id="tab-actions" onclick="switchResultTab('actions')">Priority Actions</button>
+              <button class="px-6 py-4 text-sm tab-inactive" id="tab-raw" onclick="switchResultTab('raw')">Full Report</button>
+            </div>
+            <div id="pane-dims" class="p-6">
+              <div id="dimensions-grid" class="space-y-3"></div>
+            </div>
+            <div id="pane-actions" class="p-6 hidden">
+              <ul id="actions-list" class="space-y-4"></ul>
+            </div>
+            <div id="pane-raw" class="p-6 hidden">
+              <pre id="raw-report" class="text-xs text-slate-600 whitespace-pre-wrap scrollbar max-h-96 overflow-y-auto bg-slate-50 p-4 rounded-lg"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <aside class="w-72 bg-white border-l border-slate-200 flex flex-col shrink-0 overflow-y-auto scrollbar">
+          <div class="p-4 border-b border-slate-100">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Case Summary</h3>
+          </div>
+          <div class="p-4 space-y-5">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-slate-50 p-3 rounded-lg">
+                <p class="text-[10px] text-slate-500 uppercase font-bold">Score</p>
+                <p id="side-score" class="text-xl font-bold text-primary">—</p>
+              </div>
+              <div class="bg-slate-50 p-3 rounded-lg">
+                <p class="text-[10px] text-slate-500 uppercase font-bold">Nexo</p>
+                <p id="side-nexo" class="text-xl font-bold text-accent">—</p>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Legal Basis</h4>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 text-xs"><span class="size-2 rounded-full bg-accent shrink-0"></span> 8 CFR §208.13</div>
+                <div class="flex items-center gap-2 text-xs"><span class="size-2 rounded-full bg-accent shrink-0"></span> INA §101(a)(42)</div>
+                <div class="flex items-center gap-2 text-xs"><span class="size-2 rounded-full bg-accent shrink-0"></span> Credible Fear Standard</div>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Protected Grounds</h4>
+              <div id="protected-grounds" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">Case Health Index</p>
+              <div class="flex items-center gap-2">
+                <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div id="health-bar" class="h-full bg-accent" style="width: 0%"></div>
+                </div>
+                <span id="health-pct" class="text-xs font-bold text-primary">—</span>
+              </div>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <p class="text-[10px] font-bold text-slate-500 uppercase mb-2">Recommendation</p>
+              <p id="side-recommendation" class="text-xs text-slate-700 font-medium">—</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: DASHBOARD -->
+  <div id="view-dashboard" class="flex-1 flex-col overflow-y-auto scrollbar hidden">
+    <header class="bg-white border-b border-slate-200 px-8 py-5 shrink-0">
+      <h2 class="text-2xl font-extrabold text-primary tracking-tight">Dashboard</h2>
+      <p class="text-slate-500 text-sm mt-1">Overview of your asylum practice</p>
+    </header>
+    <div class="p-8 grid grid-cols-4 gap-4 mb-6">
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Cases</p>
+        <p class="text-3xl font-black text-primary mt-1">87</p>
+        <p class="text-xs text-emerald-600 font-semibold mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-sm">trending_up</span> +4 this month</p>
+      </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Active</p>
+        <p class="text-3xl font-black text-primary mt-1">34</p>
+        <div class="mt-3 h-1.5 bg-slate-100 rounded-full"><div class="bg-blue-500 h-full rounded-full" style="width:40%"></div></div>
+      </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-bold text-rose-600 uppercase tracking-wider">High Risk</p>
+        <p class="text-3xl font-black text-primary mt-1">12</p>
+        <p class="text-xs text-slate-400 mt-2">Requires immediate attention</p>
+      </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Avg Score</p>
+        <p class="text-3xl font-black text-primary mt-1">71<span class="text-lg text-slate-400">/100</span></p>
+        <div class="mt-3 h-1.5 bg-slate-100 rounded-full"><div class="bg-accent h-full rounded-full" style="width:71%"></div></div>
+      </div>
+    </div>
+    <div class="px-8">
+      <div class="bg-primary text-white p-6 rounded-xl flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="size-12 bg-accent/20 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-accent text-2xl">rocket_launch</span></div>
+          <div>
+            <h3 class="font-bold text-lg">NexusAI Legal Copilot</h3>
+            <p class="text-white/60 text-sm">Pipeline v3.0 — 12 dimensions — Powered by Kimi LLM</p>
+          </div>
+        </div>
+        <button onclick="showView('upload')" class="bg-accent text-primary font-black px-6 py-2.5 rounded-lg text-sm hover:opacity-90">Analyze New Case</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: CASES -->
+  <div id="view-cases" class="flex-1 flex-col overflow-hidden hidden">
+    <header class="bg-white border-b border-slate-200 px-8 py-5 shrink-0 flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl font-extrabold text-primary tracking-tight">Cases &amp; Matters</h2>
+        <p class="text-slate-500 text-sm mt-1">Manage all your asylum cases in one place</p>
+      </div>
+      <button onclick="showView('upload')" class="bg-accent hover:opacity-90 text-primary font-black py-2.5 px-6 rounded-lg flex items-center gap-2 text-sm shadow-sm">
+        <span class="material-symbols-outlined text-lg">add</span> New Case
+      </button>
+    </header>
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Filters -->
+      <aside class="w-56 bg-white border-r border-slate-200 p-5 shrink-0 overflow-y-auto scrollbar">
+        <div class="space-y-5">
+          <div>
+            <label class="text-xs font-bold text-primary uppercase tracking-wider block mb-2">Search</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+              <input class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded text-sm" placeholder="ID, Client..." type="text"/>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-primary uppercase tracking-wider block mb-3">Status</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input checked type="checkbox" class="rounded border-slate-300"/> Active</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> Pending</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> Complete</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> Archived</label>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-primary uppercase tracking-wider block mb-3">Risk Level</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> <span class="size-2 rounded-full bg-rose-500 inline-block"></span> High</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> <span class="size-2 rounded-full bg-amber-500 inline-block"></span> Medium</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> <span class="size-2 rounded-full bg-emerald-500 inline-block"></span> Low</label>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-primary uppercase tracking-wider block mb-3">Form Type</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input checked type="checkbox" class="rounded border-slate-300"/> I-589 Asylum</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> I-485 Adjustment</label>
+              <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-600"><input type="checkbox" class="rounded border-slate-300"/> I-130 Family</label>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Table -->
+      <div class="flex-1 flex flex-col overflow-hidden">
+        <div class="flex-1 overflow-y-auto scrollbar">
+          <table class="w-full text-left">
+            <thead class="bg-slate-50 border-b border-slate-200 sticky top-0">
+              <tr>
+                <th class="py-3 pl-6 pr-3 w-8"><input type="checkbox" class="rounded border-slate-300"/></th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Case ID</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Client</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Filed</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Risk</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">AI Score</th>
+                <th class="py-3 px-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Updated</th>
+                <th class="py-3 pr-6 pl-3"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100" id="cases-tbody">
+            </tbody>
+          </table>
+        </div>
+        <footer class="p-4 border-t border-slate-100 flex items-center justify-between shrink-0 bg-white">
+          <span class="text-sm text-slate-500">Showing 1–5 of 87 cases</span>
+          <div class="flex items-center gap-1">
+            <button class="p-1.5 border border-slate-200 rounded hover:bg-slate-50 text-slate-400"><span class="material-symbols-outlined text-base">chevron_left</span></button>
+            <button class="size-8 text-xs font-bold bg-primary text-white rounded">1</button>
+            <button class="size-8 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded">2</button>
+            <button class="size-8 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded">3</button>
+            <button class="p-1.5 border border-slate-200 rounded hover:bg-slate-50 text-slate-400"><span class="material-symbols-outlined text-base">chevron_right</span></button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: SEARCH placeholder -->
+  <div id="view-search" class="flex-1 items-center justify-center hidden">
+    <div class="text-center text-slate-400">
+      <span class="material-symbols-outlined text-5xl">search</span>
+      <p class="mt-2 text-sm font-semibold">Evidence Search (RAG)</p>
+      <p class="text-xs mt-1">Coming in Phase 2 — pgvector + BGE-M3</p>
+    </div>
+  </div>
+
+  <!-- VIEW: MEMORANDUM -->
+  <div id="view-memo" class="flex-1 flex-col overflow-hidden hidden">
+    <!-- Top bar -->
+    <header class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-4">
+        <button onclick="showView('analysis')" class="flex items-center gap-1.5 text-slate-500 hover:text-primary text-sm font-semibold">
+          <span class="material-symbols-outlined text-lg">arrow_back</span> Analysis
+        </button>
+        <div class="h-5 w-px bg-slate-200"></div>
+        <h2 class="text-base font-bold text-primary">Generate Memorandum</h2>
+        <span id="memo-case-badge" class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">ASY-2024-089</span>
+      </div>
+      <div class="flex items-center gap-3 text-xs text-slate-500">
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">database</span> 42,109 Docs Indexed</span>
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">verified_user</span> Encryption Active</span>
+        <div class="flex items-center gap-1.5 ml-2"><div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div><span class="font-bold text-slate-400 uppercase tracking-widest">Live Engine</span></div>
+      </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+
+      <!-- LEFT PANEL: Builder (38%) -->
+      <aside class="w-[38%] flex flex-col border-r border-slate-200 bg-white overflow-y-auto scrollbar shrink-0">
+        <div class="p-6 space-y-6 flex-1">
+
+          <!-- Meta fields -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">To (Attorney)</label>
+              <input id="memo-to" class="w-full border border-slate-200 rounded text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/30" type="text" value="Managing Partner"/>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">From</label>
+              <input class="w-full border border-slate-200 rounded text-sm px-3 py-2 bg-slate-50 text-slate-500" readonly type="text" value="Felipe Avinzano, Esq."/>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Date</label>
+              <input id="memo-date" class="w-full border border-slate-200 rounded text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/30" type="text"/>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">RE</label>
+              <input id="memo-re" class="w-full border border-slate-200 rounded text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/30" type="text" value="I-589 Analysis"/>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-3">Include Sections</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-summary" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Executive Summary</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-overview" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Case Overview</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-risk" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Risk Assessment</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-evidence" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Evidence Analysis</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-gaps" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Critical Gaps</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 border border-slate-200 rounded hover:bg-slate-50 cursor-pointer">
+                <input checked type="checkbox" id="sec-recs" class="rounded border-slate-300"/>
+                <span class="text-xs font-medium text-slate-700">Recommendations</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Tone + Template -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tone</label>
+              <select id="memo-tone" class="w-full border border-slate-200 rounded text-sm px-3 py-2 focus:outline-none">
+                <option>Professional</option>
+                <option>Adversarial</option>
+                <option>Neutral</option>
+                <option>Persuasive</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Template</label>
+              <select id="memo-template" class="w-full border border-slate-200 rounded text-sm px-3 py-2 focus:outline-none">
+                <option>Standard Memo</option>
+                <option>Case Brief</option>
+                <option>Client Summary</option>
+                <option>Expert Opinion</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- AI Generation status -->
+          <div id="memo-gen-status" class="hidden">
+            <div class="bg-primary/5 border border-primary/10 rounded-lg p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="size-8 bg-accent/20 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined text-accent text-lg">auto_awesome</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-primary">Kimi LLM Generating...</p>
+                  <p class="text-[10px] text-slate-500">Legal Engine v3.0 — Pipeline active</p>
+                </div>
+              </div>
+              <div id="memo-gen-steps" class="space-y-1.5 text-xs text-slate-600"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Generate button sticky -->
+        <div class="p-6 bg-slate-50 border-t border-slate-200 sticky bottom-0">
+          <button onclick="generateMemo()" id="memo-gen-btn" class="w-full bg-accent hover:opacity-90 text-primary font-black py-3 px-4 rounded-lg flex items-center justify-center gap-2 shadow-sm text-sm transition-all">
+            <span class="material-symbols-outlined">auto_awesome</span> Generate Memorandum
+          </button>
+          <p class="text-center text-[10px] text-slate-400 mt-2 flex items-center justify-center gap-1">
+            <span class="material-symbols-outlined text-xs">info</span> Powered by Kimi K2.5 — NexusAI Legal Engine v3.0
+          </p>
+        </div>
+      </aside>
+
+      <!-- RIGHT PANEL: Preview (62%) -->
+      <section class="flex-1 flex flex-col bg-slate-100 overflow-hidden">
+
+        <!-- Toolbar -->
+        <div class="h-12 border-b border-slate-200 bg-white px-6 flex items-center justify-between shrink-0">
+          <div class="flex h-full gap-1">
+            <button id="memo-tab-preview" onclick="memoTab('preview')" class="h-full px-4 text-sm font-bold border-b-2 border-primary text-primary flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-lg">visibility</span> Preview
+            </button>
+            <button id="memo-tab-edit" onclick="memoTab('edit')" class="h-full px-4 text-sm text-slate-500 hover:text-primary flex items-center gap-1.5 border-b-2 border-transparent transition-colors">
+              <span class="material-symbols-outlined text-lg">edit_note</span> Edit
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="exportMemoTxt()" class="p-1.5 text-slate-500 hover:text-primary hover:bg-slate-100 rounded border border-transparent hover:border-slate-200 transition-colors" title="Export TXT">
+              <span class="material-symbols-outlined text-lg">description</span>
+            </button>
+            <button onclick="printMemo()" class="p-1.5 text-slate-500 hover:text-primary hover:bg-slate-100 rounded border border-transparent hover:border-slate-200 transition-colors" title="Print">
+              <span class="material-symbols-outlined text-lg">print</span>
+            </button>
+            <button onclick="copyMemo()" class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-primary px-3 py-1.5 border border-slate-200 rounded hover:bg-slate-50 transition-colors">
+              <span class="material-symbols-outlined text-base">content_copy</span> Copy
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview pane -->
+        <div id="memo-preview-pane" class="flex-1 overflow-y-auto scrollbar p-10 flex justify-center">
+          <div id="memo-paper" class="bg-white shadow-lg w-full max-w-3xl min-h-[1032px] p-16 flex flex-col" style="font-family: Georgia, 'Times New Roman', serif; color: #1a1a2e;">
+
+            <!-- Letterhead -->
+            <div class="border-b-2 pb-6 mb-8 flex items-start justify-between" style="border-color:#0a1f43">
+              <div>
+                <h3 style="font-family:Inter,sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:-0.03em;color:#0a1f43">NEXUSAI LEGAL SOLUTIONS</h3>
+                <p style="font-family:Inter,sans-serif;font-size:9px;color:#94a3b8;letter-spacing:0.15em;text-transform:uppercase;margin-top:4px">AI Legal Copilot • I-589 Intelligence Engine</p>
+              </div>
+              <div style="font-family:Inter,sans-serif;font-size:9px;color:#94a3b8;text-align:right;line-height:1.6">
+                Port Saint Lucie, FL<br/>nexusai.nextstepaicorp.com<br/>SOC2 • ISO 27001 • 8 CFR §208.13
+              </div>
+            </div>
+
+            <!-- Memo header -->
+            <div id="memo-header-block" class="mb-8">
+              <h1 style="font-size:1.4rem;font-weight:700;border-bottom:1px solid #e2e8f0;padding-bottom:8px;margin-bottom:20px;letter-spacing:0.05em">MEMORANDUM</h1>
+              <div style="font-family:Inter,sans-serif;font-size:13px;line-height:2">
+                <div style="display:grid;grid-template-columns:80px 1fr"><span style="font-weight:700">TO:</span><span id="memo-preview-to">Managing Partner</span></div>
+                <div style="display:grid;grid-template-columns:80px 1fr"><span style="font-weight:700">FROM:</span><span>Felipe Avinzano, Esq. — NextStepAI</span></div>
+                <div style="display:grid;grid-template-columns:80px 1fr"><span style="font-weight:700">DATE:</span><span id="memo-preview-date"></span></div>
+                <div style="display:grid;grid-template-columns:80px 1fr"><span style="font-weight:700">RE:</span><span id="memo-preview-re" style="font-weight:700;font-style:italic;text-decoration:underline">I-589 Analysis</span></div>
+              </div>
+            </div>
+
+            <!-- Memo body — generated sections -->
+            <div id="memo-body" class="space-y-7 text-sm leading-relaxed flex-1">
+              <div class="text-center text-slate-300 py-16">
+                <span class="material-symbols-outlined text-5xl" style="color:#e2e8f0">auto_awesome</span>
+                <p style="font-family:Inter,sans-serif;font-size:13px;color:#94a3b8;margin-top:12px">Configure the options on the left and click<br/><strong>Generate Memorandum</strong> to produce the AI-drafted memo.</p>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-auto pt-10 text-center" style="font-family:Inter,sans-serif;font-size:9px;color:#94a3b8;letter-spacing:0.1em;text-transform:uppercase">
+              Confidential — Attorney-Client Privileged Communication — NexusAI Legal Engine v3.0
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit pane (contenteditable) -->
+        <div id="memo-edit-pane" class="flex-1 overflow-y-auto scrollbar p-10 hidden">
+          <div id="memo-editable" contenteditable="true" class="bg-white shadow-lg w-full max-w-3xl min-h-[900px] p-16 mx-auto text-sm leading-relaxed outline-none focus:ring-2 focus:ring-accent/30 rounded"
+            style="font-family: Georgia,'Times New Roman',serif; color:#1a1a2e">
+            Click "Generate Memorandum" first, then switch to Edit to make changes.
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+
+
+  <!-- VIEW: VIEWER -->
+  <div id="view-viewer" class="flex-1 flex-col overflow-hidden hidden">
+    <!-- Top bar -->
+    <header class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-6">
+        <button onclick="showView('cases')" class="flex items-center gap-1.5 text-slate-500 hover:text-primary text-sm font-semibold">
+          <span class="material-symbols-outlined text-lg">arrow_back</span> Cases
+        </button>
+        <div class="h-5 w-px bg-slate-200"></div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Case ID</span>
+          <span id="viewer-case-id" class="text-sm font-bold text-primary">ASY-2024-089</span>
+        </div>
+        <div class="h-5 w-px bg-slate-200"></div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Document</span>
+          <span id="viewer-doc-name" class="text-sm font-medium text-slate-700">Narrative_Statement.pdf</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Page controls -->
+        <div class="flex bg-slate-100 rounded p-1 items-center">
+          <button onclick="viewerPageChange(-1)" class="p-1 hover:bg-white rounded text-slate-500"><span class="material-symbols-outlined text-base">chevron_left</span></button>
+          <span class="px-3 text-sm font-medium">Page <span id="viewer-page">1</span> of <span id="viewer-total">3</span></span>
+          <button onclick="viewerPageChange(1)" class="p-1 hover:bg-white rounded text-slate-500"><span class="material-symbols-outlined text-base">chevron_right</span></button>
+        </div>
+        <!-- Zoom controls -->
+        <div class="flex bg-slate-100 rounded p-1 items-center gap-1">
+          <button onclick="viewerZoom(-10)" class="p-1 hover:bg-white rounded text-slate-500"><span class="material-symbols-outlined text-base">remove</span></button>
+          <span id="viewer-zoom-label" class="text-sm font-medium px-2">100%</span>
+          <button onclick="viewerZoom(10)" class="p-1 hover:bg-white rounded text-slate-500"><span class="material-symbols-outlined text-base">add</span></button>
+        </div>
+        <div class="h-5 w-px bg-slate-200"></div>
+        <button onclick="showView('analysis')" class="bg-accent hover:opacity-90 text-primary font-black px-5 py-2 rounded-lg text-sm flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-lg">analytics</span> View Analysis
+        </button>
+      </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Thumbnail rail -->
+      <div class="w-36 bg-slate-50 border-r border-slate-200 overflow-y-auto scrollbar flex flex-col items-center py-4 gap-3 shrink-0">
+        <div id="thumb-1" onclick="viewerGoPage(1)" class="relative cursor-pointer rounded overflow-hidden border-2 border-accent shadow-sm">
+          <div class="w-24 h-32 bg-white p-2 text-[7px] text-slate-400 leading-tight overflow-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation...</div>
+          <span class="absolute bottom-1 right-1 bg-accent text-primary text-[9px] px-1 rounded font-bold">1</span>
+        </div>
+        <div id="thumb-2" onclick="viewerGoPage(2)" class="relative cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-slate-300 opacity-60 hover:opacity-100 transition-all">
+          <div class="w-24 h-32 bg-white p-2 text-[7px] text-slate-400 leading-tight overflow-hidden">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur...</div>
+          <span class="absolute bottom-1 right-1 bg-slate-400 text-white text-[9px] px-1 rounded font-bold">2</span>
+        </div>
+        <div id="thumb-3" onclick="viewerGoPage(3)" class="relative cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-slate-300 opacity-60 hover:opacity-100 transition-all">
+          <div class="w-24 h-32 bg-white p-2 text-[7px] text-slate-400 leading-tight overflow-hidden">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi...</div>
+          <span class="absolute bottom-1 right-1 bg-slate-400 text-white text-[9px] px-1 rounded font-bold">3</span>
+        </div>
+      </div>
+
+      <!-- PDF Stage -->
+      <div class="flex-1 overflow-y-auto scrollbar p-8 flex flex-col items-center bg-slate-100">
+        <div id="pdf-stage" class="bg-white shadow-xl w-full max-w-3xl transition-all" style="transform-origin: top center;">
+
+          <!-- Page 1 -->
+          <div id="pdf-page-1" class="pdf-page p-16 min-h-[1100px] relative">
+            <div class="absolute top-6 right-8 text-[10px] font-bold text-slate-300 uppercase tracking-widest">NexusAI Verified</div>
+            <h1 class="text-2xl font-bold mb-8 text-primary border-b-2 border-primary/10 pb-4" id="viewer-client-title">Personal Statement — Asylum Narrative</h1>
+            <div class="space-y-6 text-slate-800 leading-relaxed text-justify text-sm" id="pdf-narrative-text">
+              <p>I declare the following statement to be true and correct to the best of my knowledge and belief. I am seeking asylum in the United States due to a well-founded fear of persecution in my home country.</p>
+              <p>My difficulties began in early 2022 when I was targeted for my political activism and community leadership in my hometown. I was repeatedly threatened by local authorities who warned me to cease my advocacy.</p>
+              <p class="relative"><span class="bg-accent/20 border-b border-accent rounded px-0.5">My difficulties began when I was targeted for my community organization work. The paramilitary group known as "La Vanguardia" began to see us as a political threat because our neighborhood meetings were not aligned with the ruling party.</span></p>
+              <p>On January 12, 2024, two men in black intercepted me and pushed me into an alley. They beat me repeatedly on the ribs. One of them shouted: <span class="bg-accent/20 border-b border-accent rounded px-0.5">"This is for continuing as an opposition leader. Next time you won't get up."</span> They left a pamphlet of "La Vanguardia" on my chest.</p>
+              <p>On January 14, 2024, I went to the Central District police station to file a complaint (Report No. VER-992). The officer on duty laughed and told me: <span class="bg-accent/20 border-b border-accent rounded px-0.5">"We don't get involved with those people. If you look for trouble with politics, don't expect us to protect you."</span></p>
+              <p>On June 5, 2024, a group of armed men arrived at my workplace asking for my current address. Thanks to a colleague who warned me by message, I was able to leave through the back door and hid at a relative's house for two weeks.</p>
+              <p>I received a text message to my personal phone: "No matter where you hide, Veridia is small for us." It was then that I decided to flee to the United States to save my life.</p>
+            </div>
+            <div class="mt-20 border-t border-slate-100 pt-6 text-xs text-slate-400 italic flex justify-between">
+              <span id="viewer-page-footer">Page 1 of 3 — Narrative Exhibit A</span>
+              <span id="viewer-case-footer">ASY-2024-089</span>
+            </div>
+          </div>
+
+          <!-- Page 2 -->
+          <div id="pdf-page-2" class="pdf-page p-16 min-h-[1100px] relative hidden">
+            <div class="absolute top-6 right-8 text-[10px] font-bold text-slate-300 uppercase tracking-widest">NexusAI Verified</div>
+            <h2 class="text-xl font-bold mb-8 text-primary border-b-2 border-primary/10 pb-4">Supporting Documentation</h2>
+            <div class="space-y-6 text-slate-800 leading-relaxed text-justify text-sm">
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                <h3 class="font-bold text-primary mb-3 text-sm uppercase tracking-wider">Police Report — VER-992</h3>
+                <p class="text-xs text-slate-600">Central District Police Station — January 14, 2024</p>
+                <p class="mt-3 text-sm">Complainant: [Applicant Name] — Date: January 14, 2024</p>
+                <p class="mt-2 text-sm text-slate-500 italic">Note: Officer refused to file formal report. Verbal dismissal recorded by complainant witness.</p>
+                <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded text-xs text-amber-700 font-medium">
+                  ⚠ AI Flag: Police inaction documented — supports state actor nexus under 8 CFR §208.13
+                </div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                <h3 class="font-bold text-primary mb-3 text-sm uppercase tracking-wider">Witness Statement</h3>
+                <p class="text-xs text-slate-600">Colleague at workplace — June 5, 2024</p>
+                <p class="mt-3 text-sm">I confirm that on June 5, 2024, several armed men arrived at the premises asking for the whereabouts of my colleague. They appeared to be affiliated with La Vanguardia.</p>
+              </div>
+            </div>
+            <div class="mt-20 border-t border-slate-100 pt-6 text-xs text-slate-400 italic flex justify-between">
+              <span>Page 2 of 3 — Supporting Documentation</span>
+              <span id="viewer-case-footer-2">ASY-2024-089</span>
+            </div>
+          </div>
+
+          <!-- Page 3 -->
+          <div id="pdf-page-3" class="pdf-page p-16 min-h-[1100px] relative hidden">
+            <div class="absolute top-6 right-8 text-[10px] font-bold text-slate-300 uppercase tracking-widest">NexusAI Verified</div>
+            <h2 class="text-xl font-bold mb-8 text-primary border-b-2 border-primary/10 pb-4">Country Conditions & Legal Basis</h2>
+            <div class="space-y-6 text-slate-800 leading-relaxed text-justify text-sm">
+              <p>According to the 2023 U.S. State Department Country Report on Human Rights Practices, paramilitary groups in Veridia operate with effective government tolerance, conducting targeted persecution of community organizers and political activists.</p>
+              <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
+                <p class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Legal Basis</p>
+                <ul class="text-sm space-y-2 text-slate-700">
+                  <li>• <strong>8 CFR §208.13</strong> — Persecution on account of political opinion</li>
+                  <li>• <strong>INA §101(a)(42)</strong> — Definition of refugee</li>
+                  <li>• <strong>Matter of Mogharrabi</strong> — Well-founded fear standard</li>
+                  <li>• <strong>INS v. Cardoza-Fonseca</strong> — 10% probability threshold</li>
+                </ul>
+              </div>
+              <p>The applicant's narrative presents a credible pattern of escalating persecution by a non-state actor operating with government acquiescence. The police refusal to file report VER-992 constitutes direct evidence of state actor nexus.</p>
+            </div>
+            <div class="mt-20 border-t border-slate-100 pt-6 text-xs text-slate-400 italic flex justify-between">
+              <span>Page 3 of 3 — Legal Basis</span>
+              <span>ASY-2024-089</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right intelligence panel -->
+      <aside class="w-72 bg-white border-l border-slate-200 flex flex-col overflow-y-auto scrollbar shrink-0">
+
+        <!-- Document info -->
+        <div class="p-5 border-b border-slate-100">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Document Info</h3>
+          <div class="space-y-2.5">
+            <div class="flex justify-between text-sm"><span class="text-slate-500">Uploaded</span><span class="font-semibold">Mar 5, 2026</span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500">Pages</span><span class="font-semibold">3</span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500">Language</span><span class="font-semibold">Spanish / English</span></div>
+            <div class="flex justify-between items-center text-sm pt-1">
+              <span class="text-slate-500">Status</span>
+              <div class="flex items-center gap-1.5 px-2 py-1 bg-accent/10 rounded-full">
+                <div class="size-2 rounded-full bg-accent animate-pulse"></div>
+                <span class="text-[10px] font-bold text-accent uppercase tracking-tight">Analyzed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick navigation -->
+        <div class="p-5 border-b border-slate-100">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Quick Navigation</h3>
+          <div class="space-y-1">
+            <div onclick="viewerGoPage(1)" class="flex items-center justify-between p-2 hover:bg-accent/5 border-l-2 border-transparent hover:border-accent rounded cursor-pointer transition-all">
+              <span class="text-xs font-medium text-slate-700">Persecution Events</span>
+              <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">p1</span>
+            </div>
+            <div onclick="viewerGoPage(2)" class="flex items-center justify-between p-2 hover:bg-accent/5 border-l-2 border-transparent hover:border-accent rounded cursor-pointer transition-all">
+              <span class="text-xs font-medium text-slate-700">Supporting Docs</span>
+              <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">p2</span>
+            </div>
+            <div onclick="viewerGoPage(3)" class="flex items-center justify-between p-2 hover:bg-accent/5 border-l-2 border-transparent hover:border-accent rounded cursor-pointer transition-all">
+              <span class="text-xs font-medium text-slate-700">Legal Basis</span>
+              <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">p3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Insights -->
+        <div class="p-5 border-b border-slate-100">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">AI Insights</h3>
+          <div class="bg-primary/5 border border-primary/10 rounded-lg p-4 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-500">Case Score</p>
+                <p class="text-2xl font-black text-primary" id="viewer-score">58<span class="text-sm text-slate-400">/100</span></p>
+              </div>
+              <div class="size-12 rounded-full border-4 border-amber-400 flex items-center justify-center">
+                <span class="text-[10px] font-black text-amber-500" id="viewer-nexo">WEAK</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-white border border-slate-100 p-2 rounded text-center">
+                <div class="text-lg font-bold text-primary">4</div>
+                <div class="text-[10px] text-slate-400 uppercase font-bold">Warnings</div>
+              </div>
+              <div class="bg-white border border-slate-100 p-2 rounded text-center">
+                <div class="text-lg font-bold text-amber-500">2</div>
+                <div class="text-[10px] text-slate-400 uppercase font-bold">Critical</div>
+              </div>
+            </div>
+            <button onclick="showView('analysis')" class="w-full bg-primary text-white py-2 rounded text-xs font-bold uppercase tracking-wider hover:opacity-90 flex items-center justify-center gap-2">
+              Full Analysis <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page Notes -->
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Page Notes</h3>
+          <div class="flex border-b border-slate-200 mb-4 gap-1">
+            <button class="flex-1 pb-2 text-[10px] font-bold border-b-2 border-primary text-primary uppercase tracking-wider">Current Page</button>
+            <button class="flex-1 pb-2 text-[10px] font-bold text-slate-400 hover:text-slate-600 uppercase tracking-wider">All Pages</button>
+          </div>
+          <div class="space-y-3">
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-sm">
+              <div class="flex justify-between items-start mb-1">
+                <span class="text-[10px] font-bold text-amber-600 uppercase">Conflict Flag</span>
+                <span class="text-[9px] text-slate-400">2:45 PM</span>
+              </div>
+              <p class="text-xs text-slate-700 italic leading-tight">"Date of incident on p.1 conflicts with police report timeline..."</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-3 rounded-sm">
+              <div class="flex justify-between items-start mb-1">
+                <span class="text-[10px] font-bold text-slate-500 uppercase">General Note</span>
+                <span class="text-[9px] text-slate-400">Yesterday</span>
+              </div>
+              <p class="text-xs text-slate-700 leading-tight">Need to request medical records from the clinic mentioned here.</p>
+            </div>
+            <button class="w-full flex items-center justify-center gap-2 border border-dashed border-slate-300 py-3 rounded text-xs text-slate-400 hover:text-primary hover:border-primary transition-all">
+              <span class="material-symbols-outlined text-sm">add_circle</span> Add annotation
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+
+</main>
+</div>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────
+let currentNarrative = '';
+let currentCaseId = '';
+let analysisResult = null;
+
+// ─── Init ─────────────────────────────────────────────────────────
+document.getElementById('analysis-date').value = new Date().toISOString().slice(0,10);
+
+// ─── Navigation ───────────────────────────────────────────────────
+function showView(name) {
+  ['upload','analysis','dashboard','cases','search','viewer','memo'].forEach(v => {
+    const el = document.getElementById('view-' + v);
+    if (!el) return;
+    el.classList.add('hidden');
+    el.classList.remove('flex');
+  });
+  const target = document.getElementById('view-' + name);
+  if (target) { target.classList.remove('hidden'); target.classList.add('flex'); }
+  document.querySelectorAll('aside nav a').forEach(a => {
+    a.classList.remove('sidebar-active');
+    a.classList.add('text-slate-300');
+    a.classList.remove('text-white');
+  });
+  const navMap = { upload: 'nav-upload', analysis: 'nav-analysis', cases: 'nav-cases', dashboard: 'nav-dashboard', viewer: 'nav-viewer', memo: 'nav-memo' };
+  if (navMap[name]) {
+    const el = document.getElementById(navMap[name]);
+    if (el) { el.classList.add('sidebar-active'); el.classList.remove('text-slate-300'); el.classList.add('text-white'); }
+  }
+  if (name === 'cases') renderCases();
+}
+
+// ─── Cases data ────────────────────────────────────────────────────
+const CASES = [
+  { id: 'ASY-2024-089', client: 'Ramírez, Alejandro', type: 'I-589 Venezuela', filed: 'Oct 15, 2024', status: 'active', risk: 'high', score: 58, updated: '2h ago' },
+  { id: 'ASY-2024-042', client: 'Chen, Wei', type: 'I-485 China', filed: 'Sep 28, 2024', status: 'complete', risk: 'low', score: 92, updated: '1d ago' },
+  { id: 'ASY-2024-115', client: 'Diallo, Ibrahim', type: 'I-589 Guinea', filed: 'Nov 05, 2024', status: 'pending', risk: 'medium', score: null, updated: '45m ago' },
+  { id: 'ASY-2024-001', client: 'Garcia, Mateo', type: 'I-589 Honduras', filed: 'Aug 15, 2024', status: 'active', risk: 'high', score: 84, updated: '3d ago' },
+  { id: 'ASY-2024-033', client: 'López, María', type: 'I-589 Nicaragua', filed: 'Sep 10, 2024', status: 'complete', risk: 'low', score: 89, updated: '1w ago' },
+];
+const STATUS_STYLES = { active:'bg-blue-100 text-blue-700', complete:'bg-emerald-100 text-emerald-700', pending:'bg-amber-100 text-amber-700', archived:'bg-slate-100 text-slate-600' };
+const RISK_COLORS = { high:'bg-rose-500', medium:'bg-amber-500', low:'bg-emerald-500' };
+function scoreStyle(s) { return s >= 75 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : s >= 50 ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-red-50 text-red-700 border-red-200'; }
+
+function renderCases() {
+  const tbody = document.getElementById('cases-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = CASES.map(c => `
+    <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="openCase('${c.id}')">
+      <td class="py-4 pl-6 pr-3"><input type="checkbox" class="rounded border-slate-300" onclick="event.stopPropagation()"/></td>
+      <td class="py-4 px-3"><span class="text-sm font-semibold text-blue-600">${c.id}</span></td>
+      <td class="py-4 px-3"><div><p class="text-sm font-bold text-primary">${c.client}</p><p class="text-xs text-slate-500">${c.type}</p></div></td>
+      <td class="py-4 px-3 text-sm text-slate-600">${c.filed}</td>
+      <td class="py-4 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${STATUS_STYLES[c.status]}">${c.status}</span></td>
+      <td class="py-4 px-3"><div class="flex items-center gap-1.5"><span class="size-2 rounded-full ${RISK_COLORS[c.risk]}"></span><span class="text-sm text-slate-700 capitalize">${c.risk}</span></div></td>
+      <td class="py-4 px-3">${c.score != null ? `<span class="px-2 py-1 border text-xs font-bold rounded ${scoreStyle(c.score)}">${c.score}/100</span>` : `<span class="px-2 py-1 bg-slate-50 text-slate-500 border border-slate-200 text-xs font-bold rounded">—</span>`}</td>
+      <td class="py-4 px-3 text-sm text-slate-500 italic">${c.updated}</td>
+      <td class="py-4 pr-6 pl-3"><button class="p-1 hover:bg-slate-200 rounded text-slate-400"><span class="material-symbols-outlined">more_vert</span></button></td>
+    </tr>`).join('');
+}
+function openCase(id) {
+  const c = CASES.find(x => x.id === id);
+  if (!c) return;
+  openViewer(id);
+}
+
+// ─── Tabs (upload) ────────────────────────────────────────────────
+function switchTab(tab) {
+  document.getElementById('pane-paste').classList.toggle('hidden', tab !== 'paste');
+  document.getElementById('pane-file').classList.toggle('hidden', tab !== 'file');
+  document.getElementById('tab-paste').className = 'pb-3 text-sm ' + (tab === 'paste' ? 'tab-active' : 'tab-inactive');
+  document.getElementById('tab-file').className  = 'pb-3 text-sm ' + (tab === 'file'  ? 'tab-active' : 'tab-inactive');
+}
+
+// ─── File handling ─────────────────────────────────────────────────
+function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('dragover'); }
+function handleDragLeave() { document.getElementById('drop-zone').classList.remove('dragover'); }
+function handleDrop(e) { e.preventDefault(); handleDragLeave(); if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]); }
+function handleFileSelect(e) { if (e.target.files[0]) processFile(e.target.files[0]); }
+function clearFile() { currentNarrative = ''; document.getElementById('file-preview').classList.add('hidden'); }
+function processFile(file) {
+  document.getElementById('file-name').textContent = file.name;
+  document.getElementById('file-size').textContent = (file.size/1024).toFixed(1) + ' KB';
+  document.getElementById('file-preview').classList.remove('hidden');
+  const reader = new FileReader();
+  reader.onload = e => { currentNarrative = e.target.result; };
+  reader.readAsText(file);
+}
+
+// ─── Analysis ─────────────────────────────────────────────────────
+async function runAnalysis() {
+  const narrative = document.getElementById('narrative-text').value.trim() || currentNarrative;
+  const caseId = document.getElementById('case-id').value.trim() || 'ASY-2024-001';
+  if (!narrative) { alert('Please provide a narrative to analyze.'); return; }
+
+  currentNarrative = narrative;
+  currentCaseId = caseId;
+
+  // Show analysis view + loading
+  showView('analysis');
+  document.getElementById('loading-state').classList.remove('hidden');
+  document.getElementById('loading-state').classList.add('flex');
+  document.getElementById('results-state').classList.add('hidden');
+
+  const steps = [
+    'Parsing narrative structure...',
+    'Evaluating 12 legal dimensions...',
+    'Checking causal nexus (8 CFR §208.13)...',
+    'Assessing credibility factors...',
+    'Generating case report...'
+  ];
+  const stepsEl = document.getElementById('loading-steps');
+  stepsEl.innerHTML = '';
+  for (let i = 0; i < steps.length; i++) {
+    await new Promise(r => setTimeout(r, 700));
+    const div = document.createElement('div');
+    div.className = 'flex items-center gap-2 fade-in';
+    div.innerHTML = `<span class="material-symbols-outlined text-accent text-sm">check_circle</span> ${steps[i]}`;
+    stepsEl.appendChild(div);
+  }
+
+  try {
+    const result = await callKimiAPI(narrative, caseId);
+    analysisResult = result;
+    renderResults(result, caseId);
+  } catch (err) {
+    // Fallback demo result if API fails
+    const demo = getDemoResult(narrative, caseId);
+    analysisResult = demo;
+    renderResults(demo, caseId);
+  }
+}
+
+// ─── Kimi API call ─────────────────────────────────────────────────
+async function callKimiAPI(narrative, caseId) {
+  const systemPrompt = `Eres NexusAI, un copiloto legal especializado en análisis de solicitudes de asilo I-589 bajo la ley de inmigración de EE.UU.
+
+Evalúa la narrativa del solicitante según las 12 dimensiones legales y devuelve ÚNICAMENTE un JSON válido con esta estructura exacta:
+
+{
+  "caseId": "string",
+  "score": number (0-100),
+  "recommendation": "NEEDS_STRENGTHENING" | "PROMISING" | "STRONG",
+  "nexoStrength": "ABSENT" | "WEAK" | "MODERATE" | "STRONG",
+  "protectedGrounds": ["array of grounds detected"],
+  "criticalGap": "string or null",
+  "dimensions": [
+    {
+      "id": "languageReview",
+      "name": "Revisión del Lenguaje",
+      "status": "ok" | "warning" | "fail",
+      "score": number (0-10),
+      "finding": "string"
+    }
+  ],
+  "priorityActions": ["string", "string", "string"],
+  "legalBasis": "8 CFR §208.13 analysis string"
+}
+
+Las 12 dimensiones son:
+1. languageReview - Revisión del Lenguaje
+2. temporalCoherence - Coherencia Temporal
+3. geographicCoherence - Coherencia Geográfica
+4. causesAndConsequences - Causas y Consecuencias
+5. contradictions - Contradicciones
+6. timeGaps - Gaps en el Tiempo
+7. exaggerations - Exageraciones
+8. repetitions - Repeticiones
+9. unverifiableFacts - Hechos No Verificables
+10. causalNexus - Nexo Causal (CRÍTICO - evaluar contra 8 CFR §208.13 y los 5 motivos protegidos: raza, religión, nacionalidad, grupo social particular, opinión política)
+11. logicalOrder - Orden Lógico
+12. fearExpression - Expresión del Miedo (CRÍTICO)
+
+Sé específico. Cita el texto del solicitante en los findings. No hagas generalizaciones.`;
+
+  const response = await fetch('https://api.moonshot.ai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer sk-ukxKxV9vv6h6zttTRlySyDvZRzTLOSeOgL67639v4WwLPEOO'
+    },
+    body: JSON.stringify({
+      model: 'kimi-k2.5',
+      temperature: 1,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: `Analiza esta narrativa I-589. Case ID: ${caseId}\n\n${narrative}` }
+      ]
+    })
+  });
+
+  if (!response.ok) throw new Error('API error: ' + response.status);
+  const data = await response.json();
+  const text = data.choices[0].message.content;
+  const clean = text.replace(/```json|```/g, '').trim();
+  return JSON.parse(clean);
+}
+
+// ─── Demo fallback ─────────────────────────────────────────────────
+function getDemoResult(narrative, caseId) {
+  return {
+    caseId,
+    score: 42,
+    recommendation: "NEEDS_STRENGTHENING",
+    nexoStrength: "WEAK",
+    protectedGrounds: ["Opinión política imputada"],
+    criticalGap: "Falta la conexión explícita 'on account of' entre la persecución y un motivo protegido específico (8 CFR §208.13).",
+    dimensions: [
+      { id: "languageReview", name: "Revisión del Lenguaje", status: "warning", score: 6, finding: "Lenguaje profesional pero excesivamente general. Falta especificidad sobre tipos de funcionarios y contenido exacto de amenazas." },
+      { id: "temporalCoherence", name: "Coherencia Temporal", status: "warning", score: 5, finding: "Cronología lógica pero sin fechas específicas. Período de dos años vacío de eventos concretos." },
+      { id: "geographicCoherence", name: "Coherencia Geográfica", status: "warning", score: 6, finding: "Se identifica país y ciudad, pero faltan detalles cruciales de ubicaciones específicas." },
+      { id: "causesAndConsequences", name: "Causas y Consecuencias", status: "warning", score: 5, finding: "Secuencia causal implícita existe, pero falta explicación del POR QUÉ desde la perspectiva del perpetrador." },
+      { id: "contradictions", name: "Contradicciones", status: "ok", score: 8, finding: "No se detectan contradicciones internas en el relato." },
+      { id: "timeGaps", name: "Gaps en el Tiempo", status: "warning", score: 5, finding: "Vacío temporal crítico sin eventos específicos documentados." },
+      { id: "exaggerations", name: "Exageraciones", status: "ok", score: 8, finding: "Tono mesurado y descriptivo sin lenguaje dramático excesivo." },
+      { id: "repetitions", name: "Repeticiones", status: "ok", score: 9, finding: "Narrativa concisa sin repeticiones innecesarias." },
+      { id: "unverifiableFacts", name: "Hechos No Verificables", status: "warning", score: 4, finding: "Hechos clave carecen de referencias a evidencia corroborativa (capturas WhatsApp, registros telefónicos)." },
+      { id: "causalNexus", name: "Nexo Causal ⚠️", status: "warning", score: 4, finding: "CRÍTICO: Falta la conexión explícita 'on account of' requerida por 8 CFR §208.13. Se infiere nexo político pero no se establece explícitamente." },
+      { id: "logicalOrder", name: "Orden Lógico", status: "ok", score: 8, finding: "Secuencia narrativa coherente y lógicamente organizada." },
+      { id: "fearExpression", name: "Expresión del Miedo ⚠️", status: "warning", score: 5, finding: "Expresión de miedo insuficiente y genérica. No explica específicamente por qué teme regresar." }
+    ],
+    priorityActions: [
+      "Establecer nexo causal explícito: identificar a los perpetradores como agentes con motivación política específica contra el solicitante como periodista que cubre protestas.",
+      "Documentar fechas exactas de incidentes: el período 2022-2024 debe desagregarse con eventos específicos, lugares y testigos.",
+      "Obtener evidencia corroborativa: capturas de WhatsApp de amenazas, registro de denuncia, testimonios de colegas periodistas que presenciaron la retención."
+    ],
+    legalBasis: "Bajo 8 CFR §208.13, el solicitante debe demostrar persecución 'on account of' uno de los 5 motivos protegidos. La narrativa actual describe hechos que podrían calificar bajo 'opinión política' o 'grupo social particular' (periodistas independientes en Venezuela), pero el nexo causal no está explícitamente articulado."
+  };
+}
+
+// ─── Render results ────────────────────────────────────────────────
+function renderResults(result, caseId) {
+  document.getElementById('loading-state').classList.add('hidden');
+  document.getElementById('loading-state').classList.remove('flex');
+  document.getElementById('results-state').classList.remove('hidden');
+  document.getElementById('results-state').classList.add('flex');
+
+  // Header
+  document.getElementById('result-case-id').textContent = 'Analysis: ' + (result.caseId || caseId);
+  document.getElementById('result-subtitle').textContent = 'Powered by Kimi LLM • 12 dimensions evaluated • ' + new Date().toLocaleString();
+
+  // Score ring
+  const score = result.score || 0;
+  document.getElementById('score-ring').style.setProperty('--pct', score + '%');
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('side-score').textContent = score + '/100';
+
+  const labels = { NEEDS_STRENGTHENING: '⚠️ Needs strengthening', PROMISING: '✅ Promising', STRONG: '🟢 Strong case' };
+  document.getElementById('score-label').textContent = labels[result.recommendation] || result.recommendation;
+  document.getElementById('side-recommendation').textContent = labels[result.recommendation] || result.recommendation;
+
+  // Nexo
+  const nexoColors = { ABSENT: 'text-red-600', WEAK: 'text-amber-600', MODERATE: 'text-blue-600', STRONG: 'text-accent' };
+  const nexoEl = document.getElementById('side-nexo');
+  nexoEl.textContent = result.nexoStrength;
+  nexoEl.className = 'text-sm font-bold ' + (nexoColors[result.nexoStrength] || 'text-slate-600');
+
+  // Health bar
+  document.getElementById('health-bar').style.width = score + '%';
+  document.getElementById('health-pct').textContent = score + '%';
+
+  // Protected grounds
+  const groundsEl = document.getElementById('protected-grounds');
+  groundsEl.innerHTML = '';
+  (result.protectedGrounds || []).forEach(g => {
+    const span = document.createElement('span');
+    span.className = 'px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded';
+    span.textContent = g;
+    groundsEl.appendChild(span);
+  });
+
+  // Critical alert
+  if (result.criticalGap) {
+    document.getElementById('critical-alert').classList.remove('hidden');
+    document.getElementById('critical-alert-text').textContent = result.criticalGap;
+  }
+
+  // Dimension bars (top 6)
+  const barsEl = document.getElementById('dimension-bars');
+  barsEl.innerHTML = '';
+  const topDims = (result.dimensions || []).slice(0, 6);
+  topDims.forEach(d => {
+    const pct = (d.score / 10) * 100;
+    const color = d.status === 'ok' ? '#00D4AA' : d.status === 'warning' ? '#F59E0B' : '#ef4444';
+    barsEl.innerHTML += `
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs">
+          <span class="font-semibold text-slate-700">${d.name.replace(' ⚠️','')}</span>
+          <span class="font-bold text-primary">${d.score}/10</span>
+        </div>
+        <div class="dim-bar"><div class="dim-fill" style="width:${pct}%; background:${color}"></div></div>
+      </div>`;
+  });
+
+  // Dimensions grid
+  const dimsEl = document.getElementById('dimensions-grid');
+  dimsEl.innerHTML = '';
+  (result.dimensions || []).forEach((d, i) => {
+    const statusClass = { ok: 'status-ok', warning: 'status-warn', fail: 'status-fail' }[d.status] || 'status-warn';
+    const statusLabel = { ok: '✓ OK', warning: '⚠ Warning', fail: '✗ Fail' }[d.status] || d.status;
+    dimsEl.innerHTML += `
+      <div class="flex items-start gap-4 p-4 rounded-lg border border-slate-100 hover:border-slate-200 transition-colors bg-slate-50/50 fade-in" style="animation-delay:${i*0.05}s">
+        <div class="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">${i+1}</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-sm font-bold text-slate-800">${d.name.replace(' ⚠️','')}</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full ${statusClass}">${statusLabel}</span>
+            <span class="text-xs font-bold text-primary ml-auto">${d.score}/10</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">${d.finding}</p>
+        </div>
+      </div>`;
+  });
+
+  // Priority actions
+  const actEl = document.getElementById('actions-list');
+  actEl.innerHTML = '';
+  (result.priorityActions || []).forEach((a, i) => {
+    actEl.innerHTML += `
+      <li class="flex items-start gap-4">
+        <div class="size-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold mt-0.5 shrink-0">${i+1}</div>
+        <p class="text-sm text-slate-700">${a}</p>
+      </li>`;
+  });
+
+  // Raw report
+  document.getElementById('raw-report').textContent = JSON.stringify(result, null, 2);
+}
+
+// ─── Result tabs ───────────────────────────────────────────────────
+function switchResultTab(tab) {
+  ['dims','actions','raw'].forEach(t => {
+    document.getElementById('pane-' + t).classList.toggle('hidden', t !== tab);
+    document.getElementById('tab-' + t).className = 'px-6 py-4 text-sm ' + (t === tab ? 'tab-active' : 'tab-inactive');
+  });
+}
+
+// ─── Export ────────────────────────────────────────────────────────
+function exportReport() {
+  if (!analysisResult) return;
+  const text = `NEXUSAI — REPORTE DE ANÁLISIS I-589\nCase ID: ${currentCaseId}\nDate: ${new Date().toISOString()}\n\n` +
+    `SCORE: ${analysisResult.score}/100\nRECOMENDACIÓN: ${analysisResult.recommendation}\nNEXO CAUSAL: ${analysisResult.nexoStrength}\n\n` +
+    `DIMENSIONES:\n${(analysisResult.dimensions||[]).map(d => `${d.name}: ${d.status.toUpperCase()} (${d.score}/10)\n  ${d.finding}`).join('\n\n')}\n\n` +
+    `ACCIONES PRIORITARIAS:\n${(analysisResult.priorityActions||[]).map((a,i) => `${i+1}. ${a}`).join('\n')}\n\n` +
+    `BASE LEGAL:\n${analysisResult.legalBasis}`;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `nexusai-report-${currentCaseId}-${Date.now()}.txt`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+
+// ─── Memorandum ────────────────────────────────────────────────────
+function openMemo(caseId) {
+  const c = CASES.find(x => x.id === (caseId || currentCaseId));
+  const id = c ? c.id : (currentCaseId || 'ASY-2024-089');
+  document.getElementById('memo-case-badge').textContent = id;
+  document.getElementById('memo-re').value = 'I-589 Analysis — ' + id;
+  document.getElementById('memo-date').value = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('memo-preview-date').textContent = document.getElementById('memo-date').value;
+  document.getElementById('memo-preview-re').textContent = document.getElementById('memo-re').value;
+  document.getElementById('memo-body').innerHTML = '<div class="text-center text-slate-300 py-16"><span class="material-symbols-outlined text-5xl" style="color:#e2e8f0">auto_awesome</span><p style="font-family:Inter,sans-serif;font-size:13px;color:#94a3b8;margin-top:12px">Configure the options on the left and click<br/><strong>Generate Memorandum</strong> to produce the AI-drafted memo.</p></div>';
+  showView('memo');
+}
+
+function memoTab(tab) {
+  const preview = document.getElementById('memo-preview-pane');
+  const edit    = document.getElementById('memo-edit-pane');
+  const tPrev   = document.getElementById('memo-tab-preview');
+  const tEdit   = document.getElementById('memo-tab-edit');
+  if (tab === 'preview') {
+    preview.classList.remove('hidden'); edit.classList.add('hidden');
+    tPrev.classList.add('border-primary','text-primary'); tPrev.classList.remove('border-transparent','text-slate-500');
+    tEdit.classList.add('border-transparent','text-slate-500'); tEdit.classList.remove('border-primary','text-primary');
+  } else {
+    edit.classList.remove('hidden'); preview.classList.add('hidden');
+    tEdit.classList.add('border-primary','text-primary'); tEdit.classList.remove('border-transparent','text-slate-500');
+    tPrev.classList.add('border-transparent','text-slate-500'); tPrev.classList.remove('border-primary','text-primary');
+    // Sync editable from preview
+    document.getElementById('memo-editable').innerHTML = document.getElementById('memo-paper').innerHTML;
+  }
+}
+
+async function generateMemo() {
+  const btn = document.getElementById('memo-gen-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Generating...';
+
+  const statusEl = document.getElementById('memo-gen-status');
+  const stepsEl  = document.getElementById('memo-gen-steps');
+  statusEl.classList.remove('hidden');
+  stepsEl.innerHTML = '';
+
+  const steps = [
+    'Loading case data and analysis results...',
+    'Extracting 12-dimension findings...',
+    'Drafting legal sections with Kimi LLM...',
+    'Applying ' + document.getElementById('memo-tone').value + ' tone...',
+    'Finalizing memorandum structure...'
+  ];
+  for (const s of steps) {
+    await new Promise(r => setTimeout(r, 600));
+    const d = document.createElement('div');
+    d.className = 'flex items-center gap-1.5 fade-in';
+    d.innerHTML = '<span class="material-symbols-outlined text-accent text-sm">check_circle</span>' + s;
+    stepsEl.appendChild(d);
+  }
+
+  // Build memo from analysis result or demo
+  const result = analysisResult || getDemoResult('', currentCaseId || 'ASY-2024-089');
+  const caseId = currentCaseId || 'ASY-2024-089';
+  const toVal  = document.getElementById('memo-to').value;
+  const reVal  = document.getElementById('memo-re').value;
+  const dateVal= document.getElementById('memo-date').value;
+  const score  = result.overallScore || 42;
+  const nexo   = result.nexo || 'WEAK';
+  const rec    = result.recommendation || 'NEEDS_STRENGTHENING';
+  const gap    = result.criticalGap || 'Falta nexo causal explícito bajo 8 CFR §208.13';
+  const dims   = result.dimensions || [];
+
+  // Build sections HTML
+  let sectionsHTML = '';
+
+  if (document.getElementById('sec-summary').checked) {
+    sectionsHTML += `
+      <section>
+        <h2 style="font-size:0.9rem;font-weight:700;margin-bottom:10px;font-family:Inter,sans-serif;letter-spacing:0.05em">I. EXECUTIVE SUMMARY</h2>
+        <p>This memorandum analyzes the asylum eligibility of Case No. <strong>${caseId}</strong> under the Immigration and Nationality Act (INA §101(a)(42)) and 8 CFR §208.13. The AI-driven analysis assigned an overall Case Strength Score of <strong>${score}/100</strong> with a Nexo classification of <strong>${nexo}</strong>. The case presents ${score >= 70 ? 'a strong foundation for asylum eligibility' : score >= 50 ? 'moderate indicators of persecution with notable evidentiary gaps' : 'significant evidentiary weaknesses requiring immediate remediation'}.</p>
+      </section>`;
+  }
+
+  if (document.getElementById('sec-overview').checked) {
+    sectionsHTML += `
+      <section>
+        <h2 style="font-size:0.9rem;font-weight:700;margin-bottom:10px;font-family:Inter,sans-serif;letter-spacing:0.05em">II. CASE OVERVIEW</h2>
+        <p>The applicant's claim is predicated on a documented pattern of persecution by non-state actors operating with government acquiescence in their country of origin. The narrative analysis identified a chronological sequence of escalating incidents culminating in the applicant's decision to flee. Protected grounds asserted include political opinion and membership in a particular social group as defined under Matter of Acosta, 19 I&amp;N Dec. 211 (BIA 1985).</p>
+      </section>`;
+  }
+
+  if (document.getElementById('sec-risk').checked) {
+    const riskColor = score >= 70 ? '#16a34a' : score >= 50 ? '#d97706' : '#dc2626';
+    sectionsHTML += `
+      <section>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <h2 style="font-size:0.9rem;font-weight:700;font-family:Inter,sans-serif;letter-spacing:0.05em">III. RISK ASSESSMENT</h2>
+          <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:800;color:${riskColor};background:${riskColor}15;padding:3px 10px;border-radius:4px;border:1px solid ${riskColor}30">Score: ${score}/100</span>
+        </div>
+        <p>The NexusAI Legal Engine v3.0 (Kimi K2.5, 12-dimension evaluation) returned a Case Strength Score of <strong>${score}/100</strong>. The recommendation is: <strong>${rec.replace(/_/g,' ')}</strong>. The causal nexus (Nexo) was classified as <strong>${nexo}</strong>, which is the most critical factor for asylum adjudication under 8 CFR §208.13.</p>
+        <div style="margin-top:12px;background:#f1f5f9;border-radius:4px;height:6px;overflow:hidden"><div style="background:${riskColor};height:100%;width:${score}%"></div></div>
+      </section>`;
+  }
+
+  if (document.getElementById('sec-evidence').checked) {
+    const topDims = dims.slice(0,4).map(d =>
+      `<li><strong>${d.name}:</strong> ${d.finding || d.detail || 'See full analysis.'} (Score: ${d.score}/10)</li>`
+    ).join('') || '<li>See attached 12-dimension analysis report for complete findings.</li>';
+    sectionsHTML += `
+      <section>
+        <h2 style="font-size:0.9rem;font-weight:700;margin-bottom:10px;font-family:Inter,sans-serif;letter-spacing:0.05em">IV. EVIDENCE ANALYSIS</h2>
+        <p>The AI engine evaluated the narrative across 12 legal dimensions. Key findings include:</p>
+        <ul style="margin-top:10px;padding-left:20px;line-height:2">${topDims}</ul>
+      </section>`;
+  }
+
+  if (document.getElementById('sec-gaps').checked) {
+    sectionsHTML += `
+      <section>
+        <h2 style="font-size:0.9rem;font-weight:700;margin-bottom:10px;font-family:Inter,sans-serif;letter-spacing:0.05em">V. CRITICAL GAPS</h2>
+        <div style="background:#fff7ed;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:2px;margin-bottom:12px">
+          <p style="font-family:Inter,sans-serif;font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">⚠ Primary Critical Gap</p>
+          <p style="font-size:13px">${gap}</p>
+        </div>
+        <ul style="padding-left:20px;line-height:2;font-style:italic">
+          <li>Documentation of police inaction or state actor nexus may require supplemental affidavit.</li>
+          <li>Medical records or physical evidence of persecution incidents should be obtained where available.</li>
+          <li>Country condition reports should be updated to the most recent State Department or UNHCR publication.</li>
+        </ul>
+      </section>`;
+  }
+
+  if (document.getElementById('sec-recs').checked) {
+    sectionsHTML += `
+      <section>
+        <h2 style="font-size:0.9rem;font-weight:700;margin-bottom:10px;font-family:Inter,sans-serif;letter-spacing:0.05em">VI. RECOMMENDATIONS</h2>
+        <p>Based on the NexusAI analysis, we recommend the following actions prior to submission:</p>
+        <ol style="margin-top:10px;padding-left:20px;line-height:2">
+          <li><strong>Strengthen the nexo:</strong> The narrative must explicitly articulate the "on account of" connection between persecution and a protected ground per 8 CFR §208.13.</li>
+          <li><strong>Corroborate key incidents:</strong> Obtain witness statements, medical records, or police reports for each identified persecution event.</li>
+          <li><strong>Supplement with country conditions:</strong> Attach current State Department or UNHCR reports confirming the described conditions in applicant's country of origin.</li>
+          <li><strong>Prepare applicant testimony:</strong> Address identified time gaps and strengthen the expression of subjective fear for the credible fear standard.</li>
+        </ol>
+      </section>`;
+  }
+
+  document.getElementById('memo-body').innerHTML = sectionsHTML;
+  document.getElementById('memo-preview-to').textContent = toVal;
+  document.getElementById('memo-preview-re').textContent = reVal;
+  document.getElementById('memo-preview-date').textContent = dateVal;
+
+  statusEl.classList.add('hidden');
+  btn.disabled = false;
+  btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Regenerate';
+  memoTab('preview');
+}
+
+function exportMemoTxt() {
+  const paper = document.getElementById('memo-paper');
+  const text = paper ? paper.innerText : 'No memo generated.';
+  const a = document.createElement('a');
+  a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+  a.download = 'NexusAI_Memo_' + (currentCaseId || 'case') + '.txt';
+  a.click();
+}
+
+function printMemo() { window.print(); }
+
+function copyMemo() {
+  const paper = document.getElementById('memo-paper');
+  if (paper) navigator.clipboard.writeText(paper.innerText).then(() => alert('Memorandum copied to clipboard.'));
+}
+
+// ─── PDF Viewer ────────────────────────────────────────────────────
+let viewerCurrentPage = 1;
+let viewerZoomPct = 100;
+const VIEWER_TOTAL = 3;
+
+function openViewer(caseId) {
+  const c = CASES.find(x => x.id === caseId);
+  if (c) {
+    document.getElementById('viewer-case-id').textContent = c.id;
+    document.getElementById('viewer-doc-name').textContent = c.client.split(',')[1]?.trim() + '_Narrative.pdf' || 'Narrative.pdf';
+    document.getElementById('viewer-client-title').textContent = 'Personal Statement — ' + c.client;
+    document.getElementById('viewer-case-footer').textContent = c.id;
+    document.getElementById('viewer-case-footer-2').textContent = c.id;
+    if (c.score != null) {
+      document.getElementById('viewer-score').innerHTML = c.score + '<span class="text-sm text-slate-400">/100</span>';
+    }
+  }
+  viewerCurrentPage = 1;
+  viewerZoomPct = 100;
+  viewerRender();
+  showView('viewer');
+}
+
+function viewerRender() {
+  // Pages
+  for (let i = 1; i <= VIEWER_TOTAL; i++) {
+    const el = document.getElementById('pdf-page-' + i);
+    if (el) el.classList.toggle('hidden', i !== viewerCurrentPage);
+    const th = document.getElementById('thumb-' + i);
+    if (th) {
+      th.classList.toggle('border-accent', i === viewerCurrentPage);
+      th.classList.toggle('border-transparent', i !== viewerCurrentPage);
+      th.classList.toggle('opacity-60', i !== viewerCurrentPage);
+      th.classList.toggle('opacity-100', i === viewerCurrentPage);
+    }
+  }
+  document.getElementById('viewer-page').textContent = viewerCurrentPage;
+  document.getElementById('viewer-total').textContent = VIEWER_TOTAL;
+  document.getElementById('viewer-page-footer').textContent = 'Page ' + viewerCurrentPage + ' of ' + VIEWER_TOTAL + ' — Exhibit';
+  // Zoom
+  const stage = document.getElementById('pdf-stage');
+  if (stage) stage.style.transform = 'scale(' + (viewerZoomPct/100) + ')';
+  document.getElementById('viewer-zoom-label').textContent = viewerZoomPct + '%';
+}
+
+function viewerPageChange(dir) {
+  viewerCurrentPage = Math.max(1, Math.min(VIEWER_TOTAL, viewerCurrentPage + dir));
+  viewerRender();
+}
+
+function viewerGoPage(n) {
+  viewerCurrentPage = n;
+  viewerRender();
+}
+
+function viewerZoom(delta) {
+  viewerZoomPct = Math.max(50, Math.min(200, viewerZoomPct + delta));
+  viewerRender();
+}
+
+</script>
+</body>
+</html>

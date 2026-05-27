@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Taller & Maestrías · Pasantes Ing. Mecánica · Felipe Avinzano</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-ink:       #0D1B2A;
+    --warm-bone:      #F4F1EB;
+    --considered-blue:#2C5F8A;
+    --fog:            #8C87A0;
+    --copper:         #B87333;
+    --type-black:     #1A1A1A;
+    --ink-line:       rgba(13,27,42,0.11);
+    --bone-line:      rgba(244,241,235,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--warm-bone);
+    color: var(--type-black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .isotipo { width: 44px; height: 44px; flex-shrink: 0; }
+
+  /* ── COPPER STRIP ── */
+  .copper-strip {
+    background: var(--copper);
+    padding: 9px 72px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .copper-strip span {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+  }
+  .validity-tag {
+    background: rgba(255,255,255,0.18);
+    padding: 2px 10px; border-radius: 2px;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── COVER — Considered Blue ── */
+  .cover {
+    background: var(--considered-blue);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 52px 72px;
+    position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; bottom: -90px; left: -60px;
+    width: 440px; height: 440px;
+    border: 1.5px solid rgba(244,241,235,0.06);
+    border-radius: 3px; transform: rotate(-10deg);
+  }
+  .cover::after {
+    content: '';
+    position: absolute; bottom: -30px; left: -10px;
+    width: 280px; height: 280px;
+    background: rgba(13,27,42,0.07);
+    border-radius: 3px; transform: rotate(-10deg);
+  }
+
+  .cover-header {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .logo-lockup { display: flex; align-items: center; gap: 13px; }
+  .logo-name {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 15px; color: var(--warm-bone); letter-spacing: 0.05em;
+  }
+  .doc-id {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(244,241,235,0.35);
+  }
+
+  .cover-body {
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2; padding: 72px 0 48px;
+  }
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(244,241,235,0.6); margin-bottom: 24px;
+  }
+  .cover-title {
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: clamp(42px, 5.5vw, 64px);
+    line-height: 1.05; color: var(--warm-bone);
+    max-width: 700px; margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+  .cover-title em { font-style: italic; color: rgba(244,241,235,0.48); }
+  .cover-hook {
+    font-size: 15px; font-weight: 300;
+    color: rgba(244,241,235,0.62); max-width: 520px;
+    line-height: 1.75; border-left: 2px solid rgba(244,241,235,0.35);
+    padding-left: 20px; margin-top: 8px;
+  }
+
+  /* Dos audiencias claramente diferenciadas en la portada */
+  .audience-pills {
+    display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap;
+  }
+  .pill {
+    padding: 6px 16px; border-radius: 2px;
+    font-size: 11px; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pill-decision { background: var(--copper); color: white; }
+  .pill-audience { background: rgba(244,241,235,0.12); color: rgba(244,241,235,0.7); border: 1px solid rgba(244,241,235,0.2); }
+
+  .cover-meta {
+    display: grid; grid-template-columns: repeat(4, auto);
+    gap: 48px; padding-top: 52px;
+    border-top: 1px solid var(--bone-line);
+    position: relative; z-index: 2;
+  }
+  .meta-label {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,241,235,0.28); margin-bottom: 5px;
+  }
+  .meta-value { font-size: 13px; font-weight: 300; color: rgba(244,241,235,0.72); }
+
+  /* ── SECTIONS ── */
+  .section { max-width: 880px; margin: 0 auto; padding: 84px 72px; }
+  .section-divider { height: 1px; background: var(--ink-line); max-width: 880px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 14px;
+  }
+  .section-h2 {
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: 34px; color: var(--deep-ink);
+    line-height: 1.15; margin-bottom: 36px; letter-spacing: -0.01em;
+  }
+  .section-h2 em { font-style: italic; color: var(--considered-blue); }
+  .body {
+    font-size: 15px; font-weight: 300; color: #3d3d3d;
+    line-height: 1.82; margin-bottom: 22px; max-width: 680px;
+  }
+
+  /* ── AUDIENCIA SPLIT — quién lee esto ── */
+  .audience-split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; margin: 36px 0; background: var(--ink-line);
+    border: 1px solid var(--ink-line);
+  }
+  .audience-col { padding: 28px 28px; background: var(--warm-bone); }
+  .audience-col.decision { background: var(--deep-ink); }
+  .aud-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 2px;
+    font-size: 9px; font-weight: 500; letter-spacing: 0.16em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .aud-badge.oscar { background: var(--copper); color: white; }
+  .aud-badge.pasantes { background: rgba(44,95,138,0.12); color: var(--considered-blue); }
+  .aud-title {
+    font-family: 'DM Serif Display', serif; font-size: 18px;
+    color: var(--deep-ink); margin-bottom: 10px; line-height: 1.2;
+  }
+  .audience-col.decision .aud-title { color: var(--warm-bone); }
+  .aud-desc { font-size: 13px; font-weight: 300; color: #5a5a5a; line-height: 1.65; }
+  .audience-col.decision .aud-desc { color: rgba(244,241,235,0.6); }
+  .aud-answer {
+    margin-top: 12px; font-size: 12px; font-weight: 400;
+    color: var(--copper); letter-spacing: 0.04em;
+  }
+
+  /* ── BLOQUES DEL TALLER ── */
+  .blocks { margin: 44px 0; }
+  .block-row {
+    display: grid; grid-template-columns: 64px 1fr;
+    gap: 0; border-bottom: 1px solid var(--ink-line);
+  }
+  .block-row:last-child { border-bottom: none; }
+  .block-letter-col {
+    display: flex; align-items: flex-start;
+    padding: 28px 0; padding-right: 20px;
+    border-right: 1px solid var(--ink-line);
+  }
+  .block-letter {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px; font-weight: 400;
+    color: rgba(13,27,42,0.12); line-height: 1;
+  }
+  .block-content { padding: 28px 0 28px 28px; }
+  .block-time {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    background: rgba(13,27,42,0.06);
+    font-size: 10px; font-weight: 400; letter-spacing: 0.1em;
+    color: var(--fog); margin-bottom: 10px;
+  }
+  .block-title {
+    font-size: 15px; font-weight: 500; color: var(--deep-ink);
+    margin-bottom: 6px; letter-spacing: 0.01em;
+  }
+  .block-tools {
+    font-size: 11px; font-weight: 400;
+    color: var(--copper); letter-spacing: 0.07em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .block-desc { font-size: 13px; font-weight: 300; color: #5a5a5a; line-height: 1.68; }
+  .block-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tag {
+    background: rgba(13,27,42,0.06); padding: 3px 10px;
+    font-size: 11px; font-weight: 400; color: var(--deep-ink);
+    border-radius: 2px; letter-spacing: 0.03em;
+  }
+
+  /* ── RESULTADO CONCRETO ── */
+  .resultado-box {
+    background: var(--considered-blue); padding: 32px 40px; margin: 40px 0;
+  }
+  .resultado-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(244,241,235,0.55); margin-bottom: 12px;
+  }
+  .resultado-text {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 20px; color: var(--warm-bone); line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── INVERSIÓN — sin exponer margen ── */
+  .inv-section { background: var(--deep-ink); padding: 84px 72px; }
+  .inv-inner { max-width: 880px; margin: 0 auto; }
+  .inv-section .eyebrow { color: var(--copper); }
+  .inv-section .section-h2 { color: var(--warm-bone); }
+  .inv-section .section-h2 em { color: rgba(244,241,235,0.38); }
+
+  .pricing-band {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; background: rgba(244,241,235,0.06); margin: 44px 0;
+  }
+  .band-cell {
+    background: rgba(13,27,42,0.95); padding: 36px 30px;
+    border: 1px solid rgba(244,241,235,0.07);
+  }
+  .band-label {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(244,241,235,0.35); margin-bottom: 18px;
+  }
+  .band-value {
+    font-family: 'DM Serif Display', serif; font-size: 48px;
+    font-weight: 400; color: var(--warm-bone);
+    line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .band-desc { font-size: 13px; font-weight: 300; color: rgba(244,241,235,0.42); line-height: 1.65; }
+
+  .includes-list { margin-top: 40px; }
+  .includes-title {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--copper); margin-bottom: 20px;
+  }
+  .includes-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .inc-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 18px;
+    background: rgba(244,241,235,0.04);
+    border: 1px solid rgba(244,241,235,0.07);
+  }
+  .inc-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--copper); flex-shrink: 0; margin-top: 6px;
+  }
+  .inc-text { font-size: 13px; font-weight: 300; color: rgba(244,241,235,0.58); line-height: 1.55; }
+
+  .inv-note {
+    border-left: 2px solid var(--copper); padding: 18px 24px; margin-top: 32px;
+  }
+  .inv-note p {
+    font-size: 13px; font-weight: 300;
+    color: rgba(244,241,235,0.48); line-height: 1.72;
+  }
+  .inv-note strong { color: rgba(244,241,235,0.75); font-weight: 400; }
+
+  /* ── UNIVERSIDADES — tabla limpia ── */
+  .uni-section { padding: 84px 72px; background: var(--warm-bone); }
+  .uni-inner { max-width: 940px; margin: 0 auto; }
+
+  .rec-card {
+    background: var(--deep-ink); padding: 28px 36px; margin-bottom: 40px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 0;
+    align-items: start;
+  }
+  .rec-copper-bar { background: var(--copper); width: 3px; border-radius: 2px; margin-right: 28px; }
+  .rec-body { padding-left: 24px; border-left: 1px solid rgba(244,241,235,0.08); }
+  .rec-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--copper); margin-bottom: 8px;
+  }
+  .rec-text { font-size: 14px; font-weight: 300; color: rgba(244,241,235,0.72); line-height: 1.72; }
+  .rec-text strong { color: var(--warm-bone); font-weight: 500; }
+
+  .uni-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .uni-table thead tr { border-bottom: 2px solid var(--deep-ink); }
+  .uni-table th {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--fog);
+    padding: 0 14px 14px 0; text-align: left; vertical-align: bottom;
+  }
+  .uni-table th:last-child { padding-right: 0; }
+  .uni-table tbody tr { border-bottom: 1px solid var(--ink-line); transition: background 0.15s; }
+  .uni-table tbody tr:hover { background: rgba(13,27,42,0.03); }
+  .uni-table tbody tr:last-child { border-bottom: none; }
+  .uni-table td { padding: 18px 14px 18px 0; vertical-align: top; font-weight: 300; line-height: 1.5; color: #3d3d3d; }
+  .uni-table td:last-child { padding-right: 0; }
+
+  .uni-name { font-weight: 500; color: var(--deep-ink); font-size: 13px; display: block; margin-bottom: 2px; }
+  .uni-sub { font-size: 11px; color: var(--fog); font-weight: 300; }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .badge-online { background: rgba(44,95,138,0.1); color: var(--considered-blue); }
+  .badge-presencial { background: rgba(13,27,42,0.08); color: var(--deep-ink); }
+
+  .relevance { display: flex; gap: 3px; align-items: center; margin-bottom: 3px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(13,27,42,0.1); }
+  .dot.on { background: var(--copper); }
+  .rel-text { font-size: 11px; color: var(--fog); }
+
+  .cost-val { font-weight: 500; color: var(--deep-ink); }
+  .footnote { font-size: 11px; font-weight: 300; color: #999; line-height: 1.6; margin-top: 16px; }
+
+  /* ── PRÓXIMOS PASOS ── */
+  .steps-section { padding: 84px 72px; background: var(--warm-bone); }
+  .steps-inner { max-width: 880px; margin: 0 auto; }
+  .steps-row {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 2px; margin: 44px 0; background: var(--ink-line);
+  }
+  .step-box { background: var(--warm-bone); padding: 32px 24px; text-align: center; }
+  .step-n {
+    font-family: 'DM Serif Display', serif; font-size: 38px;
+    font-weight: 400; color: var(--deep-ink); opacity: 0.10;
+    margin-bottom: 12px; line-height: 1;
+  }
+  .step-title { font-size: 13px; font-weight: 500; color: var(--deep-ink); letter-spacing: 0.02em; margin-bottom: 8px; }
+  .step-desc { font-size: 12px; font-weight: 300; color: #666; line-height: 1.65; }
+
+  /* ── CTA ACCIONABLE ── */
+  .cta-block {
+    background: var(--copper); padding: 36px 44px;
+    display: flex; justify-content: space-between; align-items: center; gap: 32px;
+    margin-top: 8px;
+  }
+  .cta-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 6px;
+  }
+  .cta-text {
+    font-family: 'DM Serif Display', serif; font-size: 22px;
+    font-weight: 400; color: white; line-height: 1.2;
+  }
+  .cta-buttons { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn {
+    display: inline-block; padding: 12px 24px;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; transition: all 0.18s; cursor: pointer;
+  }
+  .btn-primary { background: var(--deep-ink); color: var(--warm-bone); border: 1.5px solid var(--deep-ink); }
+  .btn-primary:hover { background: #162336; }
+  .btn-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); }
+  .btn-ghost:hover { border-color: white; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--deep-ink); padding: 44px 72px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { display: flex; align-items: center; gap: 14px; }
+  .footer-name { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px; color: var(--warm-bone); letter-spacing: 0.04em; }
+  .footer-role { font-size: 11px; font-weight: 300; color: rgba(244,241,235,0.38); letter-spacing: 0.06em; margin-top: 2px; }
+  .footer-right { text-align: right; }
+  .footer-right a { display: block; font-size: 12px; font-weight: 300; color: rgba(244,241,235,0.45); text-decoration: none; letter-spacing: 0.04em; margin-bottom: 3px; transition: color 0.18s; }
+  .footer-right a:hover { color: var(--warm-bone); }
+  .footer-tagline { font-size: 9px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,241,235,0.18); margin-top: 10px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .cover-eyebrow { animation: fadeUp 0.55s ease 0.15s both; }
+  .cover-title   { animation: fadeUp 0.55s ease 0.30s both; }
+  .cover-hook    { animation: fadeUp 0.55s ease 0.45s both; }
+  .cover-meta    { animation: fadeUp 0.55s ease 0.60s both; }
+
+  @media (max-width: 720px) {
+    .copper-strip, .cover, .section, .inv-section, .uni-section,
+    .steps-section, .footer { padding-left: 28px; padding-right: 28px; }
+    .cover-meta { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .pricing-band, .audience-split, .includes-grid, .steps-row { grid-template-columns: 1fr; }
+    .block-row { grid-template-columns: 1fr; }
+    .block-letter-col { display: none; }
+    .block-content { padding: 20px 0; }
+    .cta-block { flex-direction: column; align-items: flex-start; }
+    .footer { flex-direction: column; gap: 28px; text-align: center; }
+    .footer-right { text-align: center; }
+    .uni-table { font-size: 12px; }
+  }
+  .footer-social {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 6px; margin-bottom: 4px;
+    justify-content: flex-end;
+  }
+  .footer-social a {
+    color: rgba(244,241,235,0.38);
+    transition: color 0.18s;
+    display: flex; align-items: center;
+    margin-bottom: 0 !important;
+  }
+  .footer-social a:hover { color: rgba(244,241,235,0.85); }
+  .footer-social svg { display: block; }
+</style>
+</head>
+<body>
+
+<!-- COPPER STRIP -->
+<div class="copper-strip">
+  <span>Propuesta Confidencial · 02 de 02</span>
+  <span class="validity-tag">Válida hasta 30 Jun 2026</span>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-header">
+    <div class="logo-lockup">
+      <svg class="isotipo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" stroke="none" transform="rotate(-4, 185, 200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4, 215, 200)"/></svg>
+      <span class="logo-name">felipe avinzano</span>
+    </div>
+    <span class="doc-id">Taller + Maestrías · Mayo 2026</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">Taller Introductorio · Rutas Académicas · Ing. Mecánica y Manufactura</div>
+    <h1 class="cover-title">IA Práctica<br><em>para Ingenieros.</em></h1>
+    <p class="cover-hook">Un taller sobre IA de 2 horas y una guía curada de maestrías en EE.UU. para estudiantes de Ingeniería Mecánica y Manufactura.</p>
+
+  </div>
+
+  <div class="cover-meta">
+    <div class="meta-item">
+      <div class="meta-label">Audiencia</div>
+      <div class="meta-value">Pasantes · Ing. Mecánica</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Formato</div>
+      <div class="meta-value">1 sesión · 2 h · Live online</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Grupo</div>
+      <div class="meta-value">5–15 participantes</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Válida hasta</div>
+      <div class="meta-value">30 Junio 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 · CONTEXTO -->
+<div class="section">
+  <div class="eyebrow">01 · Contexto</div>
+  <h2 class="section-h2">Un taller.<br><em>Dos resultados.</em></h2>
+  <p class="body">Este taller está diseñado para estudiantes de Ingeniería Mecánica y Manufactura que necesitan un primer mapa claro de la IA: qué existe, qué aplica directamente en su campo, y qué rutas académicas tienen disponibles si quieren profundizar.</p>
+
+  <p class="body">El taller no es una introducción genérica. Está anclado en casos reales de ingeniería mecánica y manufactura: análisis de materiales, diseño de componentes, automatización de procesos y documentación técnica asistida por IA.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 02 · CONTENIDO -->
+<div class="section">
+  <div class="eyebrow">02 · Contenido del Taller</div>
+  <h2 class="section-h2">2 horas.<br><em>Cuatro bloques.</em></h2>
+  <p class="body">Formato live online, participación activa. Cada bloque de 30 minutos incluye demostración en vivo y ejercicio práctico.</p>
+
+  <div class="blocks">
+    <div class="block-row">
+      <div class="block-letter-col"><div class="block-letter">A</div></div>
+      <div class="block-content">
+        <span class="block-time">Bloque A · 30 min</span>
+        <div class="block-title">El Ecosistema de IA en 2026: Lo que existe y lo que te sirve</div>
+        <div class="block-desc">Panorama honesto. Diferencia entre herramientas generales y especializadas para ingeniería. Casos reales en manufactura, diseño mecánico y análisis estructural. Marco de decisión: cuándo usar cuál.</div>
+        <div class="block-tags">
+          <span class="tag">LLMs generales</span>
+          <span class="tag">IA para CAD/CAE</span>
+          <span class="tag">Casos reales en manufactura</span>
+        </div>
+      </div>
+    </div>
+    <div class="block-row">
+      <div class="block-letter-col"><div class="block-letter">B</div></div>
+      <div class="block-content">
+        <span class="block-time">Bloque B · 30 min</span>
+        <div class="block-title">IA Visual: Imágenes Técnicas, Renders y Modelos 3D</div>
+        <div class="block-desc">Generación de visualizaciones técnicas para presentaciones de ingeniería. Demostración en vivo con un componente mecánico real. Diferencia entre render artístico y render técnico. Herramientas gratuitas vs. de pago.</div>
+        <div class="block-tags">
+          <span class="tag">Text-to-image</span>
+          <span class="tag">Renders conceptuales</span>
+          <span class="tag">Modelos 3D con IA</span>
+        </div>
+      </div>
+    </div>
+    <div class="block-row">
+      <div class="block-letter-col"><div class="block-letter">C</div></div>
+      <div class="block-content">
+        <span class="block-time">Bloque C · 30 min</span>
+        <div class="block-title">IA para Análisis de Datos, Cálculos y Documentación Técnica</div>
+        <div class="block-desc">Auditoría y corrección de resultados de software de cálculo. Análisis de datos de manufactura. Automatización de reportes técnicos. Demostración en vivo con un caso de ingeniería real.</div>
+        <div class="block-tags">
+          <span class="tag">Análisis de datos</span>
+          <span class="tag">Validación de cálculos</span>
+          <span class="tag">Reportes automatizados</span>
+        </div>
+      </div>
+    </div>
+    <div class="block-row">
+      <div class="block-letter-col"><div class="block-letter">D</div></div>
+      <div class="block-content">
+        <span class="block-time">Bloque D · 30 min</span>
+        <div class="block-title">Tu Primer Asistente Virtual: Del concepto al prototipo</div>
+        <div class="block-desc">Qué es un asistente virtual y para qué sirve en ingeniería. Construcción de uno básico en vivo. Casos: revisión de especificaciones, documentación de procesos, informes automáticos. Cada participante diseña el flujo de su propio asistente.</div>
+        <div class="block-tags">
+          <span class="tag">Prompt engineering</span>
+          <span class="tag">Automatización</span>
+          <span class="tag">Prototipo en vivo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resultado-box">
+    <div class="resultado-label">Lo que se llevan al salir</div>
+    <div class="resultado-text">"Un mapa claro de las herramientas de IA que aplican a mi trabajo, cómo empezar a usarlas hoy, y qué ruta académica tomar si quiero profundizar."</div>
+  </div>
+</div>
+
+<!-- 03 · INVERSIÓN — sin margen expuesto -->
+<div class="inv-section">
+  <div class="inv-inner">
+    <div class="eyebrow">03 · Inversión</div>
+    <h2 class="section-h2">Precio por participante,<br><em>claro y directo.</em></h2>
+
+    <div class="pricing-band">
+      <div class="band-cell">
+        <div class="band-label">Precio por participante</div>
+        <div class="band-value">$97</div>
+        <div class="band-desc">USD por persona · incluye todos los materiales y acceso a la grabación por 30 días</div>
+      </div>
+      <div class="band-cell">
+        <div class="band-label">Tamaño del grupo</div>
+        <div class="band-value">5–15</div>
+        <div class="band-desc">participantes por sesión — mínimo para garantizar la dinámica, máximo para mantener la calidad de interacción</div>
+      </div>
+    </div>
+
+    <div class="includes-list">
+      <div class="includes-title">Todo incluido en el precio</div>
+      <div class="includes-grid">
+        <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Sesión live de 2 horas con Felipe Avinzano</div></div>
+        <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Materiales digitales: resumen de herramientas + prompts de inicio</div></div>
+        <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Guía curada de maestrías en IA para Ing. Mecánica (EE.UU.)</div></div>
+        <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Acceso a la grabación completa por 30 días</div></div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- 04 · PRÓXIMOS PASOS -->
+<div class="steps-section">
+  <div class="steps-inner">
+    <div class="eyebrow">04 · Próximos pasos</div>
+    <h2 class="section-h2">Para agendar<br><em>el taller.</em></h2>
+
+    <div class="steps-row">
+      <div class="step-box">
+        <div class="step-n">01</div>
+        <div class="step-title">Confirma el número de participantes</div>
+        <div class="step-desc">Mínimo 5, máximo 15. Con ese dato defino la fecha disponible y envío la confirmación formal.</div>
+      </div>
+      <div class="step-box">
+        <div class="step-n">02</div>
+        <div class="step-title">Elegimos fecha y horario</div>
+        <div class="step-desc">2 horas en el horario que mejor funcione al grupo. Disponibilidad con al menos 5 días de anticipación.</div>
+      </div>
+      <div class="step-box">
+        <div class="step-n">03</div>
+        <div class="step-title">Los pasantes reciben acceso</div>
+        <div class="step-desc">48 horas antes: link de acceso + guía de preparación de 10 minutos para aprovechar mejor la sesión.</div>
+      </div>
+    </div>
+
+    <!-- CTA ACCIONABLE -->
+    <div class="cta-block">
+      <div>
+        <div class="cta-label">¿Cuántos pasantes tienes?</div>
+        <div class="cta-text">Escríbeme y agendamos en 24 horas.</div>
+      </div>
+      <div class="cta-buttons">
+        <a href="mailto:felipe@felipeavinzano.com?subject=Taller%20IA%20Pasantes%20-%20Confirmo%20interés&body=Hola%20Felipe%2C%20quiero%20agendar%20el%20taller%20para%20mis%20pasantes.%20Somos%20__%20participantes." class="btn btn-primary">Escribir a Felipe</a>
+        <a href="https://felipeavinzano.com" class="btn btn-ghost">Ver perfil</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    <svg class="isotipo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" stroke="none" transform="rotate(-4, 185, 200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4, 215, 200)"/></svg>
+    <div>
+      <div class="footer-name">felipe avinzano</div>
+      <div class="footer-role">Executive AI Consultant & Educator · Stuart, Florida</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:felipe@felipeavinzano.com">felipe@felipeavinzano.com</a>
+    <a href="https://felipeavinzano.com">felipeavinzano.com</a>
+    <a href="tel:+17728009691">+1 (772) 800-9691</a>
+    <div class="footer-social">
+      <a href="https://linkedin.com/in/felipe-avinzano" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="https://x.com/AvinzanoFelipe" target="_blank" aria-label="X / Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://www.instagram.com/felipeavinzano/" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+    </div>
+    <div class="footer-tagline">Strategy · Frameworks · Impact</div>
+  </div>
+</div>
+
+</body>
+</html>
