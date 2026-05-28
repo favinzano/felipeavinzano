@@ -7,11 +7,15 @@
 <meta property="og:title" content="Bootcamp AI: Zero to Pro — Felipe Avinzano">
 <meta property="og:description" content="8 sesiones técnicas en vivo. Custom GPTs, frameworks profesionales, análisis de datos. Desde $197.">
 <meta property="og:url" content="https://felipeavinzano.com/bootcamp">
+<meta property="og:image" content="https://felipeavinzano.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://felipeavinzano.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Bootcamp AI: Zero to Pro","description":"8 sesiones en vivo para dominar IA con frameworks probados en producción.","provider":{"@type":"Person","name":"Felipe Avinzano","url":"https://felipeavinzano.com"},"offers":[{"@type":"Offer","price":"197","priceCurrency":"USD","name":"Early Bird"},{"@type":"Offer","price":"227","priceCurrency":"USD","name":"Regular"},{"@type":"Offer","price":"257","priceCurrency":"USD","name":"Last Minute"}],"inLanguage":"es","courseMode":"online","availableLanguage":"es"}</script>
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--deep-ink:#0D1B2A;--warm-bone:#F4F1EB;--fog:#8C97A0;--type-black:#1A1A1A;--copper:#B87333;--rule:rgba(244,241,235,0.12);--font-display:"DM Serif Display",Georgia,serif;
+:root{--deep-ink:#0D1B2A;--warm-bone:#F4F1EB;--fog:#A8B3BC;--type-black:#1A1A1A;--copper:#B87333;--rule:rgba(244,241,235,0.12);--font-display:"DM Serif Display",Georgia,serif;
   --font:"Inter",-apple-system,sans-serif;--pad:clamp(24px,5vw,96px);--section-y:clamp(80px,10vw,130px)}
 html{scroll-behavior:smooth}
 body{background:var(--deep-ink);color:var(--warm-bone);font-family:var(--font);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -208,6 +212,11 @@ a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
 /* SVG icon sizing */
 .dlv-icon svg,.logistics-icon svg{width:28px;height:28px}
 
+
+/* ── SOCIAL ICONS ── */
+.footer-social{display:flex;gap:20px;align-items:center}
+.social-link{display:flex;align-items:center;justify-content:center;color:var(--fog);transition:color 200ms,transform 200ms}
+.social-link:hover{color:var(--copper);transform:translateY(-2px)}
 </style>
 <link rel="canonical" href="https://felipeavinzano.com/bootcamp">
 <meta property="og:title" content="Bootcamp AI: Zero to Pro — Felipe Avinzano · $197">
@@ -396,53 +405,158 @@ a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
 
 <!-- TESTIMONIALS -->
 <section class="section section--border">
+<style>
+.bt-track-wrap{overflow:hidden}
+.bt-track{display:flex;transition:transform 0.55s cubic-bezier(0.16,1,0.3,1);will-change:transform}
+.bt-card{flex:0 0 100%;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);min-height:280px}
+.bt-card-q{padding:48px 52px;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.bt-card-q::before{content:'\201C';position:absolute;top:24px;right:32px;font-family:var(--font-display);font-size:110px;line-height:1;color:rgba(184,115,51,0.1);pointer-events:none;user-select:none}
+.bt-q-text{font-size:clamp(17px,2vw,22px);font-weight:300;letter-spacing:-0.015em;line-height:1.55;color:var(--warm-bone);position:relative;z-index:1}
+.bt-author{display:flex;align-items:center;gap:14px;margin-top:36px}
+.bt-avatar{width:44px;height:44px;background:rgba(184,115,51,0.1);border:1px solid rgba(184,115,51,0.35);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--copper);flex-shrink:0;letter-spacing:0.04em}
+.bt-a-name{font-size:14px;font-weight:400;color:var(--warm-bone);margin-bottom:3px}
+.bt-a-role{font-size:12px;color:var(--fog)}
+.bt-a-tag{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--copper);margin-top:5px}
+.bt-card-m{padding:48px 52px;background:rgba(244,241,235,0.025);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.bt-card-m::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,115,51,0.06) 0%,transparent 55%);pointer-events:none}
+.bt-m-num{font-family:var(--font-display);font-size:clamp(56px,8vw,100px);font-weight:400;letter-spacing:-0.03em;line-height:1;color:var(--copper);margin-bottom:10px;position:relative;z-index:1}
+.bt-m-label{font-size:13px;font-weight:300;color:rgba(244,241,235,0.5);line-height:1.55;max-width:24ch;position:relative;z-index:1}
+.bt-m-tag{display:inline-block;margin-top:20px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--copper);border:1px solid rgba(184,115,51,0.35);padding:5px 12px;position:relative;z-index:1}
+.bt-controls{display:flex;align-items:center;justify-content:space-between;margin-top:28px}
+.bt-dots{display:flex;gap:8px;align-items:center}
+.bt-dot{height:2px;width:24px;background:rgba(244,241,235,0.2);border:none;cursor:pointer;padding:0;transition:background 0.3s,width 0.3s}
+.bt-dot.on{background:var(--copper);width:40px}
+.bt-counter{font-size:11px;color:var(--fog);letter-spacing:0.06em}
+.bt-arrows{display:flex;gap:10px}
+.bt-arr{width:44px;height:44px;border:1px solid rgba(244,241,235,0.2);background:transparent;color:var(--warm-bone);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:border-color 0.2s,background 0.2s;font-family:inherit}
+.bt-arr:hover{border-color:var(--copper);background:rgba(184,115,51,0.08)}
+.bt-arr:disabled{opacity:0.25;cursor:default}
+@media(max-width:760px){
+  .bt-card{grid-template-columns:1fr}
+  .bt-card-m{border-top:1px solid var(--rule)}
+  .bt-card-q,.bt-card-m{padding:32px 28px}
+}
+</style>
   <div class="container">
     <p class="label label--copper reveal" style="margin-bottom:20px">resultados reales</p>
-    <h2 class="h2 reveal" style="max-width:22ch;margin-bottom:48px">profesionales técnicos que ya construyeron sus sistemas.</h2>
-    <div class="testimonial-grid reveal">
-      <div class="testimonial">
-        <p class="testimonial-quote">"Apliqué el Framework RTF y reduje mi tiempo de generación de informes técnicos de 4 horas a 30 minutos. Todo lo que aprendí pude aplicarlo casi de inmediato en la empresa donde trabajo."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">OM</div>
-          <div>
-            <p class="testimonial-name">Oscar Morillo</p>
-            <p class="testimonial-role">Ingeniero Civil</p>
-            <p class="testimonial-result">87.5% reducción en tiempo</p>
+    <h2 class="h2 reveal" style="max-width:22ch;margin-bottom:48px">profesionales que ya construyeron sus sistemas.</h2>
+
+    <div class="bt-track-wrap reveal">
+      <div class="bt-track" id="btTrack">
+
+        <!-- Slide 1 -->
+        <div class="bt-card">
+          <div class="bt-card-q">
+            <p class="bt-q-text">Apliqué el Framework RTF y reduje mi tiempo de generación de informes técnicos de 4 horas a 30 minutos. Todo lo que aprendí pude aplicarlo casi de inmediato en la empresa donde trabajo.</p>
+            <div class="bt-author">
+              <div class="bt-avatar">OM</div>
+              <div>
+                <p class="bt-a-name">Oscar Morillo</p>
+                <p class="bt-a-role">Ingeniero Civil</p>
+                <p class="bt-a-tag">Bootcamp AI: Zero to Pro</p>
+              </div>
+            </div>
+          </div>
+          <div class="bt-card-m">
+            <p class="bt-m-num">87.5%</p>
+            <p class="bt-m-label">reducción en tiempo de generación de informes técnicos</p>
+            <span class="bt-m-tag">4h → 30 min</span>
           </div>
         </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-quote">"El Custom GPT Workbook me permitió crear un asistente especializado que ahora usa todo mi equipo. Me catapultó en la empresa."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JA</div>
-          <div>
-            <p class="testimonial-name">José Ahumada</p>
-            <p class="testimonial-role">Ingeniero Estructural</p>
-            <p class="testimonial-result">Custom GPT adoptado por equipo completo</p>
+
+        <!-- Slide 2 -->
+        <div class="bt-card">
+          <div class="bt-card-q">
+            <p class="bt-q-text">El Custom GPT Workbook me permitió crear un asistente especializado que ahora usa todo mi equipo. Me catapultó en la empresa.</p>
+            <div class="bt-author">
+              <div class="bt-avatar">JA</div>
+              <div>
+                <p class="bt-a-name">José Ahumada</p>
+                <p class="bt-a-role">Ingeniero Estructural</p>
+                <p class="bt-a-tag">Bootcamp AI: Zero to Pro</p>
+              </div>
+            </div>
+          </div>
+          <div class="bt-card-m">
+            <p class="bt-m-num">1→∞</p>
+            <p class="bt-m-label">GPT creado por uno, adoptado por todo el equipo</p>
+            <span class="bt-m-tag">Adopción total</span>
           </div>
         </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-quote">"La instrucción por parte de un profesional en activo que emplea IA ha elevado significativamente el nivel de exigencia y la calidad del trabajo realizado."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">NP</div>
-          <div>
-            <p class="testimonial-name">Narle Paz</p>
-            <p class="testimonial-role">Ingeniero Petrolero</p>
-            <p class="testimonial-result">Nivel técnico profesional</p>
+
+        <!-- Slide 3 -->
+        <div class="bt-card">
+          <div class="bt-card-q">
+            <p class="bt-q-text">La instrucción por parte de un profesional en activo que emplea IA ha elevado significativamente el nivel de exigencia y la calidad del trabajo realizado.</p>
+            <div class="bt-author">
+              <div class="bt-avatar">NP</div>
+              <div>
+                <p class="bt-a-name">Narle Paz</p>
+                <p class="bt-a-role">Ingeniero Petrolero</p>
+                <p class="bt-a-tag">Bootcamp AI: Zero to Pro</p>
+              </div>
+            </div>
           </div>
+          <div class="bt-card-m">
+            <p class="bt-m-num" style="font-size:clamp(32px,4vw,56px);line-height:1.25">"Nivel técnico<br>profesional"</p>
+            <p class="bt-m-label">calidad de trabajo elevada al estándar de un profesional en activo</p>
+            <span class="bt-m-tag">Criterio ejecutivo</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bt-controls">
+        <div class="bt-dots" id="btDots">
+          <button class="bt-dot on" data-i="0" aria-label="Testimonio 1"></button>
+          <button class="bt-dot" data-i="1" aria-label="Testimonio 2"></button>
+          <button class="bt-dot" data-i="2" aria-label="Testimonio 3"></button>
+        </div>
+        <span class="bt-counter" id="btCnt">01 / 03</span>
+        <div class="bt-arrows">
+          <button class="bt-arr" id="btPrev" disabled>←</button>
+          <button class="bt-arr" id="btNext">→</button>
         </div>
       </div>
     </div>
+
   </div>
 </section>
+
+<script>
+(function(){
+  const track=document.getElementById('btTrack'),dots=document.querySelectorAll('.bt-dot'),
+        cnt=document.getElementById('btCnt'),prev=document.getElementById('btPrev'),
+        next=document.getElementById('btNext'),total=3;
+  let c=0,t;
+  function go(n){
+    c=Math.max(0,Math.min(n,total-1));
+    track.style.transform=`translateX(-${c*100}%)`;
+    dots.forEach((d,i)=>d.classList.toggle('on',i===c));
+    cnt.textContent=String(c+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+    prev.disabled=c===0; next.disabled=c===total-1;
+  }
+  prev.onclick=()=>{go(c-1);reset()};
+  next.onclick=()=>{go(c+1);reset()};
+  dots.forEach(d=>d.onclick=()=>{go(+d.dataset.i);reset()});
+  track.addEventListener('touchstart',e=>{track._sx=e.touches[0].clientX},{passive:true});
+  track.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-track._sx;
+    if(Math.abs(dx)>50){go(dx<0?c+1:c-1);reset();}
+  },{passive:true});
+  function reset(){clearInterval(t);t=setInterval(()=>go(c===total-1?0:c+1),5000)}
+  reset();
+  track.parentElement.addEventListener('mouseenter',()=>clearInterval(t));
+  track.parentElement.addEventListener('mouseleave',reset);
+})();
+</script>
 
 <!-- INSTRUCTOR -->
 <section class="section section--alt section--border" id="instructor">
   <div class="container">
     <div class="instructor-grid">
       <div class="reveal">
-        <img src="https://felipeavinzano.com/felipe-photo.webp" alt="Felipe Avinzano" class="instructor-photo" onerror="this.style.background='rgba(244,241,235,0.05)'">
+        <img src="https://felipeavinzano.com/felipe-photo.webp" alt="Felipe Avinzano — consultor ejecutivo de IA, ex-CIO con 25 años en gestión de tecnología" class="instructor-photo" width="480" height="640" loading="lazy" onerror="this.style.background='rgba(244,241,235,0.05)'">
       </div>
       <div>
         <p class="label label--copper reveal" style="margin-bottom:20px">tu instructor</p>
@@ -463,55 +577,102 @@ a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
 
 <!-- PRICING -->
 <section class="section section--border" id="pricing">
+<style>
+/* ── PRICING ── */
+.px-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);margin-bottom:0}
+.px-card{padding:36px 32px 0;border-right:1px solid var(--rule);position:relative;display:flex;flex-direction:column}
+.px-card:last-child{border-right:0}
+.px-card.best{border-top:2px solid var(--copper);background:rgba(184,115,51,0.04)}
+.px-badge{display:inline-block;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;background:var(--copper);color:var(--warm-bone);padding:5px 12px;margin-bottom:20px;align-self:flex-start}
+.px-spacer{height:29px;margin-bottom:20px}
+.px-tier{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.16em;color:var(--fog);margin-bottom:10px}
+.px-price{font-family:var(--font-display);font-size:clamp(42px,5vw,64px);font-weight:400;letter-spacing:-0.02em;color:var(--warm-bone);line-height:1;margin-bottom:8px}
+.px-price sup{font-size:0.42em;vertical-align:super}
+.px-when{font-size:12px;color:var(--fog);line-height:1.4;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.px-features{list-style:none;padding:24px 0 0;flex:1}
+.px-features li{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:300;color:rgba(244,241,235,0.7);padding-bottom:14px}
+.px-features li::before{content:'✓';color:var(--copper);flex-shrink:0;font-size:14px}
+.px-cta{padding:24px 0 32px;margin-top:auto}
+.px-btn-c{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--copper);color:var(--warm-bone);font-size:13px;font-weight:300;padding:14px 20px;width:100%;transition:background 200ms}
+.px-btn-c:hover{background:#9d5a2a}
+.px-btn-g{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(244,241,235,0.22);color:var(--warm-bone);font-size:13px;font-weight:300;padding:13px 20px;width:100%;transition:border-color 200ms,background 200ms}
+.px-btn-g:hover{border-color:rgba(244,241,235,0.5);background:rgba(244,241,235,0.04)}
+.px-garantia{display:flex;align-items:center;gap:16px;padding:18px 24px;border:1px solid rgba(184,115,51,0.25);margin-top:20px}
+@media(max-width:700px){
+  .px-cards{grid-template-columns:1fr}
+  .px-card{border-right:0;border-bottom:1px solid var(--rule)}
+  .px-card:last-child{border-bottom:0}
+}
+</style>
   <div class="container">
     <p class="label label--copper reveal" style="margin-bottom:20px">inversión</p>
     <h2 class="h2 reveal" style="max-width:20ch;margin-bottom:48px">tres opciones. mismo contenido. diferente timing.</h2>
-    <div class="pricing-grid reveal">
-      <div class="price-card price-card--featured">
-        <span class="price-badge">más popular</span>
-        <p class="price-name">Early Bird</p>
-        <p class="price-amount">$197</p>
-        <p class="price-note">Primeros 10 cupos · USD</p>
-        <ul class="price-includes">
-          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+
+    <div class="px-cards reveal">
+
+      <!-- Early Bird -->
+      <div class="px-card best">
+        <span class="px-badge">más popular</span>
+        <p class="px-tier">Early Bird</p>
+        <p class="px-price"><sup>$</sup>197</p>
+        <p class="px-when">Primeros 10 cupos · USD</p>
+        <ul class="px-features">
+          <li>8 sesiones en vivo (2h c/u)</li>
           <li>6 deliverables técnicos</li>
-          <li>Grabaciones 90 días</li>
+          <li>Grabaciones disponibles 90 días</li>
           <li>Certificado profesional</li>
           <li>Comunidad WhatsApp privada</li>
         </ul>
-        <a href="https://buy.stripe.com/aFacN50AT0f9as65wacIE04" class="btn btn-copper btn-full">reservar ahora <span class="arrow">→</span></a>
+        <div class="px-cta">
+          <a href="https://buy.stripe.com/aFacN50AT0f9as65wacIE04" class="px-btn-c">reservar ahora →</a>
+        </div>
       </div>
-      <div class="price-card">
-        <p class="price-name">Regular</p>
-        <p class="price-amount">$227</p>
-        <p class="price-note">Hasta 3 días antes del inicio</p>
-        <ul class="price-includes">
-          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+
+      <!-- Regular -->
+      <div class="px-card">
+        <div class="px-spacer"></div>
+        <p class="px-tier">Regular</p>
+        <p class="px-price"><sup>$</sup>227</p>
+        <p class="px-when">Hasta 3 días antes del inicio</p>
+        <ul class="px-features">
+          <li>8 sesiones en vivo (2h c/u)</li>
           <li>6 deliverables técnicos</li>
-          <li>Grabaciones 90 días</li>
+          <li>Grabaciones disponibles 90 días</li>
           <li>Certificado profesional</li>
           <li>Comunidad WhatsApp privada</li>
         </ul>
-        <a href="https://buy.stripe.com/7sY14n83lfa38jYcYCcIE05" class="btn btn-outline btn-full">reservar ahora <span class="arrow">→</span></a>
+        <div class="px-cta">
+          <a href="https://buy.stripe.com/7sY14n83lfa38jYcYCcIE05" class="px-btn-g">reservar ahora →</a>
+        </div>
       </div>
-      <div class="price-card">
-        <p class="price-name">Last Minute</p>
-        <p class="price-amount">$257</p>
-        <p class="price-note">Últimos 3 días antes del inicio</p>
-        <ul class="price-includes">
-          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><polyline points="20 6 9 17 4 12"/></svg> 8 sesiones en vivo</li>
+
+      <!-- Last Minute -->
+      <div class="px-card">
+        <div class="px-spacer"></div>
+        <p class="px-tier">Last Minute</p>
+        <p class="px-price"><sup>$</sup>257</p>
+        <p class="px-when">Últimos 3 días antes del inicio</p>
+        <ul class="px-features">
+          <li>8 sesiones en vivo (2h c/u)</li>
           <li>6 deliverables técnicos</li>
-          <li>Grabaciones 90 días</li>
+          <li>Grabaciones disponibles 90 días</li>
           <li>Certificado profesional</li>
           <li>Comunidad WhatsApp privada</li>
         </ul>
-        <a href="https://buy.stripe.com/3cI3cvdnFge71VA8ImcIE06" class="btn btn-outline btn-full">reservar ahora <span class="arrow">→</span></a>
+        <div class="px-cta">
+          <a href="https://buy.stripe.com/3cI3cvdnFge71VA8ImcIE06" class="px-btn-g">reservar ahora →</a>
+        </div>
       </div>
-    </div>
-    <div style="margin-top:24px;padding:20px 28px;border:1px solid rgba(184,115,51,0.3);display:flex;align-items:center;gap:16px" class="reveal">
-      <span style="color:var(--copper)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+
+    </div><!-- /px-cards -->
+
+    <div class="px-garantia reveal">
+      <span style="color:var(--copper);flex-shrink:0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </span>
       <p style="font-size:14px;color:var(--fog);line-height:1.6"><strong style="color:var(--warm-bone)">Garantía de satisfacción:</strong> Si después de la primera sesión no cumple tus expectativas, reembolso completo. Sin preguntas.</p>
     </div>
+
   </div>
 </section>
 
@@ -568,7 +729,7 @@ a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
     <div class="reveal">
       <div class="faq-item">
         <div class="faq-q">¿Cuándo son exactamente las sesiones?<span class="faq-q-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Martes y Jueves, 7:00–9:00 PM EST. Calendario completo:<ul><li>Sesión 1: Martes 17 de Marzo</li><li>Sesión 2: Jueves 19 de Marzo</li><li>Sesión 3: Martes 24 de Marzo</li><li>Sesión 4: Jueves 26 de Marzo</li><li>Sesión 5: Martes 31 de Marzo</li><li>Sesión 6: Jueves 2 de Abril</li><li>Sesión 7: Martes 7 de Abril</li><li>Sesión 8: Jueves 9 de Abril</li></ul></div></div>
+        <div class="faq-a"><div class="faq-a-inner">Las sesiones se dictan en vivo los martes y jueves, 7:00–9:00 PM EST. Son 8 sesiones en 4 semanas consecutivas. El calendario exacto se comparte al confirmar tu inscripción. Todas las sesiones quedan grabadas y disponibles durante 30 días.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Qué pasa si me pierdo una sesión?<span class="faq-q-icon">+</span></div>
@@ -612,26 +773,36 @@ a,button,[role="button"]{cursor:pointer;touch-action:manipulation}
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div style="display:flex;align-items:center;gap:14px"><svg width="32" height="32" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/><rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/></svg>
+      <div class="f-brand">
+        <svg width="28" height="28" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+          <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+        </svg>
         <div>
           <div style="font-size:14px;font-weight:300;letter-spacing:-0.015em">felipe avinzano</div>
-          <div style="font-size:12px;color:var(--fog);margin-top:4px">Stuart, Florida, USA</div>
+          <div class="f-tagline">convirtiendo experiencia acumulada en sistemas de ia accionables.</div>
         </div>
       </div>
       <div class="footer-links">
-        <a href="/">inicio</a>
+        <a href="index.html">inicio</a>
+        <a href="bootcamp.html">bootcamp</a>
         <a href="sobre-felipe.html">sobre felipe</a>
-        <a href="/#servicios">servicios</a>
         <a href="blog.html">blog</a>
-        <a href="mailto:felipe@felipeavinzano.com">felipe@felipeavinzano.com</a>
+        <a href="faq.html">faq</a>
+        <a href="index.html#contacto">contacto</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://linkedin.com/in/felipe-avinzano" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://x.com/AvinzanoFelipe/" target="_blank" rel="noopener" aria-label="X / Twitter" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/felipeavinzano/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://substack.com/@felipeavinzano" target="_blank" rel="noopener" aria-label="Substack" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Felipe Avinzano · Todos los derechos reservados.</p>
-      <div style="display:flex;gap:20px">
-        <a href="terminos-condiciones.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Términos</a>
-        <a href="politica-privacidad.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Privacidad</a>
-        <a href="politica-reembolso.html" style="font-size:12px;color:rgba(140,151,160,0.4)">Reembolso</a>
+      <p class="footer-copy">© 2026 felipe avinzano · felipeavinzano.com</p>
+      <div class="footer-bottom-links">
+        <a href="/llms.txt">llms.txt</a>
+        <a href="/sitemap.xml">sitemap</a>
       </div>
     </div>
   </div>
