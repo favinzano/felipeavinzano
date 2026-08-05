@@ -1,179 +1,169 @@
 # Demo en vivo — Caso wow + paso a paso
 ## Sesión: "Build a proactive agent workflow with AI" · jue 6 ago, 8:00 PM EST
 
-> **Objetivo del demo:** que la audiencia *vea* —en tiempo real— un agente que trabaja **antes** de que se lo pidan. No una demo de juguete: un flujo que detecta, decide y actúa solo, mapeado a tu arquitectura **disparador → contexto → decisión → acción**. Y que el momento wow abra, sin esfuerzo, el puente al Bootcamp.
+> **Regla del demo:** el agente corre **únicamente dentro de Claude Code / Cowork o ChatGPT / Codex**. Sin n8n, sin Make, sin orquestadores externos. Nada de "conecta 8 apps". El agente se **crea hablándole a la IA** y luego **se ejecuta solo en un horario** (tarea programada) — esa es la prueba viva de que es *proactivo*: nadie lo dispara a mano.
 
 ---
 
-## 1. El caso wow — "El Centinela de Bandeja"
+## 1. La idea que hace clic
 
-Un agente que **vigila una bandeja de entrada** (o un formulario de leads), y ante cada mensaje nuevo:
-1. Lee el contenido y quién lo envía.
-2. Decide si es urgente / qué tipo de acción requiere.
-3. **Redacta el borrador de respuesta** ya listo.
-4. Si es urgente, **te avisa al teléfono** (Telegram/Slack) con un resumen de una línea + el borrador para enviar con un toque.
+Un agente proactivo, en estas herramientas, son **tres cosas** que ya viven dentro de Claude Cowork / ChatGPT, sin código:
 
-**El pitch en una frase:** *"Mientras tú duermes o estás en otra reunión, este agente ya leyó, ya clasificó y ya escribió la respuesta. Tú solo apruebas."*
+1. **Un reloj propio** (tarea programada / *scheduled task* / *routine*): la IA se despierta sola cada hora / cada mañana. Ese reloj **es** el disparador. Nadie escribe un prompt cada vez.
+2. **Conectores** (Gmail, Calendar, Slack, Drive…): le dan ojos y manos sobre tu mundo real.
+3. **Criterio + acción**: la IA lee, decide y actúa (redacta, agenda, te avisa al teléfono).
 
-### Por qué es el caso correcto para ESTA sesión
-- **Universal:** todos sufren la bandeja de entrada. La audiencia se ve reflejada al instante.
-- **Es la tesis de la campaña, hecha visible:** un chatbot espera tu prompt; este agente actúa *antes*. El demo *es* el argumento.
-- **Loop cerrado en tiempo real:** entra un mensaje → segundos después vibra tu teléfono con la respuesta escrita. Ahí está el wow.
-- **Mapea 1:1 a tu arquitectura** (lo usas para enseñar mientras construyes).
-- **Sin código y construible en vivo** en ~15 min.
+La frase que lo resume para la audiencia:
+> *"No voy a programar nada. Le voy a **decir** a Claude qué vigilar y cada cuándo. A partir de ahí, trabaja solo — aunque yo cierre la laptop."*
 
-### Cómo mapea a los 4 componentes (tu hilo conductor)
+---
+
+## 2. El caso wow — "El Centinela de Bandeja"
+
+Le pides a Claude (o ChatGPT) que **cada hora en horario laboral**:
+1. Revise los correos nuevos de tu bandeja (vía conector de Gmail).
+2. Clasifique urgencia con tus reglas de negocio.
+3. **Redacte el borrador de respuesta** de los urgentes.
+4. Te mande al teléfono (push / Slack) un resumen de una línea + el borrador listo. Lo no urgente lo deja como borrador y no te interrumpe.
+
+### Por qué es el caso correcto
+- **Universal:** todos ahogados en la bandeja. La audiencia se ve reflejada.
+- **Es tu tesis, hecha visible:** el agente actúa *antes* de que tú abras el correo.
+- **100% dentro de la herramienta:** se crea con una instrucción en lenguaje natural; no hay stack que mostrar.
+- **Mapea 1:1 a tu arquitectura** (lo usas para enseñar mientras lo creas).
+
+### Cómo mapea a los 4 componentes
 | Componente | En este agente |
 |---|---|
-| **Disparador** | Llega un mensaje nuevo (email o formulario). |
-| **Contexto** | El texto del mensaje + remitente + tus reglas de negocio (qué cuenta como "urgente"). |
-| **Decisión** | El modelo clasifica: urgente / normal / ignorar, y define el tono de la respuesta. |
-| **Acción** | Redacta el borrador + si es urgente, dispara la alerta al teléfono. |
+| **Disparador** | La **tarea programada** (el reloj propio de Claude/ChatGPT). Se despierta solo. |
+| **Contexto** | El **conector de Gmail**: los correos nuevos + remitente + tus reglas de "urgente". |
+| **Decisión** | Claude/GPT clasifica urgencia y categoría, y decide si te interrumpe o no. |
+| **Acción** | Redacta el borrador + manda la alerta al teléfono (push/Slack). |
 
 ---
 
-## 2. El momento wow — coreografía exacta
+## 3. Las 3 rutas (elige una; las tres cumplen la regla "sin orquestador")
 
-El wow no se explica, se **provoca en vivo**. Guion del momento (≈60 segundos):
+| Ruta | Herramienta | Para quién | Nivel |
+|---|---|---|---|
+| **A — Recomendada** | **Claude Cowork / Claude Code** (tarea programada + conectores + notificación push) | Público mixto; máximo "sin código" | Cero técnico |
+| **B** | **ChatGPT — Tasks** (tarea programada + conectores) | Quien ya vive en ChatGPT | Cero técnico |
+| **C** | **Codex / Claude Code** escribe y corre un mini-agente en código (cron + API) | Audiencia técnica que quiere ver el motor | Técnico |
 
-1. Ya tienes el agente activo (lo acabas de construir en pantalla).
-2. Dices: *"Vamos a probarlo con alguien real. ¿Quién me manda un mensaje ahora mismo?"* — y compartes en pantalla la dirección/el formulario.
-3. Un asistente (o tu co-host "sembrado", como plan seguro) envía: asunto **"urgente"**, cuerpo *"Necesito la propuesta hoy, ¿me la pasas?"*.
-4. Callas 10 segundos. Miras el canvas: el flujo se ejecuta nodo por nodo en vivo (verde, verde, verde).
-5. **Tu teléfono vibra** (mostrado en pantalla vía Slack de escritorio, o el celular espejeado, o a cámara). Lees en voz alta la alerta:
-   > 🔴 *URGENTE — [Nombre] pide la propuesta hoy. Borrador listo 👇*
-   > *"Hola [Nombre], claro. Te comparto la propuesta hoy mismo antes de las 6 PM…"*
-6. Cierre del momento: *"No le pedí nada. Ya leyó, ya decidió que era urgente, y ya escribió la respuesta. Eso es un agente proactivo."*
-
-> **Regla de oro:** ten SIEMPRE un asistente cómplice listo para mandar el mensaje "urgente" en el segundo justo, aunque también invites a la audiencia. Nunca dependas de que un desconocido lo haga a tiempo.
+**Recomendación:** haz el demo con la **Ruta A**. Es la que mejor cuenta la historia "le hablo y trabaja solo", no expone nada técnico, y el disparador (la tarea programada) es exactamente el concepto que quieres enseñar. Deja la Ruta C como bonus para el Q&A si hay devs en la sala.
 
 ---
 
-## 3. Stack sin código
+## 4. Paso a paso — Ruta A (Claude Cowork / Claude Code)
 
-| Pieza | Recomendado | Alternativa |
-|---|---|---|
-| **Orquestador** | **n8n** (visual, tiene nodo *AI Agent* nativo, se ve "agente") | Make.com (aún más fácil para principiantes) |
-| **Cerebro (LLM)** | OpenAI GPT‑4o o Claude (vía API) | Cualquiera con API; costo por corrida ≈ centavos |
-| **Disparador** | Gmail Trigger *(narrativa "bandeja")* **o** formulario Tally/Typeform *(webhook instantáneo, más confiable en vivo)* | IMAP genérico |
-| **Alerta al teléfono** | **Telegram** (bot gratis, se ve la notificación en el cel) | Slack (fácil de mostrar en pantalla de escritorio) |
-
-**Recomendación para minimizar riesgo en vivo:** usa **n8n + formulario (Tally) como disparador + Telegram** para la alerta. El webhook del formulario dispara al instante (sin el retraso de polling de Gmail), y Telegram da el "vibró el teléfono" perfecto. Si prefieres la narrativa pura de "bandeja de entrada", usa Gmail Trigger con sondeo cada 1 min y cronometra el mensaje del cómplice ~40 s antes del reveal.
-
----
-
-## 4. Paso a paso del build (en vivo, ~15 min)
-
-Construye los 4 nodos **hablando cada uno como un componente de la arquitectura**. Así enseñas mientras armas.
-
-### Paso 0 — Pre-vuelo (ya hecho antes de la sesión)
-- Cuenta n8n (cloud o local) abierta y logueada.
-- API key de OpenAI/Claude cargada como credencial en n8n.
-- Bot de Telegram creado con **@BotFather** → token guardado como credencial; `chat_id` tuyo obtenido (mándale un mensaje al bot y léelo con getUpdates).
-- Formulario Tally con 2 campos (nombre, mensaje) y su webhook copiado, **o** Gmail conectado.
-- **Un flujo idéntico ya construido y probado en una pestaña oculta** (plan B, ver §6).
+### Paso 0 — Pre-vuelo (antes de la sesión)
+- Sesión de Claude (Cowork/Code) abierta y logueada.
+- **Conector de Gmail activado** (Configuración → Conectores). Opcional: Slack y/o Calendar.
+- **App de Claude en el teléfono** con notificaciones push activadas (para el "vibró el teléfono").
+- Una **cuenta de correo de demo** con 2 correos de prueba ya redactados para enviar (uno "urgente", uno normal).
+- **La tarea ya creada y probada una vez** en una sesión espejo (plan B, §7).
 
 ### Paso 1 — Disparador *(“qué lo despierta”)*
-- n8n → nodo **Webhook** (si usas formulario) o **Gmail Trigger** (si usas bandeja).
-- Formulario: pega la URL del webhook de n8n en Tally. Envía una prueba → verás llegar el payload.
-- **Frase:** *"Primero, el disparador. El agente no hace nada hasta que pasa algo en el mundo real. Aquí, alguien manda un mensaje."*
+Le dices a Claude, en lenguaje natural:
+> *"Crea una tarea programada que se ejecute **cada hora en horario laboral (L–V, 9–18 h)**."*
 
-### Paso 2 — Contexto *(“qué necesita saber para no equivocarse”)*
-- Nodo **Set / Edit Fields**: mapea `nombre`, `mensaje`, `remitente` a variables limpias.
-- **Frase:** *"El contexto. Sin esto, el agente responde en el vacío. Le damos quién escribe y qué dice — y en un caso real, también tus reglas de negocio."*
+Claude crea la *routine* / tarea programada. **Frase:** *"Esto es el disparador. No es un botón que aprieto: es un reloj que la IA se pone a sí misma. Se despierta sola."*
 
-### Paso 3 — Decisión + redacción *(“actúo / no actúo, y cómo”)*
-- Nodo **OpenAI / AI Agent** (Message → model, output en JSON).
-- **System prompt (cópialo tal cual):**
-  ```
-  Eres el asistente de bandeja de [Felipe / la empresa]. Recibes un mensaje entrante.
-  Devuelve SOLO un JSON con estas claves:
-  {
-    "urgencia": "alta" | "media" | "baja",
-    "categoria": "venta" | "soporte" | "interno" | "spam",
-    "resumen": "una frase de máximo 12 palabras",
-    "borrador": "respuesta lista para enviar, tono profesional y cálido, en español, máx 4 líneas"
-  }
-  Reglas: 'urgencia alta' solo si el mensaje pide algo para hoy, menciona un problema
-  que bloquea, o viene de un cliente esperando. No inventes datos que no estén en el mensaje.
-  ```
-- **Frase:** *"Aquí está la decisión. No es magia: es criterio codificado. Le dijimos qué es urgente para el negocio. El modelo clasifica y, de una vez, escribe la respuesta."*
+### Paso 2 — Contexto *(“qué necesita saber”)*
+Sigues la instrucción:
+> *"…que revise los **correos nuevos de mi Gmail** de las últimas 2 horas: quién escribe y qué dice."*
+
+**Frase:** *"El contexto llega por el conector de Gmail. Sin esto, la IA responde en el vacío. Con esto, ve tu mundo real."*
+
+### Paso 3 — Decisión *(“actúo / no actúo, y cómo”)*
+> *"Clasifica cada correo en urgencia **alta/media/baja**. Urgencia alta = pide algo para hoy, un cliente espera, o algo está bloqueado. Para los de urgencia alta, redacta un borrador de respuesta profesional y cálido, máximo 4 líneas, en español. No inventes datos que no estén en el correo."*
+
+**Frase:** *"Aquí está la decisión. No es magia: es criterio de negocio que le dicté. Y de una vez escribe la respuesta."*
 
 ### Paso 4 — Acción *(“qué ejecuta, y con qué límites”)*
-- Nodo **IF**: ¿`urgencia == "alta"`?
-  - **Sí →** nodo **Telegram** (Send Message) a tu `chat_id`:
-    ```
-    🔴 URGENTE — {{resumen}}
+> *"Para los urgentes: mándame una **notificación** con un resumen de una línea y el borrador listo. Para los no urgentes: guárdalos como borrador en Gmail y **no me interrumpas**."*
 
-    Borrador listo 👇
-    {{borrador}}
-    ```
-  - **No →** nodo Gmail "Create Draft" (guarda el borrador sin molestarte) — o simplemente lo registra.
-- **Frase:** *"Y la acción. Ojo con el límite que le pusimos: lo urgente te interrumpe en el teléfono; lo demás lo deja como borrador y no te distrae. Un buen agente sabe cuándo NO actuar."*
+**Frase:** *"Y la acción, con su límite: lo urgente me busca al teléfono; lo demás lo deja listo y me deja en paz. Un buen agente sabe cuándo NO actuar."*
 
-### Paso 5 — Activar y probar
-- Pon el flujo en **Active** (o Execute en modo escucha).
-- → Pasa al **momento wow** (§2).
+### Paso 5 — Activar y probar en vivo
+- La tarea queda **activa y programada**. Muéstralo: *"Ya está viva. Se ejecutará sola cada hora — aunque yo cierre esto."*
+- Como no vas a esperar una hora en vivo, dile a Claude: **"ejecútala ahora"** (correr bajo demanda). Eso corre el mismo agente al instante para el momento wow.
 
 ---
 
-## 5. Guion del demo, minuto a minuto (~18 min dentro de la sesión)
+## 5. El momento wow — coreografía exacta (≈60 s)
 
-| Min | Qué haces | Qué dices (idea) |
-|---|---|---|
-| 0–2 | Planteas el dolor | "Todos abrimos el mail y ya vamos tarde. ¿Y si alguien ya lo hubiera leído y contestado por ti?" |
-| 2–4 | Muestras el lienzo vacío | "No voy a mostrarte 10 apps. Voy a mostrarte una arquitectura: disparador, contexto, decisión, acción." |
-| 4–14 | Construyes los 4 nodos (§4) | Una frase por componente, atando cada uno a la arquitectura. |
-| 14–15 | Activas | "Está vivo. No le he pedido nada aún." |
-| 15–16 | **Momento wow** (§2) | Provocas el mensaje y dejas que vibre el teléfono. |
-| 16–18 | Cierras el bucle | "Esto es UN proceso. Tu operación tiene 20 así. Ahí es donde esto deja de ser un truco y se vuelve un sistema." → **puente al upsell**. |
+1. Con la tarea ya activa, dices: *"Vamos a probarla con un correo real, ahora."*
+2. Tu cómplice (o tú desde otro dispositivo) envía a la bandeja de demo: asunto **"urgente"**, cuerpo *"Necesito la propuesta hoy, ¿me la pasas?"*.
+3. Le dices a Claude **"ejecuta la tarea ahora"** (o esperas el tick si lo tienes afinado).
+4. En pantalla, Claude reporta paso a paso: leyó la bandeja → clasificó → redactó.
+5. **Tu teléfono vibra** con la notificación (mostrada en pantalla o a cámara):
+   > 🔴 *URGENTE — [Nombre] pide la propuesta hoy. Borrador listo 👇*
+   > *"Hola [Nombre], claro. Te comparto la propuesta hoy mismo antes de las 6 PM…"*
+6. Cierre: *"No le pedí nada. Le dije UNA vez qué vigilar. Ya leyó, decidió que era urgente y escribió la respuesta. Y va a seguir haciéndolo sola cada hora. Eso es un agente proactivo."*
 
----
-
-## 6. Plan B — a prueba de fallos
-
-En vivo, algo falla. Prepara esto y no sudas:
-
-- **Flujo espejo pre-construido y probado** en otra pestaña: si el build en vivo se traba, cambias de pestaña y ejecutas el que ya funciona ("aquí está el mismo, ya activo").
-- **Cómplice sembrado** para el mensaje "urgente" (nunca dependas del público).
-- **Screenshot / video de 20 s** del resultado (la alerta en el teléfono), listo para mostrar si la red muere.
-- **Datos de prueba fijos**: un mensaje "urgente" y uno "normal" ya escritos para copiar-pegar.
-- **API con saldo verificado** esa misma tarde (una corrida cuesta centavos, pero una key sin saldo mata el demo).
-- **Zoom:** comparte *pantalla específica*, no toda; ten el navegador a 125% para que se lea; silencia notificaciones ajenas.
-- **Ensaya el build completo 2 veces** cronometrado antes del jueves.
+> **Regla de oro:** ten SIEMPRE un cómplice listo para mandar el correo "urgente" en el segundo justo. Nunca dependas de un desconocido.
 
 ---
 
-## 7. Checklist pre-vuelo
+## 6. Ruta B (ChatGPT Tasks) y Ruta C (Codex / código) — resumen
 
-- [ ] Cuenta n8n (o Make) lista y logueada.
-- [ ] Credencial de OpenAI/Claude cargada y con **saldo verificado hoy**.
-- [ ] Bot de Telegram creado (@BotFather), token + `chat_id` guardados y probados.
-- [ ] Formulario Tally (o Gmail) conectado; webhook probado de punta a punta.
-- [ ] Flujo espejo construido, activo y probado (plan B).
-- [ ] Cómplice briefeado para mandar el mensaje "urgente" en el momento.
-- [ ] Backup: screenshot/video de la alerta.
+**Ruta B — ChatGPT Tasks:**
+- ChatGPT → activa el conector de Gmail → crea una **Task** programada con el mismo texto de los pasos 1–4.
+- ChatGPT ejecuta en su horario y te notifica. Mismo guion, misma arquitectura.
+
+**Ruta C — Codex / Claude Code escribe el agente (para técnicos):**
+- Le pides a Codex/Claude Code: *"Escribe un agente en Python que cada 10 min consulte la API de Gmail, use el modelo para clasificar y redactar, y me avise por Telegram si hay algo urgente. Déjalo corriendo con un cron aquí."*
+- El agente de código **lo escribe y lo corre en su propio entorno**. Muestras el código + el cron (el disparador) + el mensaje que llega. Wow más técnico: "el agente construyó al agente".
+- Úsalo solo si la sala es técnica; para público mixto, quédate en A.
+
+---
+
+## 7. Plan B — a prueba de fallos
+
+- **Tarea espejo ya creada, probada y activa** en otra sesión: si el armado en vivo se traba, cambias y ejecutas la que ya funciona.
+- **Cómplice sembrado** para el correo "urgente".
+- **Screenshot / video de 20 s** de la notificación en el teléfono, listo si la red muere.
+- **Conector de Gmail reautenticado esa tarde** (los tokens caducan y matan el demo).
+- **Correos de prueba ya escritos** para copiar-pegar.
+- **Zoom:** comparte *pantalla específica*, navegador a 125%, silencia otras notificaciones.
+- **Ensaya el flujo completo ×2** cronometrado antes del jueves — incluyendo "ejecútala ahora" y la llegada del push.
+
+---
+
+## 8. Checklist pre-vuelo
+
+- [ ] Sesión de Claude Cowork/Code (o ChatGPT) lista y logueada.
+- [ ] Conector de Gmail activado y **reautenticado hoy**.
+- [ ] App de Claude/ChatGPT en el teléfono con **push activado** y probado.
+- [ ] Cuenta de correo de demo + 2 correos de prueba escritos.
+- [ ] Tarea programada creada, activa y **probada con "ejecutar ahora"** (plan B).
+- [ ] Cómplice briefeado para el correo "urgente".
+- [ ] Backup: screenshot/video de la notificación.
 - [ ] Ensayo cronometrado ×2.
-- [ ] Notificaciones del sistema silenciadas; navegador a 125%.
+- [ ] Navegador a 125%; notificaciones ajenas silenciadas.
 
 ---
 
-## 8. Caso alterno — "Vigía de Leads" (si quieres sabor B2B/ventas)
+## 9. Caso alterno — "Radar de reuniones" (si prefieres algo aún más limpio en vivo)
 
-Misma arquitectura, disparador = **formulario de contacto/lead**:
-- **Disparador:** nuevo lead entra al formulario.
-- **Contexto:** respuestas del lead (+ enriquecimiento opcional: dominio, empresa).
-- **Decisión:** puntúa **caliente / tibio / frío** según reglas.
-- **Acción:** si es caliente → borrador de respuesta personalizada + alerta a ventas: *"🔥 Lead caliente: [nombre], [empresa] — borrador listo, ¿lo envío?"*
+Mismo patrón, disparador = **el calendario**:
+- **Disparador:** tarea programada cada mañana a las 7:00.
+- **Contexto:** conector de Google Calendar (las reuniones de hoy) + Gmail (hilos con esos asistentes).
+- **Decisión:** por cada reunión, qué necesitas saber antes de entrar.
+- **Acción:** te manda un **brief de preparación** por push/correo, con quién es cada quién y el último contexto.
 
-Ventaja: el webhook del formulario dispara **al instante** (el más confiable en vivo) y es oro para tu audiencia B2B. Desventaja: menos universal que la bandeja para un público mixto. Elige según quién se conecte.
+Ventaja: no depende de que llegue un correo justo en el momento — el calendario ya tiene datos. Muy confiable en vivo y con efecto "trabajó mientras dormías".
 
 ---
 
-## 9. El puente al upsell (desde el wow, sin fricción)
+## 10. El puente al upsell (desde el wow, sin fricción)
 
-El demo hace el trabajo de venta solo. En el minuto 16–18:
-
-> *"Lo que acabas de ver es UN proceso, atendido por UN agente. Tu operación tiene decenas: cobranza, seguimiento, reportes, onboarding. Diseñar cada uno con criterio —dónde sí, dónde no, con qué límites— es exactamente lo que hacemos, paso a paso, en el **Bootcamp AI: Zero to Pro** (US$257.00). Ocho sesiones en vivo, de cero a tus propios sistemas. El link está en el chat."*
+> *"Lo que viste es UN agente vigilando UN proceso. Tu operación tiene decenas: cobranza, seguimiento, reportes, onboarding. Diseñar cada uno con criterio —dónde sí, dónde no, con qué límites— es exactamente lo que hacemos, paso a paso, en el **Bootcamp AI: Zero to Pro** (US$257.00). Ocho sesiones en vivo, de cero a tus propios agentes. El link está en el chat."*
 
 Reversión de riesgo: *"La sesión de hoy te dio valor completo, compres o no. Si te encajó, el siguiente paso está en el link. Sin prisa artificial."*
+
+---
+
+### Nota de honestidad para el demo
+Los conectores y las tareas programadas dependen del plan de Claude/ChatGPT que tengas activo. Verifica **el mismo día** que tu cuenta tenga: (1) conector de Gmail disponible, (2) tareas programadas / *routines* habilitadas, (3) notificaciones push funcionando. Si tu plan no expone tareas programadas, usa la Ruta C (Codex/Claude Code con cron en su entorno), que no depende de esa función.
