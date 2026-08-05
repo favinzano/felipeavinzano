@@ -20,13 +20,14 @@ Estado de las variables (los valores definidos ya están aplicados en todas las 
 | `{{OFERTA}}` | ⏳ Pendiente — oferta del cierre (Bootcamp $197 Early Bird / Diagnóstico de IA) |
 | `{{CUPO}}` | ⏳ Pendiente — ej: 100 lugares en vivo (el resto va a lista de espera del replay) |
 
-**Orden de disparo recomendado:**
-1. Landing de registro publicada (día 0)
-2. Post de anuncio en LinkedIn + Instagram + X (día 0)
-3. WhatsApp / broadcast a base propia (día 0 y día -1)
-4. Secuencia de emails (confirmación → -3d → -1d → día del evento → post)
-5. Posts de valor + último llamado (día -2 y día 0)
-6. Anuncios pagados opcionales para amplificar (día -5 a día 0)
+**Calendario de lanzamiento — ventana real (martes 4 → jueves 6 de agosto):**
+- **Martes 4 ago (hoy, noche):** publica la landing + post de anuncio (LinkedIn/IG/X) + primer broadcast de WhatsApp. Activa el registro cuanto antes: cada hora cuenta.
+- **Miércoles 5 ago (mañana):** email de valor (Email 2) + segundo post educativo + (opcional) anuncios pagados de empuje.
+- **Miércoles 5 ago (noche):** email recordatorio "mañana en vivo" (Email 3) + story / último llamado.
+- **Jueves 6 ago (día del evento):** post "HOY 8 PM EST" + Email 4 (~5:30 PM EST) + broadcast de WhatsApp 1 h antes.
+- **Jueves 6 ago (post-sesión, dentro de 2 h):** Email 5A (asistentes) y Email 5B (no-asistentes).
+
+> Con solo 2 días, concentra el empuje en orgánico + WhatsApp a tu base; los anuncios pagados rinden poco con esta anticipación, úsalos solo si ya tienes audiencias calientes listas.
 
 ---
 
@@ -120,7 +121,7 @@ Felipe
 
 ---
 
-### Email 2 — Valor (día -3)
+### Email 2 — Valor (miércoles 5 ago · mañana)
 **Asunto:** La mayoría usa IA como un buscador caro
 **Cuerpo:**
 Rápido, porque esto es lo que separa a quien "usa IA" de quien la tiene *trabajando*:
@@ -138,7 +139,7 @@ Felipe
 
 ---
 
-### Email 3 — Recordatorio (día -1)
+### Email 3 — Recordatorio (miércoles 5 ago · noche)
 **Asunto:** Mañana en vivo — trae una tarea repetitiva
 **Cuerpo:**
 Mañana construimos tu primer mapa de agente proactivo.
@@ -154,7 +155,7 @@ Felipe
 
 ---
 
-### Email 4 — Día del evento (mismo día, 2–3 h antes)
+### Email 4 — Día del evento (jueves 6 ago · ~5:30 PM EST)
 **Asunto:** HOY 8:00 PM EST — tu acceso
 **Cuerpo:**
 Hoy es el día. En unas horas armamos, en vivo, un agente de IA que trabaja solo.
