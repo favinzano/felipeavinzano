@@ -17,8 +17,8 @@ Estado de las variables (los valores definidos ya están aplicados en todas las 
 | Hora | ✅ `8:00 PM EST` |
 | Duración | ✅ `60 min` |
 | `{{LINK}}` | ⏳ Pendiente — URL de registro (Zoom / landing) |
-| `{{OFERTA}}` | ⏳ Pendiente — oferta del cierre (Bootcamp $197 Early Bird / Diagnóstico de IA) |
-| `{{CUPO}}` | ⏳ Pendiente — ej: 100 lugares en vivo (el resto va a lista de espera del replay) |
+| Oferta | ✅ `Bootcamp AI: Zero to Pro — US$257.00` |
+| Cupo | ✅ `100 personas en vivo` (el resto entra al salón de espera) |
 
 **Calendario de lanzamiento — ventana real (martes 4 → jueves 6 de agosto):**
 - **Martes 4 ago (hoy, noche):** publica la landing + post de anuncio (LinkedIn/IG/X) + primer broadcast de WhatsApp. Activa el registro cuanto antes: cada hora cuenta.
@@ -61,7 +61,7 @@ Estado de las variables (los valores definidos ya están aplicados en todas las 
 **Subhead:** Sesión en vivo, gratuita. Construimos —paso a paso— un agente de IA que no espera órdenes: detecta, decide y ejecuta por sí mismo.
 
 **CTA principal:** `Reservar mi lugar gratis →`
-**Micro-copy bajo el botón:** 06/Agosto/2026 · 8:00 PM EST · 60 min · En vivo por Zoom · {{CUPO}}
+**Micro-copy bajo el botón:** 06/Agosto/2026 · 8:00 PM EST · 60 min · En vivo por Zoom · 100 personas en vivo
 
 ### El problema (bloque de tensión)
 La mayoría no tiene un problema de herramientas de IA. Tiene un problema de diseño.
@@ -97,7 +97,7 @@ Consultor ejecutivo de IA con más de 25 años en tecnología empresarial, inclu
 **¿De qué van a intentar venderme?** Al final compartimos cómo llevar esto más lejos con Felipe. Es opcional. La sesión entrega valor completo aunque no compres nada.
 
 ### CTA final
-**Headline:** {{CUPO}}. En vivo. Una vez.
+**Headline:** 100 personas en vivo. Una vez.
 **Botón:** `Reservar mi lugar gratis →`
 
 ---
@@ -175,7 +175,7 @@ Felipe
 **Cuerpo:**
 Gracias por estar en vivo hoy. Ya viste cómo se diseña un agente proactivo de principio a fin.
 
-Una sesión te da el mapa. Pero un mapa no es el territorio. Si quieres convertir *tu* operación en sistemas de IA con estructura —no experimentos sueltos— ahí es donde entra {{OFERTA}}.
+Una sesión te da el mapa. Pero un mapa no es el territorio. Si quieres convertir *tu* operación en sistemas de IA con estructura —no experimentos sueltos— ahí es donde entra el Bootcamp AI: Zero to Pro (US$257.00).
 
 👉 {{LINK}}
 
@@ -197,7 +197,7 @@ No pudiste entrar en vivo. Pasa. Aquí tienes el replay de *Build a proactive ag
 
 Dentro verás cómo pasar de "pedirle cosas a la IA" a diseñar un agente que detecta, decide y actúa solo.
 
-Cuando termines, si quieres llevarlo a tu operación real, mira {{OFERTA}}.
+Cuando termines, si quieres llevarlo a tu operación real, mira el Bootcamp AI: Zero to Pro (US$257.00).
 
 Felipe
 
@@ -345,7 +345,7 @@ Hola 👋 El 06/Agosto/2026 hago una sesión en vivo *gratuita*: cómo construir
 Nada de "las 10 apps de moda". La arquitectura real, armada en vivo.
 
 🔗 Reserva tu lugar: {{LINK}}
-{{CUPO}} — cuando se llena, se llena.
+100 personas en vivo — cuando se llena, se llena.
 
 ### Recordatorio (día -1 / día del evento)
 Recordatorio rápido ⏰ Hoy 8:00 PM EST construimos en vivo un agente de IA proactivo. Gratis. Tu acceso: {{LINK}} — llega 5 min antes, el Q&A del final es lo mejor.
@@ -387,7 +387,7 @@ Recordatorio rápido ⏰ Hoy 8:00 PM EST construimos en vivo un agente de IA pro
 **Transición (natural, sin venta agresiva):**
 "Esto que acabamos de armar es el mapa. Un mapa no es el territorio. Si quieres convertir tu operación real en sistemas de IA con estructura —no experimentos sueltos— hay una forma de hacerlo conmigo, con acompañamiento."
 
-**Oferta (elige según {{OFERTA}}):**
+**Oferta del cierre — Bootcamp AI: Zero to Pro (US$257.00):**
 - **Bootcamp AI: Zero to Pro** — 8 sesiones en vivo, de cero a tus propios sistemas de IA. $197 Early Bird. Para quien quiere estructura, no tutoriales sueltos.
 - **Diagnóstico de IA** — 4 semanas para mapear qué procesos de tu empresa merecen IA, cuáles no, y en qué orden atacarlos. Para quien decide a nivel operación.
 
@@ -403,7 +403,7 @@ Recordatorio rápido ⏰ Hoy 8:00 PM EST construimos en vivo un agente de IA pro
 
 - [ ] Landing de registro publicada y probada (formulario → email de confirmación)
 - [ ] Evento de Zoom creado con recordatorios automáticos activados
-- [ ] Variables reemplazadas en TODAS las piezas (06/Agosto/2026, 8:00 PM EST, {{LINK}}, {{OFERTA}})
+- [ ] Variables aplicadas (fecha, hora, duración, oferta, cupo); solo falta {{LINK}}
 - [ ] Secuencia de 5 emails cargada y programada
 - [ ] Posts de LinkedIn / IG / X programados (anuncio, valor, último llamado)
 - [ ] Broadcast de WhatsApp listo para día 0 y día -1
