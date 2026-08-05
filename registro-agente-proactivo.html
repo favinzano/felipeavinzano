@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--
+  Landing de registro — Sesión en vivo "Build a proactive agent workflow with AI"
+  Estilo clonado de index.html (Deep Ink / DM Serif + Inter / copper).
+  ANTES DE PUBLICAR reemplaza estas variables (búscalas con Ctrl+F):
+    {{FECHA}}   ej: martes 19 de agosto
+    {{HORA}}    ej: 7:00 PM (CDMX / GMT-6)
+    {{DURACION}} ej: 60 min + Q&A
+    {{CUPO}}    ej: 100 lugares en vivo
+    {{LINK}}    URL de registro / Zoom (poner en cada href="#registro" o botón)
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a proactive agent workflow with AI — sesión en vivo gratuita · felipe avinzano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://felipeavinzano.com/registro-agente-proactivo">
+<meta name="description" content="Sesión en vivo y gratuita: construye un agente de IA que no espera órdenes — detecta, decide y ejecuta solo. Con Felipe Avinzano, consultor ejecutivo de IA. Sin código.">
+<meta property="og:title" content="Build a proactive agent workflow with AI — sesión en vivo gratuita">
+<meta property="og:description" content="De 'chatbot que responde' a 'agente que anticipa'. Construimos la arquitectura de un flujo proactivo en vivo. Gratis, sin código.">
+<meta property="og:url" content="https://felipeavinzano.com/registro-agente-proactivo">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://felipeavinzano.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a proactive agent workflow with AI — sesión en vivo gratuita">
+<meta name="twitter:description" content="Construye un agente de IA que ejecuta solo. En vivo, gratis, sin código.">
+<meta name="twitter:image" content="https://felipeavinzano.com/og-image.png">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep-ink:#0D1B2A;
+  --warm-bone:#F4F1EB;
+  --considered-blue:#2C5F8A;
+  --fog:#A8B3BC;
+  --type-black:#1A1A1A;
+  --copper:#B87333;
+  --rule:rgba(244,241,235,0.12);
+  --rule-light:rgba(13,27,42,0.10);
+  --font-display:"DM Serif Display",Georgia,serif;
+  --font:"Inter",-apple-system,sans-serif;
+  --pad:clamp(24px,5vw,96px);
+  --section-y:clamp(96px,12vw,160px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--deep-ink);color:var(--warm-bone);font-family:var(--font);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ── REVEAL SYSTEM ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* ── LAYOUT ── */
+.container{width:100%;max-width:1440px;margin-inline:auto;padding-inline:var(--pad)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(13,27,42,0.92);backdrop-filter:blur(12px);border-color:var(--rule)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:22px}
+.nav-logo{display:flex;align-items:center;gap:12px;opacity:0;animation:fadeIn 0.6s 0.2s forwards}
+.nav-wordmark{font-size:15px;font-weight:300;letter-spacing:-0.02em}
+.nav-links{display:flex;align-items:center;gap:32px;opacity:0;animation:fadeIn 0.6s 0.4s forwards}
+.nav-links a{font-size:13px;font-weight:300;color:var(--fog);letter-spacing:-0.01em;transition:color 200ms}
+.nav-links a:hover{color:var(--warm-bone)}
+.nav-cta{padding:9px 20px;border:1px solid rgba(244,241,235,0.28);font-size:13px;color:var(--warm-bone)!important;transition:background 200ms,border-color 200ms!important}
+.nav-cta:hover{background:rgba(244,241,235,0.08)!important;border-color:rgba(244,241,235,0.6)!important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px;padding-bottom:clamp(56px,7vw,104px);position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero-bg-isotipo{position:absolute;right:-6%;bottom:-8%;width:min(680px,70vw);opacity:0;animation:heroIso 1.2s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;pointer-events:none;user-select:none}
+.hero-bg-isotipo svg{width:100%;height:auto}
+@keyframes heroIso{from{opacity:0;transform:translateX(40px) rotate(-2deg)}to{opacity:0.06;transform:translateX(0) rotate(0deg)}}
+.hero-content{position:relative;z-index:1;max-width:1440px;margin-inline:auto;padding-inline:var(--pad);width:100%}
+.hero-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--fog);margin-bottom:36px;display:flex;align-items:center;gap:14px;opacity:0;animation:fadeUp 0.7s 0.4s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-label .dot{width:7px;height:7px;border-radius:50%;background:var(--copper);flex-shrink:0;box-shadow:0 0 0 0 rgba(184,115,51,0.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(184,115,51,0.55)}70%{box-shadow:0 0 0 10px rgba(184,115,51,0)}100%{box-shadow:0 0 0 0 rgba(184,115,51,0)}}
+.hero-h1{font-family:var(--font-display);font-size:clamp(44px,8vw,116px);font-weight:400;letter-spacing:-0.02em;line-height:0.98;margin-bottom:40px;max-width:16ch}
+.hero-h1 em{font-style:italic;color:var(--copper)}
+.hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;padding-top:44px;border-top:1px solid var(--rule);opacity:0;animation:fadeUp 0.8s 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-sub{font-size:clamp(18px,2vw,24px);font-weight:300;letter-spacing:-0.02em;line-height:1.35;max-width:46ch}
+.hero-sub em{font-style:normal;color:var(--copper)}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--fog);letter-spacing:-0.01em}
+.hero-meta b{color:var(--warm-bone);font-weight:400}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--copper);color:var(--warm-bone);font-size:14px;font-weight:300;padding:16px 30px;letter-spacing:-0.01em;transition:background 220ms;white-space:nowrap}
+.btn-primary:hover{background:#9d5a2a}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--fog);font-size:14px;font-weight:300;padding-bottom:4px;border-bottom:1px solid rgba(140,151,160,0.5);letter-spacing:-0.01em;transition:color 200ms,border-color 200ms}
+.btn-ghost:hover{color:var(--warm-bone);border-color:var(--warm-bone)}
+.arrow{transition:transform 200ms}
+.btn-primary:hover .arrow,.btn-ghost:hover .arrow{transform:translateX(4px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{padding-block:20px;border-bottom:1px solid var(--rule);overflow:hidden;background:rgba(244,241,235,0.02)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 26s linear infinite}
+.marquee-item{display:flex;align-items:center;white-space:nowrap}
+.marquee-text{font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--fog);padding-inline:40px}
+.marquee-sep{color:var(--copper);font-size:16px;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding-block:var(--section-y);border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--fog);margin-bottom:24px}
+.section-h2{font-family:var(--font-display);font-size:clamp(34px,5.5vw,80px);font-weight:400;letter-spacing:-0.02em;line-height:1.02;margin-bottom:40px;max-width:20ch}
+.section-h2 em{font-style:italic;color:var(--copper)}
+.body-lg{font-size:18px;line-height:1.75;color:rgba(244,241,235,0.78);max-width:64ch;margin-bottom:22px}
+.body-lg strong{color:var(--warm-bone);font-weight:400}
+.two-col{display:grid;grid-template-columns:3fr 9fr;gap:64px;align-items:start}
+.pull-quote{margin-top:52px;padding-left:28px;border-left:2px solid var(--copper)}
+.pull-quote p{font-family:var(--font-display);font-size:clamp(22px,2.6vw,30px);font-weight:400;font-style:italic;letter-spacing:-0.01em;line-height:1.35;margin-bottom:14px}
+.pull-quote cite{font-size:12px;font-style:normal;color:var(--fog);letter-spacing:0.1em;text-transform:uppercase}
+.bignum{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);font-family:var(--font-display);font-size:clamp(160px,22vw,340px);font-weight:400;letter-spacing:-0.05em;color:rgba(244,241,235,0.025);line-height:1;pointer-events:none;user-select:none}
+
+/* ── BUILD LIST ── */
+.build-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+.build-item{background:var(--deep-ink);padding:34px 32px;transition:background 240ms}
+.build-item:hover{background:rgba(244,241,235,0.02)}
+.build-num{font-family:var(--font-display);font-size:22px;color:var(--copper);margin-bottom:16px}
+.build-item h3{font-size:19px;font-weight:400;letter-spacing:-0.01em;margin-bottom:10px;line-height:1.3}
+.build-item p{font-size:14.5px;color:var(--fog);line-height:1.6}
+
+/* ── FOR WHOM ── */
+.whom-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.whom-card{border:1px solid var(--rule);padding:38px 34px}
+.whom-card h3{font-size:14px;text-transform:uppercase;letter-spacing:0.1em;color:var(--fog);margin-bottom:24px;font-weight:500}
+.whom-card.yes h3{color:var(--copper)}
+.whom-card ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.whom-card li{font-size:16px;line-height:1.55;color:rgba(244,241,235,0.85);padding-left:30px;position:relative}
+.whom-card.yes li::before{content:"→";position:absolute;left:0;color:var(--copper)}
+.whom-card.no li{color:var(--fog)}
+.whom-card.no li::before{content:"×";position:absolute;left:0;color:var(--fog)}
+
+/* ── HOST ── */
+.host-grid{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.host-photo{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(0.15) contrast(1.02);border:1px solid var(--rule)}
+.host-body p{font-size:18px;line-height:1.75;color:rgba(244,241,235,0.82);margin-bottom:20px}
+.host-body p strong{color:var(--warm-bone);font-weight:400}
+.host-quote{font-family:var(--font-display);font-style:italic;font-size:clamp(20px,2.2vw,26px);line-height:1.4;color:var(--warm-bone);border-left:2px solid var(--copper);padding-left:24px;margin-top:28px}
+
+/* ── FAQ ── */
+.faq-list{max-width:820px;margin-top:8px;border-top:1px solid var(--rule)}
+.faq-item{border-bottom:1px solid var(--rule);padding:28px 0}
+.faq-item h3{font-size:19px;font-weight:400;letter-spacing:-0.01em;margin-bottom:12px}
+.faq-item p{font-size:16px;color:var(--fog);line-height:1.7;max-width:70ch}
+
+/* ── FINAL CTA ── */
+.final-cta{padding-block:clamp(96px,14vw,180px);text-align:center;position:relative;overflow:hidden}
+.final-cta h2{font-family:var(--font-display);font-size:clamp(40px,7vw,104px);font-weight:400;letter-spacing:-0.02em;line-height:1.0;margin-bottom:28px}
+.final-cta h2 em{font-style:italic;color:var(--copper)}
+.final-cta p{font-size:18px;color:var(--fog);max-width:52ch;margin:0 auto 40px}
+.final-cta .btn-primary{font-size:15px;padding:18px 36px}
+.final-cta .cta-meta{margin-top:22px;font-size:13px;color:var(--fog);letter-spacing:0.02em}
+
+/* ── FOOTER ── */
+footer{padding-block:52px;background:var(--deep-ink)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.f-brand{display:flex;align-items:center;gap:14px}
+.f-tagline{font-size:12px;color:var(--fog);margin-top:5px;letter-spacing:-0.01em}
+.footer-links{display:flex;gap:32px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--fog);transition:color 150ms}
+.footer-links a:hover{color:var(--warm-bone)}
+.footer-social{display:flex;gap:20px;align-items:center}
+.social-link{display:flex;align-items:center;justify-content:center;color:var(--fog);transition:color 200ms,transform 200ms}
+.social-link:hover{color:var(--copper);transform:translateY(-2px)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(140,151,160,0.45)}
+.footer-bottom-links{display:flex;gap:24px}
+.footer-bottom-links a{font-size:12px;color:rgba(140,151,160,0.45);transition:color 150ms}
+.footer-bottom-links a:hover{color:var(--fog)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .hero-bottom{grid-template-columns:1fr;gap:32px}
+  .two-col{grid-template-columns:1fr;gap:32px}
+  .whom-grid{grid-template-columns:1fr;gap:24px}
+  .host-grid{grid-template-columns:1fr;gap:36px}
+  .host-photo{max-width:360px}
+  .nav-links a:not(.nav-cta){display:none}
+  .bignum{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg width="34" height="34" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+          <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+        </svg>
+        <span class="nav-wordmark">felipe avinzano</span>
+      </a>
+      <div class="nav-links">
+        <a href="#construir">qué construimos</a>
+        <a href="#felipe">sobre felipe</a>
+        <a href="#faq">faq</a>
+        <a href="{{LINK}}" class="nav-cta">reservar lugar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-bg-isotipo" aria-hidden="true">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+      <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label"><span class="dot"></span> Sesión en vivo · Gratis · Zoom</div>
+    <h1 class="hero-h1">Build a <em>proactive</em> agent workflow with AI</h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">Construimos, paso a paso, un agente de IA que no espera órdenes: <em>detecta, decide y ejecuta</em> por sí mismo. En vivo, de cero, sin código.</p>
+      <div class="hero-actions">
+        <div class="hero-meta">
+          <span><b>{{FECHA}}</b></span>
+          <span><b>{{HORA}}</b></span>
+          <span>{{DURACION}}</span>
+        </div>
+        <a href="{{LINK}}" class="btn-primary">Reservar mi lugar gratis <span class="arrow">→</span></a>
+        <div class="hero-meta"><span>{{CUPO}} · el resto pasa a lista de espera del replay</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-text">disparador</span><span class="marquee-sep">✦</span><span class="marquee-text">contexto</span><span class="marquee-sep">✦</span><span class="marquee-text">decisión</span><span class="marquee-sep">✦</span><span class="marquee-text">acción</span><span class="marquee-sep">✦</span><span class="marquee-text">sin código</span><span class="marquee-sep">✦</span></div>
+    <div class="marquee-item"><span class="marquee-text">disparador</span><span class="marquee-sep">✦</span><span class="marquee-text">contexto</span><span class="marquee-sep">✦</span><span class="marquee-text">decisión</span><span class="marquee-sep">✦</span><span class="marquee-text">acción</span><span class="marquee-sep">✦</span><span class="marquee-text">sin código</span><span class="marquee-sep">✦</span></div>
+  </div>
+</div>
+
+<!-- ── PROBLEMA ── -->
+<section class="section">
+  <div class="bignum" aria-hidden="true">?</div>
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal"><div class="section-label">El problema</div></div>
+      <div>
+        <h2 class="section-h2 reveal">No tienes un problema de <em>herramientas</em>. Tienes uno de <em>diseño</em>.</h2>
+        <p class="body-lg reveal reveal-delay-1">La mayoría le pide cosas a la IA una por una. Copia, pega, corrige, y vuelve a empezar. <strong>Eso no es automatización: es trabajo manual con un paso extra.</strong></p>
+        <p class="body-lg reveal reveal-delay-2">Un <strong>agente proactivo</strong> invierte la relación. En lugar de esperar tu prompt, vigila un proceso, entiende el contexto y actúa antes de que tú lo notes. La diferencia no está en el modelo que uses. Está en la arquitectura.</p>
+        <div class="pull-quote reveal reveal-delay-3">
+          <p>“La IA no se implementa. Se injerta en una operación existente.”</p>
+          <cite>Felipe Avinzano</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUÉ CONSTRUIMOS ── -->
+<section class="section" id="construir">
+  <div class="container">
+    <div class="section-label reveal">Lo que vas a construir · en vivo</div>
+    <h2 class="section-h2 reveal">De “chatbot que responde” a <em>agente que anticipa</em>.</h2>
+    <div class="build-grid">
+      <div class="build-item reveal"><div class="build-num">01</div><h3>El mapa completo</h3><p>Los cuatro componentes de un agente proactivo: disparador, contexto, decisión y acción — y cómo encajan.</p></div>
+      <div class="build-item reveal reveal-delay-1"><div class="build-num">02</div><h3>Del prompt manual al flujo</h3><p>Cómo pasar de pedir cosas una por una a un flujo que corre solo, sin ti encima.</p></div>
+      <div class="build-item reveal reveal-delay-2"><div class="build-num">03</div><h3>Chatbot vs. agente</h3><p>Las 3 piezas que separan un asistente que reacciona de uno que trabaja por su cuenta.</p></div>
+      <div class="build-item reveal reveal-delay-3"><div class="build-num">04</div><h3>Dónde sí y dónde no</h3><p>En qué procesos un agente proactivo te ahorra horas — y dónde te va a costar caro.</p></div>
+      <div class="build-item reveal reveal-delay-4"><div class="build-num">05</div><h3>Un ejemplo real</h3><p>Armamos un agente de cero, delante de ti, con lógica de negocio — no una demo de juguete.</p></div>
+      <div class="build-item reveal reveal-delay-4"><div class="build-num">06</div><h3>Q&A abierto</h3><p>Traes tu caso, lo pensamos juntos en vivo. Suele ser la mejor parte de la sesión.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARA QUIÉN ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-label reveal">¿Es para ti?</div>
+    <h2 class="section-h2 reveal">Diseñada para quien quiere que la IA <em>haga</em>, no solo que responda.</h2>
+    <div class="whom-grid">
+      <div class="whom-card yes reveal">
+        <h3>Sí, si eres…</h3>
+        <ul>
+          <li>Dueño de negocio o director que quiere que la IA ejecute, no solo que conteste.</li>
+          <li>Profesional que ya usa IA a diario y siente que la está desaprovechando.</li>
+          <li>Alguien cansado de “usar ChatGPT” que quiere diseñar algo que trabaje solo.</li>
+        </ul>
+      </div>
+      <div class="whom-card no reveal reveal-delay-1">
+        <h3>No, si buscas…</h3>
+        <ul>
+          <li>La lista de “las 10 herramientas de IA de este mes”.</li>
+          <li>Magia sin entender la lógica detrás del flujo.</li>
+          <li>Un workshop inspiracional que no piensas aplicar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOBRE FELIPE ── -->
+<section class="section" id="felipe">
+  <div class="container">
+    <div class="section-label reveal">Quién lo dirige</div>
+    <div class="host-grid">
+      <img class="host-photo reveal" src="felipe-photo.webp" alt="Felipe Avinzano" loading="lazy">
+      <div class="host-body reveal reveal-delay-1">
+        <p><strong>Felipe Avinzano</strong> es consultor ejecutivo de IA con más de 25 años en tecnología empresarial, incluyendo una década como CIO.</p>
+        <p>No enseña herramientas: convierte experiencia operativa acumulada en sistemas de IA que producen resultados medibles. Trabaja con empresas B2B en LATAM, España y EE.UU. hispanohablante.</p>
+        <p class="host-quote">“Si la operación está desordenada, la IA no la transforma: la vuelve más rápida, más opaca y más peligrosa.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-label reveal">Preguntas</div>
+    <h2 class="section-h2 reveal">Antes de que reserves.</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal"><h3>¿Es gratis de verdad?</h3><p>Sí. La sesión en vivo es gratuita. Solo pedimos tu registro para enviarte el acceso y el material.</p></div>
+      <div class="faq-item reveal"><h3>¿Necesito saber programar?</h3><p>No. Trabajamos desde la lógica del flujo, no desde el código. Si sabes describir un proceso, puedes diseñar un agente.</p></div>
+      <div class="faq-item reveal"><h3>¿Habrá grabación?</h3><p>Los registrados reciben acceso al replay por tiempo limitado. Pero lo bueno pasa en vivo — incluido el Q&A abierto del final.</p></div>
+      <div class="faq-item reveal"><h3>¿De qué me van a intentar vender?</h3><p>Al final comparto cómo llevar esto a tu operación real conmigo. Es opcional. La sesión entrega valor completo aunque no compres nada.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta" id="registro">
+  <div class="bignum" aria-hidden="true">✦</div>
+  <div class="container">
+    <h2 class="reveal">En vivo. Una vez.<br><em>Sin repetición del momento.</em></h2>
+    <p class="reveal reveal-delay-1">Reserva tu lugar ahora. Cuando el cupo se llena, el resto pasa a la lista de espera del replay.</p>
+    <a href="{{LINK}}" class="btn-primary reveal reveal-delay-2">Reservar mi lugar gratis <span class="arrow">→</span></a>
+    <div class="cta-meta reveal reveal-delay-3">{{FECHA}} · {{HORA}} · {{DURACION}} · {{CUPO}}</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="f-brand">
+        <svg width="28" height="28" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="120" width="160" height="160" fill="#F4F1EB" transform="rotate(-4,185,200)"/>
+          <rect x="135" y="120" width="160" height="160" fill="none" stroke="#F4F1EB" stroke-width="5.5" transform="rotate(4,215,200)"/>
+        </svg>
+        <div>
+          <div style="font-size:14px;font-weight:300;letter-spacing:-0.015em">felipe avinzano</div>
+          <div class="f-tagline">convirtiendo experiencia acumulada en sistemas de ia accionables.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/">inicio</a>
+        <a href="bootcamp.html">bootcamp</a>
+        <a href="sobre-felipe.html">sobre felipe</a>
+        <a href="blog.html">blog</a>
+        <a href="faq.html">faq</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://linkedin.com/in/felipe-avinzano" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://x.com/AvinzanoFelipe/" target="_blank" rel="noopener" aria-label="X / Twitter" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/felipeavinzano/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 felipe avinzano · felipeavinzano.com</p>
+      <div class="footer-bottom-links">
+        <a href="/llms.txt">llms.txt</a>
+        <a href="/sitemap.xml">sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+// REVEAL on scroll
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
