@@ -9,16 +9,16 @@
 
 ## 0. Cómo usar este kit
 
-Reemplaza estas variables en TODAS las piezas antes de publicar:
+Estado de las variables (los valores definidos ya están aplicados en todas las piezas):
 
-| Variable | Reemplazar por |
+| Variable | Estado / Valor |
 |---|---|
-| `{{FECHA}}` | Ej: martes 19 de agosto |
-| `{{HORA}}` | Ej: 7:00 PM (hora de CDMX / GMT-6) — pon siempre zona horaria |
-| `{{DURACION}}` | Ej: 60 minutos + Q&A |
-| `{{LINK}}` | URL de registro (Zoom / landing) |
-| `{{OFERTA}}` | Oferta del cierre (Bootcamp $197 Early Bird / Diagnóstico de IA) |
-| `{{CUPO}}` | Ej: 100 lugares en vivo (el resto va a lista de espera del replay) |
+| Fecha | ✅ `06/Agosto/2026` |
+| Hora | ✅ `8:00 PM EST` |
+| Duración | ✅ `60 min` |
+| `{{LINK}}` | ⏳ Pendiente — URL de registro (Zoom / landing) |
+| `{{OFERTA}}` | ⏳ Pendiente — oferta del cierre (Bootcamp $197 Early Bird / Diagnóstico de IA) |
+| `{{CUPO}}` | ⏳ Pendiente — ej: 100 lugares en vivo (el resto va a lista de espera del replay) |
 
 **Orden de disparo recomendado:**
 1. Landing de registro publicada (día 0)
@@ -60,7 +60,7 @@ Reemplaza estas variables en TODAS las piezas antes de publicar:
 **Subhead:** Sesión en vivo, gratuita. Construimos —paso a paso— un agente de IA que no espera órdenes: detecta, decide y ejecuta por sí mismo.
 
 **CTA principal:** `Reservar mi lugar gratis →`
-**Micro-copy bajo el botón:** {{FECHA}} · {{HORA}} · {{DURACION}} · En vivo por Zoom · {{CUPO}}
+**Micro-copy bajo el botón:** 06/Agosto/2026 · 8:00 PM EST · 60 min · En vivo por Zoom · {{CUPO}}
 
 ### El problema (bloque de tensión)
 La mayoría no tiene un problema de herramientas de IA. Tiene un problema de diseño.
@@ -108,7 +108,7 @@ Consultor ejecutivo de IA con más de 25 años en tecnología empresarial, inclu
 **Cuerpo:**
 Listo, tu lugar para *Build a proactive agent workflow with AI* está reservado.
 
-🗓️ {{FECHA}} · {{HORA}}
+🗓️ 06/Agosto/2026 · 8:00 PM EST
 📍 En vivo por Zoom → {{LINK}}
 
 Un consejo antes de la sesión: piensa en **una tarea repetitiva** de tu semana que te gustaría que "se hiciera sola". La vamos a usar como ejemplo mental mientras construimos el flujo.
@@ -130,7 +130,7 @@ Un agente proactivo **anticipa**. Vigila un proceso, entiende el contexto y act�
 
 La diferencia no es la herramienta. Es la **arquitectura**: disparador → contexto → decisión → acción.
 
-Eso es exactamente lo que vamos a construir en vivo el {{FECHA}}. De cero. Sin código.
+Eso es exactamente lo que vamos a construir en vivo el 06/Agosto/2026. De cero. Sin código.
 
 Si aún no confirmaste el calendario: {{LINK}}
 
@@ -143,7 +143,7 @@ Felipe
 **Cuerpo:**
 Mañana construimos tu primer mapa de agente proactivo.
 
-🗓️ {{FECHA}} · {{HORA}}
+🗓️ 06/Agosto/2026 · 8:00 PM EST
 🔗 {{LINK}}
 
 Tarea de 30 segundos: identifica **una** cosa que haces cada semana y que odiarías seguir haciendo a mano en 6 meses. Esa es la candidata perfecta para un flujo proactivo. La usamos mañana.
@@ -155,11 +155,11 @@ Felipe
 ---
 
 ### Email 4 — Día del evento (mismo día, 2–3 h antes)
-**Asunto:** HOY {{HORA}} — tu acceso
+**Asunto:** HOY 8:00 PM EST — tu acceso
 **Cuerpo:**
 Hoy es el día. En unas horas armamos, en vivo, un agente de IA que trabaja solo.
 
-⏰ {{HORA}}
+⏰ 8:00 PM EST
 🔗 Entra aquí: {{LINK}}
 
 Reserva 60 minutos sin distracciones. Ven con tu tarea repetitiva en mente. Y trae preguntas: el Q&A es abierto.
@@ -215,7 +215,7 @@ Un **agente proactivo** juega otro juego: no espera tu orden. Vigila un proceso,
 
 La diferencia no está en la herramienta. Está en la arquitectura.
 
-El {{FECHA}} voy a construir uno en vivo, de cero, sin código. Gratis.
+El 06/Agosto/2026 voy a construir uno en vivo, de cero, sin código. Gratis.
 
 Disparador → contexto → decisión → acción. El mapa completo.
 
@@ -243,13 +243,13 @@ Cuatro piezas:
 3. **Decisión** — la lógica de "sí actúo / no actúo".
 4. **Acción** — qué ejecuta, y con qué límites.
 
-El {{FECHA}} armamos las cuatro en vivo. Gratis.
+El 06/Agosto/2026 armamos las cuatro en vivo. Gratis.
 {{LINK}}
 
 ---
 
 ### Post C — Último llamado (día del evento)
-Hoy {{HORA}}.
+Hoy 8:00 PM EST.
 
 En vivo construimos un agente de IA que trabaja solo. Sin código. Gratis.
 
@@ -259,7 +259,7 @@ Si sigues copiando y pegando prompts uno por uno, esto es para ti.
 {{LINK}}
 
 ### Versión corta (repost / comentario fijado)
-¿Usas IA o tienes IA trabajando para ti? Hay un mundo de diferencia. Lo mapeo en vivo el {{FECHA}}, gratis → {{LINK}}
+¿Usas IA o tienes IA trabajando para ti? Hay un mundo de diferencia. Lo mapeo en vivo el 06/Agosto/2026, gratis → {{LINK}}
 
 ---
 
@@ -289,7 +289,7 @@ La diferencia no es el modelo. Es la arquitectura.
 
 Junta las cuatro y tienes un sistema que trabaja sin ti encima.
 
-4/ El {{FECHA}} construyo uno en vivo. De cero. Sin código. Gratis.
+4/ El 06/Agosto/2026 construyo uno en vivo. De cero. Sin código. Gratis.
 
 Build a proactive agent workflow with AI.
 
@@ -297,9 +297,9 @@ Cupo limitado 👇
 {{LINK}}
 
 ### Tuits sueltos
-- "Deja de darle órdenes a la IA. Enséñale a anticiparse. En vivo, gratis, {{FECHA}} → {{LINK}}"
-- "Chatbot: espera tu prompt. Agente: ya lo hizo. La arquitectura completa el {{FECHA}} → {{LINK}}"
-- "Mientras discutes si la IA sirve, alguien ya la tiene ejecutando tareas solo. {{FECHA}}, gratis → {{LINK}}"
+- "Deja de darle órdenes a la IA. Enséñale a anticiparse. En vivo, gratis, 06/Agosto/2026 → {{LINK}}"
+- "Chatbot: espera tu prompt. Agente: ya lo hizo. La arquitectura completa el 06/Agosto/2026 → {{LINK}}"
+- "Mientras discutes si la IA sirve, alguien ya la tiene ejecutando tareas solo. 06/Agosto/2026, gratis → {{LINK}}"
 
 ---
 
@@ -311,7 +311,7 @@ Usar IA no es lo mismo que tener IA trabajando para ti. ⚙️
 Un chatbot espera que le preguntes.
 Un agente proactivo actúa antes de que lo pidas.
 
-El {{FECHA}} construyo uno EN VIVO, de cero y sin código. Gratis.
+El 06/Agosto/2026 construyo uno EN VIVO, de cero y sin código. Gratis.
 
 Te muestro las 4 piezas que separan un chatbot de un agente que trabaja solo: disparador, contexto, decisión y acción.
 
@@ -327,11 +327,11 @@ Te muestro las 4 piezas que separan un chatbot de un agente que trabaja solo: di
 3. "Un agente PROACTIVO anticipa. Vigila → decide → actúa. Solo."
 4. "Las 4 piezas: Disparador · Contexto · Decisión · Acción."
 5. "No necesitas código. Necesitas la arquitectura correcta."
-6. **CTA:** "En vivo, gratis, {{FECHA}}. Link en la bio → reserva tu lugar."
+6. **CTA:** "En vivo, gratis, 06/Agosto/2026. Link en la bio → reserva tu lugar."
 
 ### Stories (secuencia de 3)
 1. Encuesta: "¿La IA te RESPONDE o te AYUDA a ejecutar?" → [Solo responde] / [Ya ejecuta]
-2. "El {{FECHA}} armo un agente que ejecuta solo. En vivo. Gratis." + sticker de cuenta regresiva.
+2. "El 06/Agosto/2026 armo un agente que ejecuta solo. En vivo. Gratis." + sticker de cuenta regresiva.
 3. "Últimos lugares 👆 desliza para registrarte" + sticker de link {{LINK}}
 
 ---
@@ -339,7 +339,7 @@ Te muestro las 4 piezas que separan un chatbot de un agente que trabaja solo: di
 ## 7. WhatsApp / Telegram (broadcast a base propia)
 
 ### Invitación
-Hola 👋 El {{FECHA}} hago una sesión en vivo *gratuita*: cómo construir un agente de IA que trabaja solo (detecta, decide y ejecuta), sin código.
+Hola 👋 El 06/Agosto/2026 hago una sesión en vivo *gratuita*: cómo construir un agente de IA que trabaja solo (detecta, decide y ejecuta), sin código.
 
 Nada de "las 10 apps de moda". La arquitectura real, armada en vivo.
 
@@ -347,7 +347,7 @@ Nada de "las 10 apps de moda". La arquitectura real, armada en vivo.
 {{CUPO}} — cuando se llena, se llena.
 
 ### Recordatorio (día -1 / día del evento)
-Recordatorio rápido ⏰ Hoy {{HORA}} construimos en vivo un agente de IA proactivo. Gratis. Tu acceso: {{LINK}} — llega 5 min antes, el Q&A del final es lo mejor.
+Recordatorio rápido ⏰ Hoy 8:00 PM EST construimos en vivo un agente de IA proactivo. Gratis. Tu acceso: {{LINK}} — llega 5 min antes, el Q&A del final es lo mejor.
 
 ---
 
@@ -355,17 +355,17 @@ Recordatorio rápido ⏰ Hoy {{HORA}} construimos en vivo un agente de IA proact
 
 ### Variante 1 — Contrarian
 **Titular:** No uses IA. Ponla a trabajar.
-**Texto:** Un chatbot espera tu orden. Un agente proactivo actúa antes de que lo pidas. Aprende a construir uno en vivo, gratis, sin código. {{FECHA}}.
+**Texto:** Un chatbot espera tu orden. Un agente proactivo actúa antes de que lo pidas. Aprende a construir uno en vivo, gratis, sin código. 06/Agosto/2026.
 **CTA:** Reservar lugar
 
 ### Variante 2 — Dolor
 **Titular:** ¿Cansado de copiar y pegar prompts todo el día?
-**Texto:** Eso no es automatización. Es trabajo manual con un paso extra. En esta sesión en vivo y gratuita construimos un agente que ejecuta solo. {{FECHA}}.
+**Texto:** Eso no es automatización. Es trabajo manual con un paso extra. En esta sesión en vivo y gratuita construimos un agente que ejecuta solo. 06/Agosto/2026.
 **CTA:** Registrarme gratis
 
 ### Variante 3 — Autoridad
 **Titular:** 25 años en tecnología empresarial. Una sesión gratuita.
-**Texto:** Felipe Avinzano (ex-CIO, consultor de IA) construye en vivo un agente proactivo de principio a fin. Sin humo, sin código. {{FECHA}}.
+**Texto:** Felipe Avinzano (ex-CIO, consultor de IA) construye en vivo un agente proactivo de principio a fin. Sin humo, sin código. 06/Agosto/2026.
 **CTA:** Ver la sesión
 
 ---
@@ -374,10 +374,10 @@ Recordatorio rápido ⏰ Hoy {{HORA}} construimos en vivo un agente de IA proact
 
 **[0–5s]** (a cámara) "Si usas la IA preguntando cosas una por una… la estás desaprovechando."
 **[5–15s]** "Un chatbot reacciona. Un agente proactivo anticipa: vigila un proceso y actúa antes de que se lo pidas."
-**[15–28s]** "El {{FECHA}} voy a construir uno en vivo. De cero. Sin código. Disparador, contexto, decisión y acción — las cuatro piezas."
+**[15–28s]** "El 06/Agosto/2026 voy a construir uno en vivo. De cero. Sin código. Disparador, contexto, decisión y acción — las cuatro piezas."
 **[28–40s]** "Es gratis, pero es en vivo y hay cupo. El link está aquí abajo. Nos vemos ahí."
 
-**Texto en pantalla / overlay:** "Build a proactive agent workflow with AI · Gratis · {{FECHA}} · {{LINK}}"
+**Texto en pantalla / overlay:** "Build a proactive agent workflow with AI · Gratis · 06/Agosto/2026 · {{LINK}}"
 
 ---
 
@@ -402,7 +402,7 @@ Recordatorio rápido ⏰ Hoy {{HORA}} construimos en vivo un agente de IA proact
 
 - [ ] Landing de registro publicada y probada (formulario → email de confirmación)
 - [ ] Evento de Zoom creado con recordatorios automáticos activados
-- [ ] Variables reemplazadas en TODAS las piezas ({{FECHA}}, {{HORA}}, {{LINK}}, {{OFERTA}})
+- [ ] Variables reemplazadas en TODAS las piezas (06/Agosto/2026, 8:00 PM EST, {{LINK}}, {{OFERTA}})
 - [ ] Secuencia de 5 emails cargada y programada
 - [ ] Posts de LinkedIn / IG / X programados (anuncio, valor, último llamado)
 - [ ] Broadcast de WhatsApp listo para día 0 y día -1
