@@ -1,169 +1,171 @@
 # Demo en vivo — Caso wow + paso a paso
 ## Sesión: "Build a proactive agent workflow with AI" · jue 6 ago, 8:00 PM EST
 
-> **Regla del demo:** el agente corre **únicamente dentro de Claude Code / Cowork o ChatGPT / Codex**. Sin n8n, sin Make, sin orquestadores externos. Nada de "conecta 8 apps". El agente se **crea hablándole a la IA** y luego **se ejecuta solo en un horario** (tarea programada) — esa es la prueba viva de que es *proactivo*: nadie lo dispara a mano.
+> **Alineado al video oficial de Anthropic** ("Build a proactive agent workflow with Claude Code", Code w/ Claude 2026, por Maya). Usamos su **framework y mejores prácticas**, pero **NO su ejemplo** (ellos: leer repo → abrir PR). El nuestro: un **Radar de reuniones**. Todo corre **dentro de Claude Code Routines** — sin n8n, sin infraestructura propia.
 
 ---
 
-## 1. La idea que hace clic
+## 1. El framework del video (nuestro hilo conductor)
 
-Un agente proactivo, en estas herramientas, son **tres cosas** que ya viven dentro de Claude Cowork / ChatGPT, sin código:
+Una **Routine** de Claude Code es una configuración guardada — **prompt + repos + conectores + disparador** — que corre **sola en la nube gestionada por Anthropic**. Se crea con el comando **`/schedule`**. Anthropic hostea, mantiene el estado y ejecuta; tú no montas nada.
 
-1. **Un reloj propio** (tarea programada / *scheduled task* / *routine*): la IA se despierta sola cada hora / cada mañana. Ese reloj **es** el disparador. Nadie escribe un prompt cada vez.
-2. **Conectores** (Gmail, Calendar, Slack, Drive…): le dan ojos y manos sobre tu mundo real.
-3. **Criterio + acción**: la IA lee, decide y actúa (redacta, agenda, te avisa al teléfono).
+Detrás de CUALQUIER rutina hay **3 decisiones** (así lo enseña el video):
 
-La frase que lo resume para la audiencia:
-> *"No voy a programar nada. Le voy a **decir** a Claude qué vigilar y cada cuándo. A partir de ahí, trabaja solo — aunque yo cierre la laptop."*
+| Decisión | Pregunta | En nuestro Radar de reuniones |
+|---|---|---|
+| **Trigger** *(disparador)* | ¿Qué la despierta? | Horario (cada mañana) **y** evento (nueva reunión agendada). |
+| **Context** *(contexto)* | ¿Qué puede ver/alcanzar? | Conectores: Google Calendar + Gmail + Slack. |
+| **Steering** *(conducción)* | ¿Cómo decide y qué es "listo"? | El prompt: reglas, qué conectores usar, qué es *done*, qué hacer si algo falla. |
 
----
-
-## 2. El caso wow — "El Centinela de Bandeja"
-
-Le pides a Claude (o ChatGPT) que **cada hora en horario laboral**:
-1. Revise los correos nuevos de tu bandeja (vía conector de Gmail).
-2. Clasifique urgencia con tus reglas de negocio.
-3. **Redacte el borrador de respuesta** de los urgentes.
-4. Te mande al teléfono (push / Slack) un resumen de una línea + el borrador listo. Lo no urgente lo deja como borrador y no te interrumpe.
-
-### Por qué es el caso correcto
-- **Universal:** todos ahogados en la bandeja. La audiencia se ve reflejada.
-- **Es tu tesis, hecha visible:** el agente actúa *antes* de que tú abras el correo.
-- **100% dentro de la herramienta:** se crea con una instrucción en lenguaje natural; no hay stack que mostrar.
-- **Mapea 1:1 a tu arquitectura** (lo usas para enseñar mientras lo creas).
-
-### Cómo mapea a los 4 componentes
-| Componente | En este agente |
-|---|---|
-| **Disparador** | La **tarea programada** (el reloj propio de Claude/ChatGPT). Se despierta solo. |
-| **Contexto** | El **conector de Gmail**: los correos nuevos + remitente + tus reglas de "urgente". |
-| **Decisión** | Claude/GPT clasifica urgencia y categoría, y decide si te interrumpe o no. |
-| **Acción** | Redacta el borrador + manda la alerta al teléfono (push/Slack). |
+> **La clave que repite el video:** la rutina corre **sin aprobación humana en cada paso**, así que **el prompt carga todo el peso**. Un agente proactivo es tan bueno como su *steering*.
 
 ---
 
-## 3. Las 3 rutas (elige una; las tres cumplen la regla "sin orquestador")
+## 2. El caso wow — "Radar de reuniones"
 
-| Ruta | Herramienta | Para quién | Nivel |
-|---|---|---|---|
-| **A — Recomendada** | **Claude Cowork / Claude Code** (tarea programada + conectores + notificación push) | Público mixto; máximo "sin código" | Cero técnico |
-| **B** | **ChatGPT — Tasks** (tarea programada + conectores) | Quien ya vive en ChatGPT | Cero técnico |
-| **C** | **Codex / Claude Code** escribe y corre un mini-agente en código (cron + API) | Audiencia técnica que quiere ver el motor | Técnico |
+Le pides a Claude Code, una vez, que **cada mañana laboral a las 7:00**:
+1. Lea **tus reuniones de hoy** (conector de Google Calendar).
+2. Para cada reunión con externos, busque el **último hilo de correo** con esos asistentes (Gmail).
+3. Redacte un **brief de preparación** por reunión: quién es cada quién, objetivo probable, 2 preguntas que deberías hacer.
+4. Te lo mande **todo junto a Slack** (o push) antes de tu primer café.
 
-**Recomendación:** haz el demo con la **Ruta A**. Es la que mejor cuenta la historia "le hablo y trabaja solo", no expone nada técnico, y el disparador (la tarea programada) es exactamente el concepto que quieres enseñar. Deja la Ruta C como bonus para el Q&A si hay devs en la sala.
+**El pitch en una frase:** *"Antes de que yo despierte, ya alguien revisó mi día, investigó con quién me reúno y me dejó el brief listo. Y yo no le pedí nada hoy — se lo pedí una sola vez."*
+
+### Por qué este caso
+- **Confiable en vivo:** el calendario ya tiene datos (no depende de que llegue un correo justo en el momento).
+- **Universal:** todos tienen reuniones y todos llegan sin prepararse.
+- **Es tu tesis hecha visible:** trabaja *antes* de que abras la laptop.
+- **Muestra los dos disparadores** (horario y evento) con naturalidad.
 
 ---
 
-## 4. Paso a paso — Ruta A (Claude Cowork / Claude Code)
+## 3. Los dos disparadores (lo que pediste)
+
+**A) Horario — la base (para todo público).**
+La rutina se despierta sola cada mañana. Es el concepto más limpio de "proactivo": un reloj que el agente se pone a sí mismo.
+
+**B) Evento / webhook — el nivel avanzado (el wow más fuerte).**
+Cuando se **agenda una reunión nueva** (tu sistema de reservas —Calendly/Cal.com— hace un POST al endpoint de la rutina), la rutina corre **al instante** y prepara el brief de ESA reunión. Reaccionar a un evento real, no a un reloj, es lo más impresionante de mostrar.
+
+> El video lista 3 disparadores: **horario, evento de GitHub y webhook/API**. Nosotros usamos horario + webhook (más relevante que GitHub para tu audiencia). Si hubiera devs en la sala, el de GitHub es el bonus del Q&A.
+
+---
+
+## 4. Paso a paso con `/schedule` (en vivo, ~12 min)
 
 ### Paso 0 — Pre-vuelo (antes de la sesión)
-- Sesión de Claude (Cowork/Code) abierta y logueada.
-- **Conector de Gmail activado** (Configuración → Conectores). Opcional: Slack y/o Calendar.
-- **App de Claude en el teléfono** con notificaciones push activadas (para el "vibró el teléfono").
-- Una **cuenta de correo de demo** con 2 correos de prueba ya redactados para enviar (uno "urgente", uno normal).
-- **La tarea ya creada y probada una vez** en una sesión espejo (plan B, §7).
+- Claude Code (web) logueado, con **conectores de Google Calendar, Gmail y Slack** activados.
+- Una **cuenta de demo con 2 reuniones HOY** ya sembradas (con asistentes externos y algún hilo de correo previo), para que el brief salga rico.
+- Un **repo ligero** para apuntar la rutina (puede ser uno dedicado que contenga una Skill con tu formato de brief — ver §5).
+- La **rutina ya creada, activa y probada** una vez con "ejecutar ahora" (plan B, §7).
+- Canal de Slack **#mi-dia** listo, y la app de Slack/Claude en el teléfono con notificación.
 
-### Paso 1 — Disparador *(“qué lo despierta”)*
-Le dices a Claude, en lenguaje natural:
-> *"Crea una tarea programada que se ejecute **cada hora en horario laboral (L–V, 9–18 h)**."*
+### Paso 1 — Abre el creador de rutinas
+En Claude Code escribe **`/schedule`**. Aparece el formulario: **nombre, instrucciones, disparador (dropdown), repos, conectores.** *Frase:* *"No voy a programar nada en código. Voy a llenar un formulario y a escribir instrucciones en lenguaje natural."*
 
-Claude crea la *routine* / tarea programada. **Frase:** *"Esto es el disparador. No es un botón que aprieto: es un reloj que la IA se pone a sí misma. Se despierta sola."*
+### Paso 2 — Nombre + disparador *(Trigger)*
+- **Nombre:** `Radar de reuniones — brief matutino`.
+- **Disparador (dropdown):** elige **Horario** → todos los días L–V, **07:00 America/New_York**.
+- *Frase:* *"Este es el disparador. La rutina se despierta sola. Nadie escribe un prompt cada mañana."*
 
-### Paso 2 — Contexto *(“qué necesita saber”)*
-Sigues la instrucción:
-> *"…que revise los **correos nuevos de mi Gmail** de las últimas 2 horas: quién escribe y qué dice."*
+### Paso 3 — Conectores *(Context)* — con mínimo privilegio
+- Adjunta **solo** Google Calendar, Gmail y Slack. **Quita todo lo demás.**
+- *Frase (best practice del video):* *"Por defecto se incluyen todos los conectores. Mala idea. Le doy exactamente tres — ni uno más. Un agente desatendido con demasiado acceso es un riesgo, no una comodidad."*
 
-**Frase:** *"El contexto llega por el conector de Gmail. Sin esto, la IA responde en el vacío. Con esto, ve tu mundo real."*
+### Paso 4 — Instrucciones *(Steering)* — pega esto tal cual
+El prompt aplica las 4 mejores prácticas del video: **nombra los conectores exactos, define qué es "done", maneja lo inesperado, y no inventa.**
+```
+Eres mi jefe de gabinete. Cuando corras:
+1) Con Google Calendar, lista MIS reuniones de HOY (zona horaria America/New_York).
+2) Para cada reunión con asistentes externos, con Gmail busca el último hilo con
+   esos asistentes y resume en qué quedó.
+3) Redacta un brief por reunión: hora, quién es cada asistente (cargo/empresa si
+   aparece en su firma o en los hilos), el objetivo probable, y 2 preguntas que yo
+   debería hacer.
 
-### Paso 3 — Decisión *(“actúo / no actúo, y cómo”)*
-> *"Clasifica cada correo en urgencia **alta/media/baja**. Urgencia alta = pide algo para hoy, un cliente espera, o algo está bloqueado. Para los de urgencia alta, redacta un borrador de respuesta profesional y cálido, máximo 4 líneas, en español. No inventes datos que no estén en el correo."*
+QUÉ ES "DONE": enviar UN solo mensaje por Slack al canal #mi-dia con todos los
+briefs. Si no hay reuniones con externos, enviar "Hoy sin reuniones que preparar"
+y terminar.
 
-**Frase:** *"Aquí está la decisión. No es magia: es criterio de negocio que le dicté. Y de una vez escribe la respuesta."*
+CONECTORES: usa SOLO Google Calendar, Gmail y Slack. Ningún otro.
 
-### Paso 4 — Acción *(“qué ejecuta, y con qué límites”)*
-> *"Para los urgentes: mándame una **notificación** con un resumen de una línea y el borrador listo. Para los no urgentes: guárdalos como borrador en Gmail y **no me interrumpas**."*
+SI ALGO FALLA (un conector no responde, una reunión sin datos): incluye una línea
+"⚠️ No pude preparar [reunión] porque [motivo]" y continúa con las demás. NUNCA
+inventes datos que no estén en el calendario o los correos.
+```
+- *Frase:* *"Aquí está el criterio, el steering. Le digo qué usar, qué significa 'terminado', y qué hacer cuando algo sale mal — porque va a correr sin que yo apruebe cada paso."*
 
-**Frase:** *"Y la acción, con su límite: lo urgente me busca al teléfono; lo demás lo deja listo y me deja en paz. Un buen agente sabe cuándo NO actuar."*
+### Paso 5 — Repos + guardar
+- Apunta la rutina a tu **repo ligero** (opcional para este caso; útil si guardas ahí una Skill con la plantilla del brief).
+- Guarda. **Queda activa.** *Frase:* *"Ya está viva. Mañana a las 7 corre sola, aunque yo esté dormido."*
 
-### Paso 5 — Activar y probar en vivo
-- La tarea queda **activa y programada**. Muéstralo: *"Ya está viva. Se ejecutará sola cada hora — aunque yo cierre esto."*
-- Como no vas a esperar una hora en vivo, dile a Claude: **"ejecútala ahora"** (correr bajo demanda). Eso corre el mismo agente al instante para el momento wow.
+### Paso 6 — El disparador por evento (nivel avanzado)
+- Duplica la rutina; cambia el disparador a **Webhook/API**.
+- Conecta el webhook a tu sistema de reservas (Calendly/Cal.com): *"al agendarse una reunión → POST al endpoint → la rutina corre al instante y prepara el brief de esa reunión."*
+- *Frase:* *"La primera reacciona al reloj. Esta reacciona a un evento real. En cuanto alguien agenda una reunión conmigo, el brief se prepara solo — sin esperar a mañana."*
 
 ---
 
-## 5. El momento wow — coreografía exacta (≈60 s)
+## 5. Mejores prácticas del video (aplícalas y dilo en voz alta)
 
-1. Con la tarea ya activa, dices: *"Vamos a probarla con un correo real, ahora."*
-2. Tu cómplice (o tú desde otro dispositivo) envía a la bandeja de demo: asunto **"urgente"**, cuerpo *"Necesito la propuesta hoy, ¿me la pasas?"*.
-3. Le dices a Claude **"ejecuta la tarea ahora"** (o esperas el tick si lo tienes afinado).
-4. En pantalla, Claude reporta paso a paso: leyó la bandeja → clasificó → redactó.
-5. **Tu teléfono vibra** con la notificación (mostrada en pantalla o a cámara):
-   > 🔴 *URGENTE — [Nombre] pide la propuesta hoy. Borrador listo 👇*
-   > *"Hola [Nombre], claro. Te comparto la propuesta hoy mismo antes de las 6 PM…"*
-6. Cierre: *"No le pedí nada. Le dije UNA vez qué vigilar. Ya leyó, decidió que era urgente y escribió la respuesta. Y va a seguir haciéndolo sola cada hora. Eso es un agente proactivo."*
-
-> **Regla de oro:** ten SIEMPRE un cómplice listo para mandar el correo "urgente" en el segundo justo. Nunca dependas de un desconocido.
+- **Mínimo privilegio:** adjunta solo los conectores que la rutina necesita.
+- **Define qué es "done":** un mensaje de Slack, un borrador, un issue etiquetado — algo concreto.
+- **Nombra los conectores exactos** dentro del prompt (no "usa lo que tengas").
+- **Maneja lo inesperado** en el prompt (qué hacer si algo falla; no inventar).
+- **Reserva rutinas para trabajo desatendido con valor claro.** Nada de disparadores ruidosos de alta frecuencia salvo que tu plan lo aguante.
+- **(Tie-in de marca):** guarda tu formato de brief como una **Skill** en el repo de la rutina — así el "cómo se ve un buen brief" es reutilizable y versionado, no un prompt suelto.
 
 ---
 
-## 6. Ruta B (ChatGPT Tasks) y Ruta C (Codex / código) — resumen
+## 6. El momento wow — coreografía (≈75 s)
 
-**Ruta B — ChatGPT Tasks:**
-- ChatGPT → activa el conector de Gmail → crea una **Task** programada con el mismo texto de los pasos 1–4.
-- ChatGPT ejecuta en su horario y te notifica. Mismo guion, misma arquitectura.
+1. Con la rutina ya activa, dices: *"No voy a esperar a mañana. Voy a pedirle que corra ahora."*
+2. **Ejecutas la rutina bajo demanda** ("run now"). En pantalla se ve correr en la nube: lee calendario → busca correos → redacta.
+3. **Tu teléfono/Slack suena** con el brief del día:
+   > 📋 *Tu día — 2 reuniones que preparar*
+   > *10:00 — [Nombre], Director de Ops en [Empresa]. Último correo: pidió propuesta. Objetivo: cerrar alcance. Pregunta clave: "¿Qué proceso duele más hoy?"*
+4. **El golpe final (evento):** *"Y ahora miren esto."* Tu cómplice **agenda una reunión** en tu Calendly en vivo → segundos después **aparece en Slack** el brief de esa reunión recién creada.
+5. Cierre: *"No le pedí nada en el momento. Le di instrucciones una vez. Ahora reacciona a mi reloj y a mis eventos, sola. Eso es un flujo agéntico proactivo."*
 
-**Ruta C — Codex / Claude Code escribe el agente (para técnicos):**
-- Le pides a Codex/Claude Code: *"Escribe un agente en Python que cada 10 min consulte la API de Gmail, use el modelo para clasificar y redactar, y me avise por Telegram si hay algo urgente. Déjalo corriendo con un cron aquí."*
-- El agente de código **lo escribe y lo corre en su propio entorno**. Muestras el código + el cron (el disparador) + el mensaje que llega. Wow más técnico: "el agente construyó al agente".
-- Úsalo solo si la sala es técnica; para público mixto, quédate en A.
+> **Regla de oro:** cómplice sembrado para agendar la reunión en el segundo justo. Nunca dependas del público.
 
 ---
 
 ## 7. Plan B — a prueba de fallos
 
-- **Tarea espejo ya creada, probada y activa** en otra sesión: si el armado en vivo se traba, cambias y ejecutas la que ya funciona.
-- **Cómplice sembrado** para el correo "urgente".
-- **Screenshot / video de 20 s** de la notificación en el teléfono, listo si la red muere.
-- **Conector de Gmail reautenticado esa tarde** (los tokens caducan y matan el demo).
-- **Correos de prueba ya escritos** para copiar-pegar.
-- **Zoom:** comparte *pantalla específica*, navegador a 125%, silencia otras notificaciones.
-- **Ensaya el flujo completo ×2** cronometrado antes del jueves — incluyendo "ejecútala ahora" y la llegada del push.
+- **Rutina espejo ya creada, activa y probada** ("run now" funciona) en otra sesión.
+- **Cuenta de demo con reuniones y correos ya sembrados** hoy.
+- **Screenshot/video de 20 s** del brief en Slack, por si la red muere.
+- **Conectores reautenticados esa tarde** (Calendar/Gmail/Slack — los tokens caducan).
+- **Endpoint del webhook probado** antes (haz un POST de prueba y verás correr la rutina).
+- **Zoom:** comparte pantalla específica, navegador a 125%, silencia otras notificaciones.
+- **Ensaya el flujo completo ×2** cronometrado, incluyendo "run now" y la llegada del mensaje.
 
 ---
 
 ## 8. Checklist pre-vuelo
 
-- [ ] Sesión de Claude Cowork/Code (o ChatGPT) lista y logueada.
-- [ ] Conector de Gmail activado y **reautenticado hoy**.
-- [ ] App de Claude/ChatGPT en el teléfono con **push activado** y probado.
-- [ ] Cuenta de correo de demo + 2 correos de prueba escritos.
-- [ ] Tarea programada creada, activa y **probada con "ejecutar ahora"** (plan B).
-- [ ] Cómplice briefeado para el correo "urgente".
-- [ ] Backup: screenshot/video de la notificación.
+- [ ] Claude Code (web) logueado; conectores **Calendar + Gmail + Slack** activados y **reautenticados hoy**.
+- [ ] Cuenta de demo con **2 reuniones HOY** + hilos de correo sembrados.
+- [ ] Canal **#mi-dia** en Slack; push en el teléfono probado.
+- [ ] Repo ligero para la rutina (opcional: Skill con la plantilla del brief).
+- [ ] Rutina por **horario** creada, activa y probada con "run now" (plan B).
+- [ ] Rutina por **webhook** conectada a Calendly y probada con un POST.
+- [ ] Cómplice briefeado para agendar la reunión en vivo.
+- [ ] Backup: screenshot/video del brief.
 - [ ] Ensayo cronometrado ×2.
-- [ ] Navegador a 125%; notificaciones ajenas silenciadas.
 
 ---
 
-## 9. Caso alterno — "Radar de reuniones" (si prefieres algo aún más limpio en vivo)
+## 9. El puente al upsell (desde el wow, sin fricción)
 
-Mismo patrón, disparador = **el calendario**:
-- **Disparador:** tarea programada cada mañana a las 7:00.
-- **Contexto:** conector de Google Calendar (las reuniones de hoy) + Gmail (hilos con esos asistentes).
-- **Decisión:** por cada reunión, qué necesitas saber antes de entrar.
-- **Acción:** te manda un **brief de preparación** por push/correo, con quién es cada quién y el último contexto.
-
-Ventaja: no depende de que llegue un correo justo en el momento — el calendario ya tiene datos. Muy confiable en vivo y con efecto "trabajó mientras dormías".
-
----
-
-## 10. El puente al upsell (desde el wow, sin fricción)
-
-> *"Lo que viste es UN agente vigilando UN proceso. Tu operación tiene decenas: cobranza, seguimiento, reportes, onboarding. Diseñar cada uno con criterio —dónde sí, dónde no, con qué límites— es exactamente lo que hacemos, paso a paso, en el **Bootcamp AI: Zero to Pro** (US$257.00). Ocho sesiones en vivo, de cero a tus propios agentes. El link está en el chat."*
+> *"Lo que viste es UNA rutina, para UN proceso: preparar mis reuniones. Tu operación tiene decenas de procesos así — seguimiento, cobranza, reportes, onboarding — que podrían correr solos, con criterio y con límites. Diseñar cada uno, decidir dónde sí y dónde no, es exactamente lo que hacemos paso a paso en el **Bootcamp AI: Zero to Pro** (US$257.00). Ocho sesiones en vivo, de cero a tus propias rutinas proactivas. El link está en el chat."*
 
 Reversión de riesgo: *"La sesión de hoy te dio valor completo, compres o no. Si te encajó, el siguiente paso está en el link. Sin prisa artificial."*
 
 ---
 
-### Nota de honestidad para el demo
-Los conectores y las tareas programadas dependen del plan de Claude/ChatGPT que tengas activo. Verifica **el mismo día** que tu cuenta tenga: (1) conector de Gmail disponible, (2) tareas programadas / *routines* habilitadas, (3) notificaciones push funcionando. Si tu plan no expone tareas programadas, usa la Ruta C (Codex/Claude Code con cron en su entorno), que no depende de esa función.
+### Notas de honestidad
+- **Disponibilidad:** Routines, `/schedule` y los conectores dependen de tu plan de Claude. Verifica **el mismo día** que tu cuenta tenga Routines habilitadas, los tres conectores disponibles y las notificaciones funcionando.
+- **En vivo no esperas al horario:** la rutina queda *activa y programada* (eso prueba que es proactiva), pero para el momento wow usas **"run now"** y el **webhook**. Deja claro a la audiencia que el valor real es que corre **sola** después.
+- **Fidelidad al video:** tomamos su framework (Trigger · Context · Steering), su mecanismo (Routines / `/schedule` en nube gestionada) y sus 5 mejores prácticas — con un ejemplo propio (Radar de reuniones), no el suyo (repo → PR).
